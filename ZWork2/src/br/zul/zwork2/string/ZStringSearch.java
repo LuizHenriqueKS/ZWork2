@@ -13,17 +13,17 @@ public class ZStringSearch {
     ////////////////////////////////////////////////////////////////////////////
     //VARIÁVEIS PRIVADOS
     ////////////////////////////////////////////////////////////////////////////
-    private String string;
+    private String source;
     private boolean caseSensitive;
     private String patterns[];
     private String patternsToAvoid[];
-    private List<Integer> indexes;
+    private List<ZStringSearchResult> results;
     
     ////////////////////////////////////////////////////////////////////////////
     //CONSTRUTORES PARA STRINGS
     ////////////////////////////////////////////////////////////////////////////
-    private ZStringSearch(String string,boolean caseSensitive,String patterns[],String patternsToAvoid[]){
-        this.string = string;
+    private ZStringSearch(String source,boolean caseSensitive,String patterns[],String patternsToAvoid[]){
+        this.source = source;
         this.caseSensitive = caseSensitive;
         this.patterns = patterns;
         this.patternsToAvoid = patternsToAvoid;
@@ -38,26 +38,75 @@ public class ZStringSearch {
     }
     
     ////////////////////////////////////////////////////////////////////////////
+    //MÉTODOS PÚBLICOS
+    ////////////////////////////////////////////////////////////////////////////
+    public List<String> listPatternsToVoid(String pattern,String patternsToVoid[]){
+        List<String> result = new ArrayList<>();
+        for (String toVoid:patternsToVoid){
+            
+            if (caseSensitive){
+                if (toVoid.contains(pattern)){
+                    result.add(toVoid);
+                }
+            } else {
+                if (toVoid.toLowerCase().contains(pattern.toLowerCase())){
+                    result.add(toVoid);
+                }
+            }
+            
+        }
+        return result;
+    }
+    
+    ////////////////////////////////////////////////////////////////////////////
     //MÉTODOS PRIVADOS
     ////////////////////////////////////////////////////////////////////////////
     private void search(){
-        List<Integer> possible = new ArrayList<>();
+        List<ZStringSearchResult> possible = new ArrayList<>();
+        int oldSize;
         do {
+            int index;
+            int offset = 0;
+            oldSize = possible.size();
             for (String pattern:patterns){
-                int index;
-                int offset = 0;
-                do {
-                    index = pattern.indexOf(pattern,offset);
-                    valid()
-                } while ();
+                boolean add = true;
+                if (caseSensitive){
+                    index = source.indexOf(pattern,offset);
+                } else {
+                    index = source.toLowerCase().indexOf(pattern.toLowerCase(),offset);
+                }
+
+                for (String toVoid:listPatternsToVoid(pattern, patternsToAvoid)){
+                    int difference = -1;
+
+                    if (caseSensitive){
+                        difference = toVoid.indexOf(pattern);
+                    } else {
+                        difference = toVoid.toLowerCase().indexOf(pattern.toLowerCase());
+                    }
+
+                    if (caseSensitive){
+                        add = (source.startsWith(toVoid, offset+index-difference));
+                    } else {
+                        add = (source.toLowerCase().startsWith(toVoid.toLowerCase(), offset+index-difference));
+                    }
+                    
+                    if (!add){
+                        break;
+                    }
+
+                }
+                
+                if (add){
+                    ZStringSearchResult r = new ZStringSearchResult(this,pattern,index);
+                    possible.add(r);
+                }
+                
             }
-        } while (!possible.isEmpty());
-        
+        } while (oldSize!=possible.size());
+        results = possible;
     }
     
-    private void search(String source,String pattern){
-        
-    }
     
     ////////////////////////////////////////////////////////////////////////////
     //VARIÁVEIS PRIVADOS
