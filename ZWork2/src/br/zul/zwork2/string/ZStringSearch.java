@@ -139,9 +139,9 @@ public class ZStringSearch {
                     }
 
                     if (caseSensitive){
-                        add = (source.startsWith(toVoid, offset+index-difference));
+                        add = !(source.startsWith(toVoid, offset+index-difference));
                     } else {
-                        add = (source.toLowerCase().startsWith(toVoid.toLowerCase(), offset+index-difference));
+                        add = !(source.toLowerCase().startsWith(toVoid.toLowerCase(), offset+index-difference));
                     }
                     
                     if (!add){
@@ -154,6 +154,8 @@ public class ZStringSearch {
                     ZStringSearchResult r = new ZStringSearchResult(this,pattern,index);
                     possible.add(r);
                 }
+                
+                offset += index+1;
                 
             }
         } while (oldSize!=possible.size());
