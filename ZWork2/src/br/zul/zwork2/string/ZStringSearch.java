@@ -18,6 +18,7 @@ public class ZStringSearch {
     private String patterns[];
     private String patternsToAvoid[];
     private List<ZStringSearchResult> results;
+    private int resultIndex;
     
     ////////////////////////////////////////////////////////////////////////////
     //CONSTRUTORES PARA STRINGS
@@ -27,6 +28,7 @@ public class ZStringSearch {
         this.caseSensitive = caseSensitive;
         this.patterns = patterns;
         this.patternsToAvoid = patternsToAvoid;
+        search();
     }
     
     public ZStringSearch(String string,boolean caseSensitive,String pattern,String patternToAvoid){
@@ -58,6 +60,57 @@ public class ZStringSearch {
         return result;
     }
     
+    public List<ZStringSearchResult> listResults(){
+        return results;
+    }
+    
+    public ZStringSearchResult getFirstResult(){
+        return results.get(0);
+    }
+    
+    public ZStringSearchResult getLastResult(){
+        return results.get(results.size()-1);
+    }
+    
+    public int countResults(){
+        return results.size();
+    }
+    
+    public boolean first(){
+        resultIndex = 0;
+        return resultIndex>-1;
+    }
+    
+    public boolean last(){
+        resultIndex = results.size()-1;
+        return resultIndex>-1;
+    }
+    
+    public boolean next(){
+        if (resultIndex<results.size()-1){
+            resultIndex++;
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    public boolean prev(){
+        if (resultIndex>0){
+            resultIndex--;
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    public ZStringSearchResult getResult(){
+        if (resultIndex<0){
+            resultIndex = 0;
+        }
+        return results.get(resultIndex);
+    }
+    
     ////////////////////////////////////////////////////////////////////////////
     //MÉTODOS PRIVADOS
     ////////////////////////////////////////////////////////////////////////////
@@ -77,7 +130,7 @@ public class ZStringSearch {
                 }
 
                 for (String toVoid:listPatternsToVoid(pattern, patternsToAvoid)){
-                    int difference = -1;
+                    int difference;
 
                     if (caseSensitive){
                         difference = toVoid.indexOf(pattern);
@@ -105,8 +158,8 @@ public class ZStringSearch {
             }
         } while (oldSize!=possible.size());
         results = possible;
+        resultIndex = -1;
     }
-    
     
     ////////////////////////////////////////////////////////////////////////////
     //VARIÁVEIS PRIVADOS
