@@ -5,10 +5,40 @@ import java.util.List;
 
 /**
  *  Classe usada para fazer pesquisas em Strings
- * 
+ *   Ex: source = "1.3..6.8"
+ *       patterns = "."
+ *       patternsToVoid = ".."
+ *      
+ *       indices resultantes = "1 e 6"
  * @author skynet
  */
 public class ZStringSearch {
+    
+    ////////////////////////////////////////////////////////////////////////////
+    //ENUMS
+    ////////////////////////////////////////////////////////////////////////////
+    /**
+     * CUMULATIVE - Obtem todos os indices sem se importar com quem vem primeiro ou se um padrão faz parte de outro.
+     *  Ex: source = "123,.678."
+     *      patterns = "." e ",."
+     *      
+     *      indices resultantes = "3","4" e "8"
+     * 
+     * LEFT - Obtem os indices dos primeiros que aparecerem do início do texto ao fim.
+     *  Ex: source = "123,.678."
+     *      patterns = "." e ",."
+     *      
+     *      indices resultantes = "3" e "8"
+     * RIGHT - Obtem os indices dos primeiros que aparecem do fim ao início do texto
+     *  Ex: source = "123,.678."
+     *      patterns = "." e ",."
+     *      
+     *      indices resultantes = "3" e "8"
+     * 
+     */
+    public enum ZStringSearchType{
+        CUMULATIVE, LEFT, RIGHT
+    }
     
     ////////////////////////////////////////////////////////////////////////////
     //VARIÁVEIS PRIVADOS
@@ -19,15 +49,30 @@ public class ZStringSearch {
     private String patternsToAvoid[];
     private List<ZStringSearchResult> results;
     private int resultIndex;
+    private final ZStringSearchType type;
     
     ////////////////////////////////////////////////////////////////////////////
     //CONSTRUTORES PARA STRINGS
     ////////////////////////////////////////////////////////////////////////////
-    private ZStringSearch(String source,boolean caseSensitive,String patterns[],String patternsToAvoid[]){
+    /**
+     * 
+     * @param source O texto do qual deseja realizar a pesquisa
+     * @param caseSensitive Se é para considerar letras maiusculas ou minusculas (true), ou não (false)
+     * @param patterns Os padrões que deseja procurar no texto
+     * @param patternsToAvoid Os padrões que são exceção
+     * @param type O tipo de pesquisa, se deseja começar a pesquisar pela esquerda ou direita, ou se quer todos índeces.
+     *               Essa ultima opção é mais usada quando quer pesquisar mais de um padrão
+     */
+    private ZStringSearch(String source,
+                          boolean caseSensitive,
+                          String patterns[],
+                          String patternsToAvoid[],
+                          ZStringSearchType type){
         this.source = source;
         this.caseSensitive = caseSensitive;
         this.patterns = patterns;
         this.patternsToAvoid = patternsToAvoid;
+        this.type = type;
         search();
     }
     
@@ -42,9 +87,9 @@ public class ZStringSearch {
     ////////////////////////////////////////////////////////////////////////////
     //MÉTODOS PÚBLICOS
     ////////////////////////////////////////////////////////////////////////////
-    public List<String> listPatternsToVoid(String pattern,String patternsToVoid[]){
+    public List<String> listPatternsToVoid(String pattern){
         List<String> result = new ArrayList<>();
-        for (String toVoid:patternsToVoid){
+        for (String toVoid:patternsToAvoid){
             
             if (caseSensitive){
                 if (toVoid.contains(pattern)){
@@ -117,9 +162,9 @@ public class ZStringSearch {
     private void search(){
         List<ZStringSearchResult> possible = new ArrayList<>();
         int oldSize;
+        int offset = 0;
         do {
             int index;
-            int offset = 0;
             oldSize = possible.size();
             for (String pattern:patterns){
                 boolean add = true;
@@ -139,9 +184,9 @@ public class ZStringSearch {
                     }
 
                     if (caseSensitive){
-                        add = !(source.startsWith(toVoid, offset+index-difference));
+                        add = !(source.startsWith(toVoid, index-difference));
                     } else {
-                        add = !(source.toLowerCase().startsWith(toVoid.toLowerCase(), offset+index-difference));
+                        add = !(source.toLowerCase().startsWith(toVoid.toLowerCase(), index-difference));
                     }
                     
                     if (!add){
@@ -150,17 +195,64 @@ public class ZStringSearch {
 
                 }
                 
-                if (add){
+                if (add&&index>-1){
                     ZStringSearchResult r = new ZStringSearchResult(this,pattern,index);
                     possible.add(r);
+                    offset += index+1;
                 }
-                
-                offset += index+1;
-                
             }
         } while (oldSize!=possible.size());
         results = possible;
         resultIndex = -1;
+    }
+    
+    private List<ZStringSearchResult> search(String pattern){
+        List<ZStringSearchResult> result = new ArrayList<>();
+        List<String> patternsToVoid = listPatternsToVoid(pattern);
+        int offset = 0;
+        int index;
+        while (true) {
+            boolean add = true;
+            if (caseSensitive){
+                index = source.indexOf(pattern,offset);
+            } else {
+                index = source.toLowerCase().indexOf(pattern.toLowerCase(),offset);
+            }
+            
+            if (index==-1){
+                break;
+            }
+
+            for (String toVoid:patternsToVoid){
+                int difference;
+
+                if (caseSensitive){
+                    difference = toVoid.indexOf(pattern);
+                } else {
+                    difference = toVoid.toLowerCase().indexOf(pattern.toLowerCase());
+                }
+
+                if (caseSensitive){
+                    add = !(source.startsWith(toVoid, index-difference));
+                } else {
+                    add = !(source.toLowerCase().startsWith(toVoid.toLowerCase(), index-difference));
+                }
+                    
+                if (!add){
+                    break;
+                }
+
+            }
+
+            if (add){
+                ZStringSearchResult r = new ZStringSearchResult(this,pattern,index);
+                result.add(r);
+            }
+           
+            offset += index+1;
+            
+        }
+        return result;
     }
     
     ////////////////////////////////////////////////////////////////////////////

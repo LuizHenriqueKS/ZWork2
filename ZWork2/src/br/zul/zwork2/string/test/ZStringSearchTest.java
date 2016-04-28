@@ -17,6 +17,7 @@ public class ZStringSearchTest {
             System.out.println("OK!");
         } else {
             System.out.println("FALHOU!");
+            System.out.println("Resultado esperado 2 e foi obtido: "+result);
         }
         
     }
