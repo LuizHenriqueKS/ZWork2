@@ -13,6 +13,8 @@ public class ZWork2 {
      */
     public static void main(String[] args) {
         ZStringSearchTest.testCountResults();
+        ZStringSearchTest.testListResults();
+        ZStringSearchTest.testListResultsLeft();
     }
     
 }
