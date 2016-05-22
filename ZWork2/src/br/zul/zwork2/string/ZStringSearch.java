@@ -77,7 +77,7 @@ public class ZStringSearch {
      * @param caseSensitive Se é para considerar letras maiusculas ou minusculas
      * (true), ou não (false)
      * @param patterns Os padrões que deseja procurar no texto
-     * @param patternsToAvoid Os padrões que são exceção
+     * @param patternsToAvoid Os padrões que são exceção (pode ser informado como null)
      * @param type O tipo de pesquisa, se deseja começar a pesquisar pela
      * esquerda ou direita, ou se quer todos índeces. Essa ultima opção é mais
      * relevante quando quer pesquisar mais de um padrão
@@ -187,6 +187,15 @@ public class ZStringSearch {
     
     public ZStringSearchResult getResult(int index) {
         return results.get(index);
+    }
+    
+    /**
+     * Verifica se não foi encontrado nenhum padrão.
+     * @return TRUE = NENHUM PADRÃO ENCONTRADO,
+     *         FALSE = PELO MENOS UM DOS PADRÕES FOI ENCONTRADO
+     */
+    public boolean isEmpty(){
+        return results.isEmpty();
     }
 
     ////////////////////////////////////////////////////////////////////////////
