@@ -4,6 +4,8 @@ import br.zul.zwork2.string.ZString;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.logging.Level;
@@ -16,10 +18,14 @@ import java.util.logging.Logger;
 public class ZLogFileWriter {
     
     //==========================================================================
-    //VARIAVEIS GLOBAIS
+    //VARIAVEIS PÚBLICAS GLOBAIS
     //==========================================================================
     public static File DEFAULT_DIRECTORY = new File("Log");
-    public static ZLogFileWriter DEFAULT_LOG_FILE_WRITER;
+    
+    //==========================================================================
+    //VARIÁVEIS PRIVADAS GLOBAIS 
+    //==========================================================================
+    private static ZLogFileWriter logFileWriter;
     
     //==========================================================================
     //VARIÁVEIS PRIVADAS
@@ -101,10 +107,40 @@ public class ZLogFileWriter {
         } catch (IOException ex) {
             Logger.getLogger(ZLogFileWriter.class.getName()).log(Level.SEVERE, "Erro em tentar iniciar o FileWriter em cima do arquivo de log.", ex);
         }
-    }
+    }  
     
     public void write(ZLogLevel level,String message){
         
+        //TENTA ESCREVER NO ARQUIVO DE LOG CERTO
+        switch (level){
+            case INFO:
+                write(infoLogFile,level,message);
+                break;
+            case WARNING:
+                write(warningLogFile,level,message);
+                break;
+            case ERROR:
+                write(errorLogFile,level, message);
+                break;
+        }
+        
+        //SE TIVER O LOG GERAL
+        if (generalLogFile!=null){
+            //ESCREVE NELE A MENSAGEM TBM
+            write(getGeneralLogFileWriter(),level,message);
+        }
+        
+    }
+    
+      public void write(ZLogLevel level,Exception exception){
+     
+        //CONVERTE O EXCEPTION EM STRING
+        StringWriter buffer = new StringWriter();
+        try (PrintWriter pw = new PrintWriter(buffer)) {
+            exception.printStackTrace(pw);
+        }   
+        String message = buffer.getBuffer().toString();
+          
         //TENTA ESCREVER NO ARQUIVO DE LOG CERTO
         switch (level){
             case INFO:
@@ -264,6 +300,20 @@ public class ZLogFileWriter {
     public void setGeneralLogFileWriter(FileWriter generalLogFileWriter) {
         this.generalLogFileWriter = generalLogFileWriter;
     }
+    
+    //==========================================================================
+    //GETTERS E SETTERS MODIFICADOS GLOBAIS 
+    //==========================================================================
+    public static ZLogFileWriter getDefaultLogFileWriter() {
+        if (logFileWriter==null){
+            System.err.println("Use ZLogFileWriter.setDefaultLogFileWriter para definir o escritor de log padrão!");
+        }
+        return logFileWriter;
+    }
+    public static void setDefaultLogFileWriter(ZLogFileWriter logFileWriter) {
+        ZLogFileWriter.logFileWriter = logFileWriter;
+    }
+    
     
     //==========================================================================
     //GETTERS E SETTERS

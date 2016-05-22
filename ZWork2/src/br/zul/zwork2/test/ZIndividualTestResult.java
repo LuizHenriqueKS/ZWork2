@@ -9,13 +9,13 @@ public class ZIndividualTestResult<R> {
     
     private final ZCustomTest test;
     private final R result;
-    private final R resultExpected;
+    private final R expectedResult;
     private final boolean ok;
 
-    public ZIndividualTestResult(ZCustomTest test, R result, R resultExpected, boolean ok) {
+    public ZIndividualTestResult(ZCustomTest test, R result, R expectedResult, boolean ok) {
         this.test = test;
         this.result = result;
-        this.resultExpected = resultExpected;
+        this.expectedResult = expectedResult;
         this.ok = ok;
     }
 
@@ -27,8 +27,8 @@ public class ZIndividualTestResult<R> {
         return result;
     }
 
-    public R getResultExpected() {
-        return resultExpected;
+    public R getExpectedResult() {
+        return expectedResult;
     }
 
     public boolean isOk() {

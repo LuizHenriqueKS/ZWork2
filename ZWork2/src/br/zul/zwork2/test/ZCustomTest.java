@@ -6,6 +6,9 @@ package br.zul.zwork2.test;
  */
 public abstract class ZCustomTest<R> {
     
+    public abstract String getTestName();
     public abstract ZIndividualTestResult<R> run();
+    
+    public void onAfterTest(){}; 
     
 }
