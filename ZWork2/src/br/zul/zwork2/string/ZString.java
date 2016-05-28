@@ -1,12 +1,14 @@
 package br.zul.zwork2.string;
 
 import br.zul.zwork2.string.ZStringSearch.ZStringSearchType;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Classe para manipular strings de maneira mais fácil
  * @author Luiz Henrique
  */
-public class ZString {
+ public class ZString {
     
     //==========================================================================
     //ENUMS
@@ -18,8 +20,8 @@ public class ZString {
     //==========================================================================
     //VARIÁVEIS PRIVADAS
     //==========================================================================
-    private String string;
-    private boolean caseSensitive;
+    private final String string;
+    private final boolean caseSensitive;
  
     //==========================================================================
     //MÉTODOS CONSTRUTORES
@@ -27,6 +29,86 @@ public class ZString {
     public ZString(String string,boolean caseSensitive){
         this.string = string;
         this.caseSensitive = caseSensitive;
+    }
+    
+    //==========================================================================
+    //MÉTODOS PÚBLICOS
+    //==========================================================================
+    public int length(){
+        return string.length();
+    }
+    
+    public boolean isEmpty(){
+        return string.isEmpty();
+    }
+    
+    public ZString trim(){
+        return new ZString(string.trim(),caseSensitive);
+    }
+    
+    @Override
+    public String toString(){
+        return string;
+    }
+    
+    //==========================================================================
+    //MÉTODOS SUBSTRING
+    //==========================================================================
+      public ZString substring(int start,int end){
+        return new ZString(string.substring(start,end),caseSensitive);
+    }
+    
+    public ZString substring(int start){
+        return new ZString(string.substring(start),caseSensitive);
+    }
+    
+    //==========================================================================
+    //MÉTODOS DE CONTAINS
+    //==========================================================================
+    public boolean contains(String pattern){
+        if (caseSensitive){
+            return string.contains(pattern);
+        } else {
+            return string.toLowerCase().contains(pattern.toLowerCase());
+        }
+    }
+   
+    //==========================================================================
+    //EQUALS
+    //==========================================================================
+    public boolean equals(String other){
+        if (caseSensitive){
+            return string.equals(other);
+        } else {
+            return string.toLowerCase().equals(other.toLowerCase());
+        }
+    }
+    
+    //==========================================================================
+    //MÉTODOS DE SPLIT
+    //==========================================================================
+    public ZString[] split(String pattern){
+        List<ZString> result = new ArrayList<>();
+        
+        ZString source = this;
+        
+        while (source.contains(pattern)){
+            //OBTEM A PARTE DE INICIO DA STRING ATÉ O PADRÃO
+            ZString part = source.toRight(pattern);
+            //ADICIONA NA LISTA
+            result.add(part);
+            //REMOVE ESSA PARTE DO INICIO
+            source = source.substring(part.length()+1);
+        }
+        
+        //SE AINDA SOBROU ALGO
+        if (!source.isEmpty()){
+            //ADICIONA NA LISTA
+            result.add(source);
+        }
+        
+        //CONVERTE A LISTA EM ARRAY E RETORNA ELA
+        return result.toArray(new ZString[result.size()]);
     }
     
     //==========================================================================
