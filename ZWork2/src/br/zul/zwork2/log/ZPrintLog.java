@@ -25,7 +25,7 @@ public abstract class ZPrintLog {
         print(exception);
     }
     
-    public void throwException(Exception exception){
+    public RuntimeException prepareException(Exception exception) {
         
         //AO LANÇAR O EXCEPTION A MENSAGEM JÁ SERÁ ESCRITA NO CONSOLE
         //ASSIM NÃO HÁ A NECESSIDADE DE ESCREVER ELA DE NOVO
@@ -43,13 +43,18 @@ public abstract class ZPrintLog {
         getLogger().setPrintOnConsole(printOnConsole);
         
         //LANÇA O EXCEPTION
-        throw new RuntimeException(exception);
+        return new RuntimeException(exception);
         
     }
         
-    public void throwException(Exception exception,String message,String args){
+    public RuntimeException prepareException(Exception exception,String message,Object... args) {
         println(message,args);
-        throwException(exception);
+        return prepareException(exception);
+    }
+    
+    public RuntimeException prepareException(String message,Object... args){
+        println(message,args);
+        return new RuntimeException(String.format(message,args));
     }
 
 }
