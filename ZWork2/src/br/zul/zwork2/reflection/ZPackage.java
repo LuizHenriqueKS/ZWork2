@@ -110,7 +110,7 @@ public class ZPackage {
             @Override
             public boolean filter(Integer key, ZClass value) {
                 //SE É PARA IGNORAR CLASSES IGUAIS A DEFINIDA
-                if (ignoreClassesEquals&&value.get_class().equals(originClass)){
+                if (ignoreClassesEquals&&value.getObjectClass().equals(originClass)){
                     return false;
                 }
                 

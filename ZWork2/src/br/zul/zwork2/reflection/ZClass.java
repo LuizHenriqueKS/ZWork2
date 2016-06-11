@@ -2,11 +2,13 @@ package br.zul.zwork2.reflection;
 
 import br.zul.zwork2.io.ZFile;
 import br.zul.zwork2.io.ZPath;
+import br.zul.zwork2.log.ZLogLevel;
 import br.zul.zwork2.log.ZLogger;
 import br.zul.zwork2.string.ZString;
 import br.zul.zwork2.util.ZFilter;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,6 +18,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -63,7 +67,7 @@ public class ZClass<T> {
         }
         
         try {
-            this._class = (Class<T>)Class.forName(_package);
+            this.objectClass = (Class<T>)Class.forName(_package);
         } catch (ClassNotFoundException ex) {
             ZLogger log = new ZLogger(getClass(),"ZClass(String classPackage)");
             log.error.println(ex, "Classe '%s' não encontrada!", _package);
@@ -247,6 +251,19 @@ public class ZClass<T> {
         setFieldValue(object,getField(fieldName),value);
     }
     
+    
+    //==========================================================================
+    //MÉTODOS PARA INSTANCIAR A CLASSE
+    //==========================================================================
+    public T newInstance(){
+        ZLogger logger = new ZLogger(getClass(),"newInstance()");
+        try {
+            return objectClass.newInstance();
+        } catch (InstantiationException | IllegalAccessException ex) {
+            throw logger.error.prepareException(ex);
+        }
+    }
+    
     //==========================================================================
     //MÉTODOS PÚBLICOS PARA MÉTODOS
     //==========================================================================
@@ -331,6 +348,19 @@ public class ZClass<T> {
         
         return result;
         
+    }
+    
+    public Object invokeMethod(Object object,Method method,Object... parameters){
+        ZLogger log = new ZLogger(getClass(), "invokeMethod(Object object,Method method,Object... parameters)");
+        try {
+            return method.invoke(object, parameters);
+        } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
+            throw log.error.prepareException(ex);
+        }
+    }
+    
+    public Object invokeMethod(Method method,Object... parameters){
+        return invokeMethod(null,method,parameters);
     }
     
     //==========================================================================

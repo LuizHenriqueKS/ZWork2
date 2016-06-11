@@ -1,7 +1,9 @@
 package br.zul.zwork2.inject;
 
+import br.zul.zwork2.annotation.ZInject;
 import br.zul.zwork2.reflection.ZClass;
 import br.zul.zwork2.util.ZFilter;
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
@@ -38,11 +40,32 @@ public class ZInjectManager {
     //==========================================================================
     //MÉTODOS PÚBLICOS
     //==========================================================================
-    public void injectInstances(Object obj){
+    public void injectInstances(Object obj,ZInjectInterface zInjectInterface){
         
+        //INICIA UM ZCLASS PARA FACILITAR A BUSCA DOS CAMPOS
+        ZClass c = new ZClass(obj.getClass());
+        
+        //LISTA OS CAMPOS COM A ANOTAÇÃO ZInject
+        Collection<Field> fields = c.listFields(ZInject.class);
+        
+        //PERCORRE A LISTA DE CAMPOS
+        for (Field f:fields){
+            //OBTEM O VALOR PARA O CAMPO
+            Object fieldValue = getInstance(f.getType());
+            
+            //SETA O VALOR AO CAMPO CORRESPONDENTE
+            zInjectInterface.setValueField(obj, f, fieldValue);
+        }
+            
     }
     
-    public Object newInstance(Class objectClass){
+     public void injectInstances(ZInjectInterface zInjectInterface){
+        
+        injectInstances(zInjectInterface, zInjectInterface);
+            
+    }
+    
+    public Object newInstance(final Class objectClass){
         
         //PREPARA PARA OBTER A INSTANCE
         Object result;
@@ -59,7 +82,18 @@ public class ZInjectManager {
                     return false;
                 }
                 
-                return Modifier.isStatic(value.getModifiers()); //VERIFICA SE É UM MÉTODO ESTÁTICO
+                if (!Modifier.isStatic(value.getModifiers())){//VERIFICA SE NÃO É UM MÉTODO ESTÁTICO
+                    return false;
+                }
+                
+                switch (value.getParameterCount()){ //VERIFICA A QUANTIDADE DE PARAMETROS
+                    case 0: //SE TIVER 0
+                        return true; //É ACEITO
+                    case 1: //SE TIVER 1 PARAMETRO
+                        return objectClass.isAssignableFrom(value.getParameterTypes()[0]);//VERIFICA SE O PARAMETRO É DE UM CLASSE FILHA OU IGUAL A ELA
+                    default:
+                        return false; //QUALQUER OUTRA QUANTIDADE NÃO É ACEITA
+                }
                 
             }
         });
@@ -75,7 +109,33 @@ public class ZInjectManager {
             }
         });
         
-        //OBTEM O MÉTODO 
+        //VERIFICA SE POSSUI UM MÉTODO GETINSTANCE
+        if (!methodList.isEmpty()){
+            //SE POSSUI, OBTEM O PRIMEIRO MÉTODO DA LISTA
+            Method methodGetInstance = methodList.get(0);
+            
+            //VERIFICA SE POSSUI UMA PARAMETRO
+            if (methodGetInstance.getParameterCount()==1){
+                //POSSUI PARAMETRO, PASSA O CLASSE QUE QUER INSTANCIAR
+                result = c.invokeMethod(methodGetInstance, objectClass);
+                
+            } else {
+                //SE NÃO POSSUI, EXECUTA O MÉTODO SEM PARAMETROS
+                result = c.invokeMethod(methodGetInstance);
+            }
+            
+        } else {
+            
+            //SE NÃO ENCONTROU NENHUM MÉTODO getInstance NO PADRÃO CERTO, INSTANCIA DE FORMA NORMAL
+            result = c.newInstance();
+            
+        }
+        
+        //SALVA A INSTANCIA
+        setInstance(objectClass, result);
+        
+        //E RETORNA A INSTANCIA
+        return result;
         
     }
     
@@ -109,8 +169,12 @@ public class ZInjectManager {
        instance = manager;
     }
     
-    public static void injectIn(Object obj){
-        getInstance().injectInstances(obj);
+    public static void injectIn(Object obj,ZInjectInterface zInjectInterface){
+        getInstance().injectInstances(obj,zInjectInterface);
+    }
+    
+    public static void injectIn(ZInjectInterface zInjectInterface){
+        getInstance().injectInstances(zInjectInterface);
     }
     
 }
