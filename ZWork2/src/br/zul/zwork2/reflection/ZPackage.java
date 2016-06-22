@@ -85,9 +85,21 @@ public class ZPackage {
     
     public List<ZClass> listClasses(boolean subresources){
         List<ZClass> result = new ArrayList<>();
+        ZPath appPath = new ZPath(ZAppUtils.getAppFile(caller).getAbsolutePath());
         for (ZFile z:listResources(subresources)){
             if (z.getFilename().toLowerCase().endsWith(".class")){
-                result.add(new ZClass(z));
+                
+                String classPath = z.getPath().format(ZPath.ZPathPattern.PACKAGE).substring(appPath.format(ZPath.ZPathPattern.PACKAGE).length());
+                
+                if (classPath.startsWith(".")){
+                    classPath = classPath.substring(1);
+                }
+                
+                if (classPath.toLowerCase().endsWith(".class")){
+                    classPath = classPath.substring(0,classPath.length()-".class".length());
+                }
+                
+                result.add(new ZClass(classPath));
             }
         }
         return result;

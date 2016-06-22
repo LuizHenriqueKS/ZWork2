@@ -24,4 +24,8 @@ public abstract class ZTest<R> extends ZCustomTest<R> {
         return testResult;
     }
     
+    public ZIndividualTestResult<R> getLastTestResult(){
+        return testResult;
+    }
+    
 }

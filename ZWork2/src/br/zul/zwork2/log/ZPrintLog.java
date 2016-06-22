@@ -25,6 +25,10 @@ public abstract class ZPrintLog {
         print(exception);
     }
     
+    public void println(){
+        print("\r\n");
+    }
+    
     public RuntimeException prepareException(Exception exception) {
         
         //AO LANÇAR O EXCEPTION A MENSAGEM JÁ SERÁ ESCRITA NO CONSOLE

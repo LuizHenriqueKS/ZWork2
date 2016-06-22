@@ -94,11 +94,11 @@ import java.util.List;
         
         while (source.contains(pattern)){
             //OBTEM A PARTE DE INICIO DA STRING ATÉ O PADRÃO
-            ZString part = source.toRight(pattern);
+            ZString part = source.toLeft(pattern);
             //ADICIONA NA LISTA
             result.add(part);
             //REMOVE ESSA PARTE DO INICIO
-            source = source.substring(part.length()+1);
+            source = source.substring(part.length()+pattern.length());
         }
         
         //SE AINDA SOBROU ALGO
@@ -151,7 +151,7 @@ import java.util.List;
     //MÉTODOS DE CORTE SEMI-COMPLETOS
     //==========================================================================
     public ZString to(String [] patterns,String[] patternsToIgnore,ZHorizontalDirection direction){
-        return to(patterns, patterns, direction, ZStringSearchType.LEFT);
+        return to(patterns, patternsToIgnore, direction, ZStringSearchType.LEFT);
     }
     
     
@@ -160,6 +160,10 @@ import java.util.List;
     //==========================================================================
     public ZString toRight(String pattern){
         return to(new String[]{pattern},null,ZHorizontalDirection.RIGHT);
+    }
+    
+    public ZString toLeft(String pattern){
+        return to(new String[]{pattern}, null, ZHorizontalDirection.LEFT);
     }
     
 }

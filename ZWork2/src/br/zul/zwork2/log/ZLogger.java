@@ -174,6 +174,10 @@ public class ZLogger {
                 if (isPrintClassMethodNameOnConsole()){
                     //SE SIM IMPRIME A MENSAGEM FORMATADA QUE JÁ TEM ESSAS INFORMAÇÕES
                     ps.print(formattedMessage.toString());
+                    //PULA A LINHA SE NÃO TIVER O PULAR
+                    if (!formattedMessage.toString().endsWith("\n")){
+                        ps.print("\r\n");
+                    }
                 } else {
                     //CASO CONTRÁRIO, IMPRIME SÓ O QUE INTERESSA
                     ps.print(String.format(message, args));

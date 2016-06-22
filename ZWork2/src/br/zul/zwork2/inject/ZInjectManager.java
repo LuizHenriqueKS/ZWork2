@@ -1,6 +1,8 @@
 package br.zul.zwork2.inject;
 
 import br.zul.zwork2.annotation.ZInject;
+import br.zul.zwork2.annotation.ZSingleton;
+import br.zul.zwork2.log.ZLogger;
 import br.zul.zwork2.reflection.ZClass;
 import br.zul.zwork2.util.ZFilter;
 import java.lang.reflect.Field;
@@ -13,6 +15,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 /**
  *
@@ -28,19 +31,30 @@ public class ZInjectManager {
     //==========================================================================
     //VÁRIVAVEIS PRIVADAS
     //==========================================================================
-    private Map<Class,Object> instanceMap;
+    private final Map<Class,Object> instanceMap;
+    private final Map<Object,ZInjectInterface> singletonMap;
     
     //==========================================================================
     //CONSTRUTORES
     //==========================================================================
     public ZInjectManager(){
         instanceMap = new HashMap<>();
+        singletonMap = new HashMap<>();
     }
     
     //==========================================================================
     //MÉTODOS PÚBLICOS
     //==========================================================================
     public void injectInstances(Object obj,ZInjectInterface zInjectInterface){
+        
+        //PREPARA O LOGGER
+        ZLogger logger = new ZLogger(getClass(),"injectInstances(Object obj,ZInjectInterface zInjectInterface)");
+        
+        //VERIFICA SE O OBJETO POSSUI A ANOTAÇÃO ZSingleton
+        if (obj.getClass().isAnnotationPresent(ZSingleton.class)){
+            //SE POSSUI, ADICIONA NA MAP DE SINGLETONS
+            singletonMap.put(obj,zInjectInterface);
+        }
         
         //INICIA UM ZCLASS PARA FACILITAR A BUSCA DOS CAMPOS
         ZClass c = new ZClass(obj.getClass());
@@ -50,11 +64,21 @@ public class ZInjectManager {
         
         //PERCORRE A LISTA DE CAMPOS
         for (Field f:fields){
+            
+            //VERIFICA SE O TIPO DO CAMPO JÁ NÃO É O DA CLASSE DO OBJETO
+            if (f.getType().equals(obj.getClass())){
+                throw logger.error.prepareException("Tentando fazer um inject num objeto com um campo do mesmo tipo: '%s'!", obj.getClass().getName());
+            }
+            
             //OBTEM O VALOR PARA O CAMPO
             Object fieldValue = getInstance(f.getType());
             
             //SETA O VALOR AO CAMPO CORRESPONDENTE
-            zInjectInterface.setValueField(obj, f, fieldValue);
+            try{
+                zInjectInterface.setValueField(obj, f, fieldValue);
+            }catch(IllegalArgumentException | IllegalAccessException e){
+                throw logger.error.prepareException(e,"Não foi possível injetar o a instância '%s' dentro do campo '%s' do objeto '%s'",fieldValue,f.getName(),obj);
+            }
         }
             
     }
@@ -151,7 +175,21 @@ public class ZInjectManager {
         
     }
     public void setInstance(Class objectClass,Object object){
+        
+        //VERIFICA SE JÁ TINHA UMA INSTÂNCIA PARA ESSA CLASSE
+        boolean alreadyHadInstance = instanceMap.containsKey(objectClass);
+        
+        //ATUALIZA A INSTANCIA NO HASHMAP
         instanceMap.put(objectClass,object);
+        
+        //SE JÁ TINHA A INSTÂNCIA ENTÃO ATUALIZA EM TODOS O OBJETOS SINGLETONS
+        if (alreadyHadInstance){
+            for (Entry<Object,ZInjectInterface> value:singletonMap.entrySet()){
+                //FAZ A INJEÇÃO DE DEPENDÊNCIAS NOVAMENTE
+                injectInstances(value.getKey(), value.getValue());
+            }
+        }
+        
     }
         
     //==========================================================================

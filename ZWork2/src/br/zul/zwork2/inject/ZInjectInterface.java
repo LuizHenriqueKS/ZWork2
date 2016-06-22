@@ -9,6 +9,6 @@ import java.lang.reflect.Field;
  */
 public interface ZInjectInterface<T> {
 
-    void setValueField(T object,Field objectField,Object fieldValue);
+    void setValueField(T object,Field objectField,Object fieldValue) throws IllegalArgumentException,IllegalAccessException;
     
 }

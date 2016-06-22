@@ -3,6 +3,7 @@ package br.zul.zwork2.test;
 /**
  *
  * @author Luiz Henrique
+ * @param <R>
  */
 public abstract class ZCustomTest<R> {
     

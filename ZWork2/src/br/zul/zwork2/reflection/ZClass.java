@@ -1,8 +1,6 @@
 package br.zul.zwork2.reflection;
 
-import br.zul.zwork2.io.ZFile;
 import br.zul.zwork2.io.ZPath;
-import br.zul.zwork2.log.ZLogLevel;
 import br.zul.zwork2.log.ZLogger;
 import br.zul.zwork2.string.ZString;
 import br.zul.zwork2.util.ZFilter;
@@ -18,8 +16,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -58,39 +54,22 @@ public class ZClass<T> {
         }
     }
     
-    public ZClass(ZFile file){
-        
-        String _package = file.getPath().format(ZPath.ZPathPattern.PACKAGE);
-        
-        if (_package.toLowerCase().contains(".class")){        
-            _package = _package.substring(0,_package.length()-".class".length());
-        }
-        
-        try {
-            this.objectClass = (Class<T>)Class.forName(_package);
-        } catch (ClassNotFoundException ex) {
-            ZLogger log = new ZLogger(getClass(),"ZClass(String classPackage)");
-            log.error.println(ex, "Classe '%s' não encontrada!", _package);
-        }
-        
-    }
-    
     //==========================================================================
     //MÉTODOS PÚBLICOS PARA CAMPOS
     ///==========================================================================
-    public Collection<Field> listFields(){
+    public List<Field> listFields(){
         return listFields(null,null);
     }
     
-    public Collection<Field> listFields(ZFilter<String,Field> filter){
+    public List<Field> listFields(ZFilter<String,Field> filter){
         return listFields(filter,null);
     }
     
-    public Collection<Field> listFields(Class<? extends Annotation> annotation){
+    public List<Field> listFields(Class<? extends Annotation> annotation){
         return listFields(null,annotation);
     }
     
-    public Collection<Field> listFields(ZFilter<String,Field> filter,Class<? extends Annotation> annotation){
+    public List<Field> listFields(ZFilter<String,Field> filter,Class<? extends Annotation> annotation){
         //PREPARA A LISTA DE RESULTADO
         Set<Field> set = new HashSet<>();
         
@@ -135,7 +114,7 @@ public class ZClass<T> {
         }
         
         //RETORNA O RESULTADO
-        return map.values();
+        return new ArrayList<>(map.values());
     }
     
     public Field getField(final ZString fieldName){
@@ -172,12 +151,16 @@ public class ZClass<T> {
         
         //TENTA OBTER O CAMPO
         try {
-            return objectClass.getField(fieldName);
-        } catch (NoSuchFieldException ex) {
-            throw log.error.prepareException(ex, "O campo '%s' não foi encontrado na classe '%s'!", fieldName,objectClass.getName());
-        } catch (SecurityException ex) {
-            throw log.error.prepareException(ex, "Problema em tentar obter o campo '%s' na classe '%s'." ,fieldName,objectClass.getName());
-        }
+                return objectClass.getField(fieldName);
+        }catch(NoSuchFieldException | SecurityException e){
+            try{
+                return objectClass.getDeclaredField(fieldName);
+            } catch (NoSuchFieldException ex) {
+                throw log.error.prepareException(ex, "O campo '%s' não foi encontrado na classe '%s'!", fieldName,objectClass.getName());
+            } catch (SecurityException ex) {
+                throw log.error.prepareException(ex, "Problema em tentar obter o campo '%s' na classe '%s'." ,fieldName,objectClass.getName());
+            }
+        }    
         
     }
     
@@ -267,44 +250,42 @@ public class ZClass<T> {
     //==========================================================================
     //MÉTODOS PÚBLICOS PARA MÉTODOS
     //==========================================================================
-    public Collection<Method> listMethods(){
+    public List<Method> listMethods(){
         return listMethods((ZFilter)null,null);
     }
     
-    public Collection<Method> listMethods(ZFilter<Integer,Method> filter){
+    public List<Method> listMethods(ZFilter<Integer,Method> filter){
         return listMethods(filter,null);
     }
     
-    public Collection<Method> listMethods(Class<? extends Annotation> annotation){
+    public List<Method> listMethods(Class<? extends Annotation> annotation){
         return listMethods((ZFilter)null,annotation);
     }
     
     /**
      * BUSCA E LISTA MÉTODOS PELO NOME DO MÉTODO (CASE SENSITIVE)
      * 
-     * @param objectClass
      * @param methodName
      * @return 
      */
-    public Collection<Method> listMethods(String methodName){
+    public List<Method> listMethods(String methodName){
         return listMethods(new ZString(methodName,true));
     }
     
     /**
      *  BUSCA E LISTA MÉTODOS PELO NOME DO MÉTODO (CASE SENSITIVE VAI DEPENDER SE A ZSTRING FOR CASE SENSITIVE)
-     * @param objectClass
      * @param methodName
      * @return 
      */
-    public Collection<Method> listMethods(ZString methodName){
+    public List<Method> listMethods(ZString methodName){
         return listMethods(methodName,null);
     }
     
-    public Collection<Method> listMethods(String methodName,Class<? extends Annotation> annotation){
+    public List<Method> listMethods(String methodName,Class<? extends Annotation> annotation){
         return listMethods(new ZString(methodName,true),annotation);
     }
     
-    public Collection<Method> listMethods(final ZString methodName,Class<? extends Annotation> annotation){
+    public List<Method> listMethods(final ZString methodName,Class<? extends Annotation> annotation){
         
         //PREPARA O FILTRO QUE IRÁ FILTRAR OS MÉTODOS PELO NOME
         ZFilter<Integer,Method> filter = new ZFilter<Integer,Method>(){
@@ -317,7 +298,7 @@ public class ZClass<T> {
         return listMethods(filter,annotation);
     }
     
-    public Collection<Method> listMethods(ZFilter<Integer,Method> filter,final Class<? extends Annotation> annotation){
+    public List<Method> listMethods(ZFilter<Integer,Method> filter,final Class<? extends Annotation> annotation){
         
         //OBTEM TODOS OS MÉTODOS (USA O CONJUNTO SET PARA NÃO OBTER MÉTODOS DUPLICADOS)
         Set<Method> methodSet = new HashSet<>();
@@ -361,6 +342,25 @@ public class ZClass<T> {
     
     public Object invokeMethod(Method method,Object... parameters){
         return invokeMethod(null,method,parameters);
+    }
+    
+    public Object invokeMethod(Object object,ZString methodName,Object... parameters){
+        
+        ZLogger log = new ZLogger(getClass(), "invokeMethod(Object object,ZString methodName)");
+        
+        //OBTEM OS MÉTODOS COM ESSE NOME
+        Collection<Method> methodList = listMethods(methodName);
+        
+        //CONTINUA SE POSSUI SÓ UM NA LISTA
+        if (methodList.size()>1){
+            throw log.error.prepareException("Foi encontrado mais de um método com o nome '%s' na classe '%s'!",methodName.toString(),object.getClass().getName());
+        } else if (methodList.isEmpty()) {
+            throw log.error.prepareException("Foi encontrado nenhum método com o nome '%s' na classe '%s'!",methodName.toString(),object.getClass().getName());
+        }
+        
+        //INVOCA O METODO
+        return invokeMethod(object,methodList.iterator().next(), parameters);
+        
     }
     
     //==========================================================================

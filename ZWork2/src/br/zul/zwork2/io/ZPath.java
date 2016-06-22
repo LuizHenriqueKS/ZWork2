@@ -68,7 +68,7 @@ public class ZPath {
     }
     
     public ZPath(Package pack){
-        String packPath = pack.toString();
+        String packPath = pack.toString().substring("package ".length());
         init(packPath,ZPathPattern.PACKAGE);
     }
     
