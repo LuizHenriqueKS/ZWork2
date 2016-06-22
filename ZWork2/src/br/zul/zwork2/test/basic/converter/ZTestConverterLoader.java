@@ -1,23 +1,18 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.zul.zwork2.test.basic.converter;
 
 import br.zul.zwork2.converter.ZConverter;
-import br.zul.zwork2.converter.ZConverterManagerAbstract;
 import br.zul.zwork2.reflection.ZClass;
 import br.zul.zwork2.reflection.ZPackage;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import br.zul.zwork2.converter.ZConverterLoader;
 
 /**
  *
  * @author Luiz Henrique
  */
-public class ZTestConverterManager extends ZConverterManagerAbstract{
+public class ZTestConverterLoader implements ZConverterLoader{
 
     @Override
     public Collection<ZConverter> loadConverters(Class<?> type1, Class<?> type2) {

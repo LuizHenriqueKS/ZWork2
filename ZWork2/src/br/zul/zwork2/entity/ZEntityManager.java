@@ -53,6 +53,20 @@ public class ZEntityManager {
         
     }
     
+    public Class<?> getAttributeType(Class<? extends ZEntity> entityClass,String attributeName){
+        
+        //OBTEM O CAMPO
+        ZClass zClass = new ZClass(entityClass);
+        Field field = zClass.getField(attributeName);
+        
+        //OBTEM A ANOTAÇÃO
+        Class<?> type = field.getType();
+        
+        //RETORNA A ANOTAÇÃO
+        return type;
+        
+    }
+    
     public Object getAttributeValue(ZEntity entity,String attributeName){
         
         //OBTEM A CLASSE

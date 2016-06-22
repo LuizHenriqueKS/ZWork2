@@ -1,22 +1,52 @@
 package br.zul.zwork2.converter;
 
 import br.zul.zwork2.log.ZLogger;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  *
  * @author Luiz Henrique
  */
-public abstract class ZConverterManagerAbstract {
+public class ZConverterManager {
 
     //==========================================================================
-    //MÉTODOS PÚBLICOS ABSTRATOS
+    //VARIÁVEIS PRIVADAS
     //==========================================================================
-    public abstract Collection<ZConverter> loadConverters(Class<?> type1,Class<?> type2);
+    private final Set<ZConverterLoader> loaderSet;
+    
+    //==========================================================================
+    //CONSTRUTORES
+    //==========================================================================
+    public ZConverterManager(){
+        this.loaderSet = new HashSet<>();
+    }
+    
+    //==========================================================================
+    //MÉTODOS PÚBLICOS PARA LOADER
+    //==========================================================================
+    public void addLoader(ZConverterLoader loader){
+        loaderSet.add(loader);
+    }
     
     //==========================================================================
     //MÉTODOS PÚBLICOS
     //==========================================================================
+    public Collection<ZConverter> loadConverters(Class<?> type1,Class<?> type2){
+        //PREPARA A LISTA DE CONVERSORES QUE VAI SER RETORNADA
+        List<ZConverter> result = new ArrayList<>();
+        //PERCORRE OS CARREGADORES DE CONVERSORES
+        for (ZConverterLoader loader:loaderSet){
+            //CARREGA E ADICINONA OS CONVERSORES NA LISTA
+            result.addAll(loader.loadConverters(type1, type2));
+        }
+        //RETORNA A LISTA
+        return result;
+    }
+    
     /**
      * PROCURA PELO CONVERTER DOS TIPOS.
      * 

@@ -1,23 +1,27 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package br.zul.zwork2.util;
 
 import br.zul.zwork2.inject.ZInjectInterface;
 import br.zul.zwork2.inject.ZInjectManager;
-import java.lang.reflect.Field;
 
 /**
  *
  * @author Luiz Henrique
  */
-public class ZObject implements ZInjectInterface<ZObject>{
-
+public class ZObject {
+    
     public ZObject(){
-        ZInjectManager.injectIn(this);
-    }
-
-    @Override
-    public void setValueField(ZObject object, Field objectField, Object fieldValue) throws IllegalArgumentException, IllegalAccessException {
-        objectField.set(object, fieldValue);
+        init();
     }
     
+    private void init(){
+        if (this instanceof ZInjectInterface){
+            ZInjectManager.injectIn((ZInjectInterface)this);
+        }
+    }
     
 }

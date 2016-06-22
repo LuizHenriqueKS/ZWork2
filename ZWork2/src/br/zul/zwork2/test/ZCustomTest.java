@@ -1,5 +1,7 @@
 package br.zul.zwork2.test;
 
+import br.zul.zwork2.util.ZObject;
+
 /**
  *
  * @author Luiz Henrique
