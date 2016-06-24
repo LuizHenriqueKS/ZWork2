@@ -16,7 +16,7 @@ import java.util.Map.Entry;
  *
  * @author Luiz Henrique
  */
-public abstract class EntityReader implements ZInjectInterface<EntityReader>{
+public abstract class ZEntityReader implements ZInjectInterface<ZEntityReader>{
     
     //==========================================================================
     //MANAGERS
@@ -92,7 +92,7 @@ public abstract class EntityReader implements ZInjectInterface<EntityReader>{
     }
 
     @Override
-    public void setValueField(EntityReader object, Field objectField, Object fieldValue) throws IllegalArgumentException, IllegalAccessException {
+    public void setValueField(ZEntityReader object, Field objectField, Object fieldValue) throws IllegalArgumentException, IllegalAccessException {
         objectField.set(object, fieldValue);
     }
     

@@ -16,7 +16,7 @@ import java.util.List;
  * @author Luiz Henrique
  * @param <T>
  */
-public abstract class EntityWriter<T> implements ZInjectInterface<EntityWriter> {
+public abstract class ZEntityWriter<T> implements ZInjectInterface<ZEntityWriter> {
     
     //==========================================================================
     //MANAGERS
@@ -112,7 +112,7 @@ public abstract class EntityWriter<T> implements ZInjectInterface<EntityWriter> 
     }
 
     @Override
-    public void setValueField(EntityWriter object,Field objectField,Object fieldValue) throws IllegalArgumentException,IllegalAccessException{
+    public void setValueField(ZEntityWriter object,Field objectField,Object fieldValue) throws IllegalArgumentException,IllegalAccessException{
         objectField.set(object, fieldValue);
     }
     

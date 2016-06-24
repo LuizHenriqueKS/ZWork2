@@ -80,6 +80,12 @@ public class ZConverterManager {
         //PREPARA O LOGGER
         ZLogger logger = new ZLogger(getClass(), "convert(Object type1Obj,Class<?> classTo)");
         
+        //VERIFICA SE OBJETO É DO TIPO DA CLASSE
+        if (type1Obj.getClass().equals(classTo)){
+            //ENTÃO NÃO PRECISA CONVERTER
+            return type1Obj;
+        }
+        
         //OBTEM O CONVERTER PARA OS TIPOS INFORMADOS
         ZConverter converter = getConverter(type1Obj.getClass(),classTo);
         
