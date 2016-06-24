@@ -32,6 +32,8 @@ public abstract class ZEntityReader implements ZInjectInterface<ZEntityReader>{
     //==========================================================================
     //MÉTODOS PÚBLICOS ABSTRATOS
     //==========================================================================
+    public abstract void open();
+    public abstract void close();
     public abstract ZEntity readEntityOne();
     public abstract List<ZEntity> readEntityList();
     public abstract Object convertFrom(Object value,ZEntity entity,String attributeName);
@@ -43,7 +45,7 @@ public abstract class ZEntityReader implements ZInjectInterface<ZEntityReader>{
         this.columnList = columns;
     }
     
-    public ZEntity readEntity(List<Object> data){
+    public ZEntity convertToEntity(List<Object> data){
         
         //PREPARA O HASH MAP DE DADOS
         Map<String,Object> result = new HashMap<>();
@@ -55,11 +57,11 @@ public abstract class ZEntityReader implements ZInjectInterface<ZEntityReader>{
         }
         
         //RETORNA A ENTIDADE
-        return readEntity(result);
+        return convertToEntity(result);
         
     }
     
-    public ZEntity readEntity(Map<String,Object> data){
+    public ZEntity convertToEntity(Map<String,Object> data){
         
         //OBTEM O NOME DA CLASSE
         String className = (String)data.get("class");
