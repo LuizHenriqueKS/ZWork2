@@ -16,6 +16,7 @@ public class ZConversionObject {
     private Object value;
     private String name;
     private ZAttribute attribute;
+    private Class<?> type;
     
     //==========================================================================
     //CONSTRUTORES
@@ -26,9 +27,10 @@ public class ZConversionObject {
     
     public ZConversionObject(ZEntity entity,String attributeName){
         ZEntityManager entityManager = new ZEntityManager();
-        value = entityManager.getAttributeValue(entity, attributeName);
-        name = attributeName;
-        attribute = entityManager.getAttributeAnnotation(entity.getClass(), attributeName);
+        this.type = entity.getClass();
+        this.value = entityManager.getAttributeValue(entity, attributeName);
+        this.name = attributeName;
+        this.attribute = entityManager.getAttributeAnnotation(entity.getClass(), attributeName);
     }
     
     //==========================================================================
@@ -53,6 +55,13 @@ public class ZConversionObject {
     }
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Class<?> getType() {
+        return type;
+    }
+    public void setType(Class<?> type) {
+        this.type = type;
     }
     
 }

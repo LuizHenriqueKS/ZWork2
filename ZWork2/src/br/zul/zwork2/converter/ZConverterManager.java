@@ -104,4 +104,10 @@ public class ZConverterManager {
         
     }
     
+    public Object convert(ZConversionObject conversionObject){
+        
+        return convert(conversionObject.getValue(),conversionObject.getType());
+        
+    }
+    
 }
