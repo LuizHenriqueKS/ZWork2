@@ -73,10 +73,20 @@ public class ZClass<T> {
         //PREPARA A LISTA DE RESULTADO
         Set<Field> set = new HashSet<>();
         
-        //ADICIONA TODOS OS CAMPOS, TANDOS DAS CLASSES MÃES QUANTO DAS CLASSES FILHAS
-        set.addAll(Arrays.asList(objectClass.getDeclaredFields()));
-        set.addAll(Arrays.asList(objectClass.getFields()));
+        //PREPARA A CLASSE COM OS CAMPOS
+        Class<?> clazz = objectClass;
         
+        do{
+            
+            //ADICIONA TODOS OS CAMPOS, TANDOS DAS CLASSES MÃES QUANTO DAS CLASSES FILHAS
+            set.addAll(Arrays.asList(clazz.getFields()));
+            set.addAll(Arrays.asList(clazz.getDeclaredFields()));
+            
+            //MUDA CLAZZ PARA O CLAZZ DO PARENT
+            clazz = clazz.getSuperclass();
+            
+        } while (!clazz.equals(Object.class));
+            
         //CONVERTE DE SET PARA MAP
         Map<String,Field> map = new HashMap<>();
         for (Field f:set){
@@ -144,23 +154,45 @@ public class ZClass<T> {
         
     }
     
-    public Field getField(String fieldName){
-        
-        //LOGGER
-        ZLogger log = new ZLogger(getClass(),"getField(String fieldName)");
+    public boolean isFieldBelongsThisClass(String fieldName){
         
         //TENTA OBTER O CAMPO
         try {
-                return objectClass.getField(fieldName);
+            return objectClass.getField(fieldName)!=null;
         }catch(NoSuchFieldException | SecurityException e){
             try{
-                return objectClass.getDeclaredField(fieldName);
-            } catch (NoSuchFieldException ex) {
-                throw log.error.prepareException(ex, "O campo '%s' não foi encontrado na classe '%s'!", fieldName,objectClass.getName());
-            } catch (SecurityException ex) {
-                throw log.error.prepareException(ex, "Problema em tentar obter o campo '%s' na classe '%s'." ,fieldName,objectClass.getName());
+                return objectClass.getDeclaredField(fieldName)!=null;
+            } catch (NoSuchFieldException | SecurityException ex) {
+                return false;
             }
         }    
+        
+    }
+    
+    public Field getField(final String fieldName){
+        
+        //LOGGER
+        ZLogger logger = new ZLogger(getClass(),"getField(String fieldName)");
+        
+        //PREPARA UM FILTRO PARA FILTRAR PELO NOME
+        ZFilter<String,Field> filter = new ZFilter<String,Field>() {
+            @Override
+            public boolean filter(String key, Field value) {
+                return fieldName.equals(key);
+            }
+        };
+        
+        //OBTEM UMA LISTA COM CAMPOS COM ESSE NOME
+        List<Field> fieldList = listFields(filter);
+        
+        //VERIFICA SE A LISTA ESTÁ VAZIA
+        if (fieldList.isEmpty()){
+            //SE NAÕ TIVER ESCREVE UMA MENSAGEM DE ERRO NO LOG E LANÇA UM EXCEPTION
+            throw logger.error.prepareException("Não foi encontrado o campo '%s' na classe '%s'!", fieldName,objectClass.getName());
+        } else {
+            //SE TIVER, RETORNA O PRIMEIRO DA LISTA
+            return fieldList.get(0);
+        }
         
     }
     

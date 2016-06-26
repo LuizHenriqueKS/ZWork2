@@ -2,11 +2,9 @@ package br.zul.zwork2.io;
 
 import br.zul.zwork2.annotation.ZInject;
 import br.zul.zwork2.converter.ZConversionObject;
-import br.zul.zwork2.converter.ZConverterManager;
 import br.zul.zwork2.entity.ZEntity;
 import br.zul.zwork2.entity.ZEntityManager;
 import br.zul.zwork2.inject.ZInjectInterface;
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -16,7 +14,7 @@ import java.util.List;
  * @author Luiz Henrique
  * @param <T>
  */
-public abstract class ZEntityWriter<T> implements ZInjectInterface<ZEntityWriter> {
+public abstract class ZEntityWriter<T> implements ZInjectInterface {
     
     //==========================================================================
     //MANAGERS
@@ -111,9 +109,4 @@ public abstract class ZEntityWriter<T> implements ZInjectInterface<ZEntityWriter
         writeEntity(list);
     }
 
-    @Override
-    public void setValueField(ZEntityWriter object,Field objectField,Object fieldValue) throws IllegalArgumentException,IllegalAccessException{
-        objectField.set(object, fieldValue);
-    }
-    
 }

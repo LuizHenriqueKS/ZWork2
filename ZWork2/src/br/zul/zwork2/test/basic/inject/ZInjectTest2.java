@@ -18,7 +18,7 @@ import java.lang.reflect.Field;
  * @author Luiz Henrique
  */
 @ZSingleton
-public class ZInjectTest2 extends ZSimpleTest<ZInjectObjectTest> implements ZInjectInterface<ZInjectTest2>{
+public class ZInjectTest2 extends ZSimpleTest<ZInjectObjectTest> implements ZInjectInterface{
     
     //==========================================================================
     //INJEÇÕES
@@ -69,7 +69,7 @@ public class ZInjectTest2 extends ZSimpleTest<ZInjectObjectTest> implements ZInj
     }
 
     @Override
-    public void setValueField(ZInjectTest2 object, Field objectField, Object fieldValue) throws IllegalArgumentException, IllegalAccessException {
+    public void setValueField(Object object, Field objectField, Object fieldValue) throws IllegalArgumentException, IllegalAccessException {
          objectField.set(object, fieldValue);
     }
     

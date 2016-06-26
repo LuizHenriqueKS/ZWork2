@@ -57,7 +57,7 @@ public class ZPackage {
      */
     public List<ZFile> listResources(boolean subresources){
         
-        if (ZAppUtils.isAppFileDirectory(getClass())){
+        if (ZAppUtils.isAppFileDirectory(caller)){
             
             List<ZFile> result = new ArrayList<>();
             File dir = new File(ZAppUtils.getAppFile(caller),path.format(ZPath.ZPathPattern.WINDOWS));
@@ -65,13 +65,30 @@ public class ZPackage {
             return result;
             
         } else {
-            
             List<ZFile> result = new ZZipFile(ZAppUtils.getAppFile(caller)).listFiles();
             
+            //SE O FILTRO DE PATH ESTÁ NULL RETORNA SEMPRE NULL
+            if (path==null){
+                //NÃO PRECISA FILTRAR
+                return result;
+            }
+            
+            //SE NÃO TIVER NULL, FILTRA
             return new ZFilter<Integer,ZFile>(){
                 @Override
                 public boolean filter(Integer key, ZFile value) {
-                    return value.getPath().equals(path);
+                    
+                    //OBTEM O PARENTE
+                    ZPath valueParent = value.getPath().getParent();
+                    
+                    //VERIFICA SE ELE ESTÁ NULL
+                    if (valueParent==null){
+                        //RETORNA FALSE
+                        return false;
+                    }
+                   
+                    //SE NÃO, COMPARA OS DIRETÓRIOS
+                    return valueParent.equals(path);
                 }
             }.filter(result);
             
@@ -84,12 +101,20 @@ public class ZPackage {
     }
     
     public List<ZClass> listClasses(boolean subresources){
+        
         List<ZClass> result = new ArrayList<>();
         ZPath appPath = new ZPath(ZAppUtils.getAppFile(caller).getAbsolutePath());
+        boolean isAppFileDirectory = ZAppUtils.isAppFileDirectory(caller);
+        
         for (ZFile z:listResources(subresources)){
             if (z.getFilename().toLowerCase().endsWith(".class")){
                 
-                String classPath = z.getPath().format(ZPath.ZPathPattern.PACKAGE).substring(appPath.format(ZPath.ZPathPattern.PACKAGE).length());
+                String classPath;
+                if (isAppFileDirectory){
+                    classPath = z.getPath().format(ZPath.ZPathPattern.PACKAGE).substring(appPath.format(ZPath.ZPathPattern.PACKAGE).length());
+                } else {
+                    classPath = z.getPath().format(ZPath.ZPathPattern.PACKAGE);
+                }
                 
                 if (classPath.startsWith(".")){
                     classPath = classPath.substring(1);
@@ -125,7 +150,6 @@ public class ZPackage {
                 if (ignoreClassesEquals&&value.getObjectClass().equals(originClass)){
                     return false;
                 }
-                
                 //VERIFICA SE É UMA CLASSE EXTENDIDA DA ORIGINCLASS
                 return value.isChildOf(originClass);
             }

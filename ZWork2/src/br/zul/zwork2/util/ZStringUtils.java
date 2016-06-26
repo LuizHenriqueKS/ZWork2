@@ -18,6 +18,39 @@ public class ZStringUtils {
         return str==null||str.isEmpty();
     }
     
+    public static boolean isLong(String str){
+        
+        //SE ESTIVER VAZIO ENTÃO NÃO É LONG
+        if (isEmpty(str)){
+            return false;
+        }
+        
+        //TENTA CONVERTER PARA LONG
+        try{
+            Long.parseLong(str);
+            //SE CONSEGUIR ENTÃO É LONG
+            return true;
+        }catch(Exception e){
+            //SE NÃO CONSEGUIR, É PQ NÃO É LONG
+            return false;
+        }
+        
+    }
+    
+    public static String removeEmptyChar(String str){
+        
+        String result="";
+        
+        for (char c:str.toCharArray()){
+            if (c!=65279){
+                result+=c;
+            }
+        }
+        
+        return result;
+        
+    }
+    
     public static String[] convert(ZString[] array){
         List<String> list = new ArrayList<>();
         for (ZString z:array){

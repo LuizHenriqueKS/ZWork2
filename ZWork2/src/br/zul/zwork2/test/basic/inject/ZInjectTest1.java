@@ -15,7 +15,7 @@ import java.lang.reflect.Field;
  *
  * @author Luiz Henrique
  */
-public class ZInjectTest1 extends ZSimpleTest<ZInjectObjectTest> implements ZInjectInterface<ZInjectTest1>{
+public class ZInjectTest1 extends ZSimpleTest<ZInjectObjectTest> implements ZInjectInterface{
     
     //==========================================================================
     //INJEÇÕES
@@ -64,7 +64,7 @@ public class ZInjectTest1 extends ZSimpleTest<ZInjectObjectTest> implements ZInj
     }
 
     @Override
-    public void setValueField(ZInjectTest1 object, Field objectField, Object fieldValue) throws IllegalArgumentException, IllegalAccessException {
+    public void setValueField(Object object, Field objectField, Object fieldValue) throws IllegalArgumentException, IllegalAccessException {
          objectField.set(object, fieldValue);
     }
     

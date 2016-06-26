@@ -190,8 +190,12 @@ public class ZPath {
     }
     
     public ZPath getParent(){
-        String[] parentParts = Arrays.copyOfRange(listParts(), 0, parts.length-2);
-        return new ZPath(parentParts,pattern);
+        try{
+            String[] parentParts = Arrays.copyOfRange(listParts(), 0, parts.length-1);
+            return new ZPath(parentParts,pattern);
+        }catch(Exception e){
+            return null;
+        }
     }
     
 }

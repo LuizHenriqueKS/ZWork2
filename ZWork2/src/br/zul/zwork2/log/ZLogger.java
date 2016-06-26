@@ -140,7 +140,7 @@ public class ZLogger {
     public void log(ZLogLevel level,String message,Object... args){
         //FORMATA A MENSAGEM
         StringBuilder formattedMessage = new StringBuilder();
-        formattedMessage.append(getClass().getName());
+        formattedMessage.append(_class.getName());
         formattedMessage.append(".");
         formattedMessage.append(methodName);
         formattedMessage.append(":");

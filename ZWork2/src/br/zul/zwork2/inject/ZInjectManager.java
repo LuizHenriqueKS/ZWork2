@@ -110,7 +110,7 @@ public class ZInjectManager {
                     return false;
                 }
                 
-                switch (value.getParameterCount()){ //VERIFICA A QUANTIDADE DE PARAMETROS
+                switch (value.getParameterTypes().length){ //VERIFICA A QUANTIDADE DE PARAMETROS
                     case 0: //SE TIVER 0
                         return true; //É ACEITO
                     case 1: //SE TIVER 1 PARAMETRO
@@ -129,7 +129,7 @@ public class ZInjectManager {
         Collections.sort(methodList, new Comparator<Method>(){
             @Override
             public int compare(Method t, Method t1) {
-                return -(t.getParameterCount()-t1.getParameterCount());
+                return -(t.getParameterTypes().length-t1.getParameterTypes().length);
             }
         });
         
@@ -139,7 +139,7 @@ public class ZInjectManager {
             Method methodGetInstance = methodList.get(0);
             
             //VERIFICA SE POSSUI UMA PARAMETRO
-            if (methodGetInstance.getParameterCount()==1){
+            if (methodGetInstance.getParameterTypes().length==1){
                 //POSSUI PARAMETRO, PASSA O CLASSE QUE QUER INSTANCIAR
                 result = c.invokeMethod(methodGetInstance, objectClass);
                 
@@ -213,6 +213,10 @@ public class ZInjectManager {
     
     public static void injectIn(ZInjectInterface zInjectInterface){
         getInstance().injectInstances(zInjectInterface);
+    }
+    
+    public static Object getIns(Class<?> objectClass){
+        return getInstance().getInstance(objectClass);
     }
     
 }

@@ -15,5 +15,8 @@ public @interface ZAttribute {
     Class join() default void.class;
     String format() default "";
     String type() default "";
+    boolean nullable() default false;
+    boolean key() default true;
+    boolean unique() default false;
     int length() default 0;
 }

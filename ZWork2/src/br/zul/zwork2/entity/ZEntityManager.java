@@ -57,6 +57,8 @@ public class ZEntityManager {
         
         //OBTEM O CAMPO
         ZClass zClass = new ZClass(entityClass);
+        
+        //
         Field field = zClass.getField(attributeName);
         
         //OBTEM A ANOTAÇÃO

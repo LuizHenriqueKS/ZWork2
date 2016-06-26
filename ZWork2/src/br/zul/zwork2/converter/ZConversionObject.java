@@ -27,7 +27,7 @@ public class ZConversionObject {
     
     public ZConversionObject(ZEntity entity,String attributeName){
         ZEntityManager entityManager = new ZEntityManager();
-        this.type = entity.getClass();
+        this.type = entityManager.getAttributeType(entity.getClass(), attributeName);
         this.value = entityManager.getAttributeValue(entity, attributeName);
         this.name = attributeName;
         this.attribute = entityManager.getAttributeAnnotation(entity.getClass(), attributeName);

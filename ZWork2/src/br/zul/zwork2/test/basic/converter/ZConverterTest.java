@@ -16,7 +16,7 @@ import java.lang.reflect.Field;
  *
  * @author Luiz Henrique
  */
-public class ZConverterTest extends ZSimpleTest<Float> implements ZInjectInterface<ZConverterTest> {
+public class ZConverterTest extends ZSimpleTest<Float> implements ZInjectInterface {
 
     @ZInject
     ZConverterManager converterManager;
@@ -51,7 +51,7 @@ public class ZConverterTest extends ZSimpleTest<Float> implements ZInjectInterfa
     }
 
     @Override
-    public void setValueField(ZConverterTest object, Field objectField, Object fieldValue) throws IllegalArgumentException, IllegalAccessException {
+    public void setValueField(Object object, Field objectField, Object fieldValue) throws IllegalArgumentException, IllegalAccessException {
         objectField.set(object, fieldValue);
     }
     

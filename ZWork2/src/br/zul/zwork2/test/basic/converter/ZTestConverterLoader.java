@@ -16,6 +16,7 @@ public class ZTestConverterLoader implements ZConverterLoader{
 
     @Override
     public Collection<ZConverter> loadConverters(Class<?> type1, Class<?> type2) {
+        System.out.println("Iniciando leitura dos conversores");
         //OBTEM O PACOTE DESSA CLASSE
         ZPackage pack = new ZPackage(getClass(), getClass().getPackage());
         //LISTA TODAS AS CLASSES DE CONVERSOR DESSE PACOTE

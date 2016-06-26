@@ -49,7 +49,9 @@ public class ZLogFileWriter {
      * @param name Nome do arquivo do log, sem a extensão (.log).
      */
     public ZLogFileWriter(String name){
-        
+        if (name!=null){
+            init(new File(DEFAULT_DIRECTORY,name+".log"));
+        }
     }
     
     /**
@@ -63,6 +65,14 @@ public class ZLogFileWriter {
     
     public ZLogFileWriter(File generalLogFile){
         
+        init(generalLogFile);
+        
+    }
+    
+    //==========================================================================
+    //MÉTODOS DE CONSTRUÇÃO
+    //==========================================================================
+    private void init(File generalLogFile){
         //OBTEM OS DADOS NECESSARIOS PARA CRIAS OS ARQUIVOS DE LOG
         String filename = new ZString(generalLogFile.getName(),false).toRight(".").toString();
         File directory = generalLogFile.getParentFile();
@@ -74,7 +84,6 @@ public class ZLogFileWriter {
         this.infoLogFile = new File(directory,filename+".info.log");
         this.warningLogFile = new File(directory,filename+".warning.log");
         this.errorLogFile = new File(directory,filename+".error.log");
-        
     }
     
     //==========================================================================
@@ -97,8 +106,14 @@ public class ZLogFileWriter {
         try {
             //SE TIVER O ARQUIVO DE LOG
             if (file!=null){
+                //VERIFICA SE NÃO EXISTE A PASTA DO LOG
+                if (!file.getParentFile().exists()){
+                    //SE NÃO EXISTE CRIA ELA
+                    file.getParentFile().mkdirs();
+                }
+                
                 //ABRE O WRITER
-                try (FileWriter writer = new FileWriter(file)) {
+                try (FileWriter writer = new FileWriter(file,true)) {
                     //ESCREVE ELE ENTÃO
                     write(writer,level,message);
                 }
@@ -288,7 +303,7 @@ public class ZLogFileWriter {
         if (generalLogFileWriter==null){
             if (generalLogFile!=null){
                 try {
-                    generalLogFileWriter = new FileWriter(generalLogFile);
+                    generalLogFileWriter = new FileWriter(generalLogFile,true);
                 } catch (IOException ex) {
                     Logger.getLogger(ZLogFileWriter.class.getName()).log(Level.SEVERE, "Não foi possível iniciar o fileWriter do log geral!", ex);
                 }

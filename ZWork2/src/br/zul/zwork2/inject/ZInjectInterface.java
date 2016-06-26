@@ -5,10 +5,9 @@ import java.lang.reflect.Field;
 /**
  *
  * @author Luiz Henrique
- * @param <T>
  */
-public interface ZInjectInterface<T> {
+public interface ZInjectInterface {
 
-    void setValueField(T object,Field objectField,Object fieldValue) throws IllegalArgumentException,IllegalAccessException;
+    void setValueField(Object object,Field objectField,Object fieldValue) throws IllegalArgumentException,IllegalAccessException;
     
 }
