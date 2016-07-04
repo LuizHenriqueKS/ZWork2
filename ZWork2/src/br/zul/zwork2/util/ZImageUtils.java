@@ -6,6 +6,7 @@
 package br.zul.zwork2.util;
 
 import br.zul.zwork2.log.ZLogger;
+import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -69,6 +70,10 @@ public class ZImageUtils {
 
     public static ImageIcon loadImageIcon(File file, int width, int height) {
         return new ImageIcon(loadImage(file, width, height));
+    }
+    
+    public static ImageIcon loadImageIcon(File file, Dimension dimension) {
+        return new ImageIcon(loadImage(file, dimension.width, dimension.height));
     }
 
 }

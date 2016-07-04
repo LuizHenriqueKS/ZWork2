@@ -20,7 +20,7 @@ public abstract class ZEntityWriter<T> implements ZInjectInterface {
     //MANAGERS
     //==========================================================================
     @ZInject
-    ZEntityManager entityManager;
+    protected ZEntityManager entityManager;
     
     //==========================================================================
     //MÉTODOS PÚBLICOS ABSTRATOS
@@ -66,6 +66,7 @@ public abstract class ZEntityWriter<T> implements ZInjectInterface {
         
         //OBTEM OS NOMES DOS ATRIBUTOS
         List<String> attributeNameList = entityManager.listAttributeNames(first.getClass());
+        attributeNameList.add("class");
         
         //ESCREVE O CABEÇALHO
         writeHead(attributeNameList);
@@ -102,6 +103,7 @@ public abstract class ZEntityWriter<T> implements ZInjectInterface {
         //ADICIONA UM PARA A CLASSE
         ZConversionObject obj = new ZConversionObject();
         obj.setName("class");
+        obj.setType(String.class);
         obj.setValue(entity.getClass().getName());
         list.add(obj);
         
