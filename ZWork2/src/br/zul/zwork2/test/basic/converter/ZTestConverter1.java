@@ -1,5 +1,6 @@
 package br.zul.zwork2.test.basic.converter;
 
+import br.zul.zwork2.converter.ZConversionObject;
 import br.zul.zwork2.converter.ZConverter;
 
 /**
@@ -19,12 +20,12 @@ public class ZTestConverter1 implements ZConverter<Integer,String>{
     }
 
     @Override
-    public String type1ToType2(Integer type1) {
+    public String type1ToType2(ZConversionObject conversionObject,Integer type1) {
         return String.valueOf(type1);
     }
 
     @Override
-    public Integer type2ToType1(String type2) {
+    public Integer type2ToType1(ZConversionObject conversionObject,String type2) {
         return Integer.parseInt(type2);
     }
     

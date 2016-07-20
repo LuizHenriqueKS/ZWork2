@@ -15,7 +15,7 @@ public interface ZConverter<Type1,Type2> {
     
     public Class<Type1> getType1Class();
     public Class<Type2> getType2Class();
-    public Type2 type1ToType2(Type1 type1);
-    public Type1 type2ToType1(Type2 type2);
+    public Type2 type1ToType2(ZConversionObject object,Type1 type1);
+    public Type1 type2ToType1(ZConversionObject object,Type2 type2);
     
 }

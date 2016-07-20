@@ -42,6 +42,9 @@ public abstract class ZEntityWriter<T> implements ZInjectInterface {
         //OBTEM OS NOMES DOS ATRIBUTOS
         List<String> attributeNameList = entityManager.listAttributeNames(entity.getClass());
         
+        //ADICIONA O NOME DA COLUNA DA CLASSE
+        attributeNameList.add("class");
+        
         //ESCREVE O CABEÇALHO
         writeHead(attributeNameList);
         
@@ -96,6 +99,8 @@ public abstract class ZEntityWriter<T> implements ZInjectInterface {
         for (String atributeName:attributeNameList){
             //INSTANCIA O OBJETO DE CONVERSÃO
             ZConversionObject obj = new ZConversionObject(entity, atributeName);
+            //ALTERA PARA QUAL TIPO QUER CONVERTER
+            obj.setType(String.class);
             //ADICIONA NA LISTA
             list.add(obj);
         }
