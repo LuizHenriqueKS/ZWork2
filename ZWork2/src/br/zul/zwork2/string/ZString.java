@@ -121,7 +121,7 @@ import java.util.List;
         
         //VERIFICA SE NÃO FOI ENCONTRADO NENHUM PADRÃO
         if (search.isEmpty()){
-            //SE NÃO ACHOU NADA, RETORNA A SIM MESMO
+            //SE NÃO ACHOU NADA, RETORNA A SI MESMO
             return this;
         }
         
@@ -147,6 +147,40 @@ import java.util.List;
         
     }
     
+    public ZString from(String[] patterns,String[] patternsToAvoid,ZHorizontalDirection direction,ZStringSearchType searchType){
+        
+        //PREPARA PARA FAZER A BUSCA
+        ZStringSearch search = new ZStringSearch(string, caseSensitive, patterns, patternsToAvoid,searchType);
+        
+        //VERIFICA SE NÃO FOI ENCONTRADO NENHUM PADRÃO
+        if (search.isEmpty()){
+            //SE NÃO ACHOU NADA, RETORNA A SI MESMO
+            return this;
+        }
+        
+        //CASO CONTRÁRIO CORTA A STRING
+        
+        //OBTEM O INDEX DE ONDE CORTAR
+        switch (direction){
+            case LEFT: //DA ESQUERDA, PEGA O PRIMEIRO INDEX
+                search.first();
+                break;
+            case RIGHT:
+                search.last(); //DA DIREITA O ÚLTIMO
+                break;
+        }
+        
+        int index = search.getResult().getIndex();
+        int length = search.getResult().getPattern().length();
+        
+        //CORTA A STRING
+        String result = string.substring(index+length);
+        
+        //CONVERTE PARA ZSTRING E RETORNA
+        return new ZString(result,caseSensitive);
+        
+    }
+    
     //==========================================================================
     //MÉTODOS DE CORTE SEMI-COMPLETOS
     //==========================================================================
@@ -154,6 +188,20 @@ import java.util.List;
         return to(patterns, patternsToIgnore, direction, ZStringSearchType.LEFT);
     }
     
+    public ZString from(String [] patterns,String[] patternsToIgnore,ZHorizontalDirection direction){
+        return from(patterns, patternsToIgnore, direction, ZStringSearchType.LEFT);
+    }
+    
+    //==========================================================================
+    //MÉTODOS BÁSICOS DE CORTE "FROM"
+    //==========================================================================
+    public ZString fromRight(String pattern){
+        return from(new String[]{pattern},null,ZHorizontalDirection.RIGHT);
+    }
+    
+    public ZString fromLeft(String pattern){
+        return to(new String[]{pattern}, null, ZHorizontalDirection.LEFT);
+    }
     
     //==========================================================================
     //MÉTODOS BÁSICOS DE CORTE "TO"
