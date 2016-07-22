@@ -81,6 +81,11 @@ public class ZConverterManager {
         //PREPARA O LOGGER
         ZLogger logger = new ZLogger(getClass(), "convert(Object type1Obj,Class<?> classTo)");
 
+        //O TIPO A CONVERTER É NULL RETORNA NULL
+        if (type1Obj==null){
+            return null;
+        }
+        
         //VERIFICA SE OBJETO É DO TIPO DA CLASSE
         if (type1Obj.getClass().equals(classTo)) {
             //ENTÃO NÃO PRECISA CONVERTER

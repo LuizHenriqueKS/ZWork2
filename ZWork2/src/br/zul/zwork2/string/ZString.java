@@ -200,7 +200,15 @@ import java.util.List;
     }
     
     public ZString fromLeft(String pattern){
-        return to(new String[]{pattern}, null, ZHorizontalDirection.LEFT);
+        return from(new String[]{pattern}, null, ZHorizontalDirection.LEFT);
+    }
+    
+      public ZString fromRight(String... patterns){
+        return from(patterns,null,ZHorizontalDirection.RIGHT);
+    }
+    
+    public ZString fromLeft(String... patterns){
+        return from(patterns, null, ZHorizontalDirection.LEFT);
     }
     
     //==========================================================================
@@ -210,8 +218,17 @@ import java.util.List;
         return to(new String[]{pattern},null,ZHorizontalDirection.RIGHT);
     }
     
+    public ZString toRight(String... patterns){
+        return to(patterns,null,ZHorizontalDirection.RIGHT);
+    }
+    
+    public ZString toLeft(String... patterns){
+        return to(patterns, null, ZHorizontalDirection.LEFT);
+    }
+    
+    
     public ZString toLeft(String pattern){
-        return to(new String[]{pattern}, null, ZHorizontalDirection.LEFT);
+        return to(new String[]{pattern},null,ZHorizontalDirection.LEFT);
     }
     
 }
