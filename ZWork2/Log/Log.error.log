@@ -1,0 +1,78 @@
+28/07/2016 11:04:29 - ERROR - br.zul.zwork2.main.Main.main(String[] args):Quantidade de testes que falharam: 1
+28/07/2016 11:08:11 - ERROR - br.zul.zwork2.main.Main.main(String[] args):Quantidade de testes que falharam: 1
+28/07/2016 11:11:02 - ERROR - br.zul.zwork2.main.Main.main(String[] args):Quantidade de testes que falharam: 1
+28/07/2016 11:20:19 - ERROR - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):ERRO!
+28/07/2016 11:20:19 - ERROR - java.lang.NullPointerException
+	at br.zul.zwork2.test.basic.image.ZImageTest1.getResult(ZImageTest1.java:20)
+	at br.zul.zwork2.test.basic.image.ZImageTest1.getResult(ZImageTest1.java:10)
+	at br.zul.zwork2.test.ZTest.run(ZTest.java:18)
+	at br.zul.zwork2.test.ZMultipleTests.run(ZMultipleTests.java:29)
+	at br.zul.zwork2.test.ZTestManager.executeTest(ZTestManager.java:123)
+	at br.zul.zwork2.test.ZTestManager.executeTests(ZTestManager.java:65)
+	at br.zul.zwork2.test.ZTestManager.executeTests(ZTestManager.java:47)
+	at br.zul.zwork2.main.Main.main(Main.java:27)
+28/07/2016 11:20:19 - ERROR - java.lang.NullPointerException
+	at br.zul.zwork2.test.ZTestManager.executeTests(ZTestManager.java:68)
+	at br.zul.zwork2.test.ZTestManager.executeTests(ZTestManager.java:47)
+	at br.zul.zwork2.main.Main.main(Main.java:27)
+28/07/2016 11:22:52 - ERROR - br.zul.zwork2.main.Main.main(String[] args):Quantidade de testes que falharam: 1
+28/07/2016 11:48:00 - ERROR - br.zul.zwork2.main.Main.main(String[] args):Quantidade de testes que falharam: 1
+28/07/2016 11:51:59 - ERROR - br.zul.zwork2.main.Main.main(String[] args):Quantidade de testes que falharam: 1
+28/07/2016 11:52:12 - ERROR - br.zul.zwork2.main.Main.main(String[] args):Quantidade de testes que falharam: 1
+28/07/2016 11:53:32 - ERROR - br.zul.zwork2.main.Main.main(String[] args):Quantidade de testes que falharam: 1
+28/07/2016 11:53:52 - ERROR - br.zul.zwork2.main.Main.main(String[] args):Quantidade de testes que falharam: 1
+28/07/2016 11:55:06 - ERROR - br.zul.zwork2.main.Main.main(String[] args):Quantidade de testes que falharam: 1
+28/07/2016 12:04:39 - ERROR - br.zul.zwork2.main.Main.main(String[] args):Quantidade de testes que falharam: 1
+28/07/2016 12:07:15 - ERROR - br.zul.zwork2.main.Main.main(String[] args):Quantidade de testes que falharam: 1
+28/07/2016 12:07:42 - ERROR - br.zul.zwork2.main.Main.main(String[] args):Quantidade de testes que falharam: 1
+28/07/2016 12:08:57 - ERROR - br.zul.zwork2.main.Main.main(String[] args):Quantidade de testes que falharam: 1
+28/07/2016 12:09:09 - ERROR - br.zul.zwork2.main.Main.main(String[] args):Quantidade de testes que falharam: 1
+28/07/2016 12:11:18 - ERROR - br.zul.zwork2.main.Main.main(String[] args):Quantidade de testes que falharam: 1
+28/07/2016 12:13:08 - ERROR - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):ERRO!
+28/07/2016 12:13:08 - ERROR - java.lang.NullPointerException
+	at javax.swing.ImageIcon.<init>(ImageIcon.java:205)
+	at br.zul.zwork2.io.ZImage.fromResource(ZImage.java:46)
+	at br.zul.zwork2.test.basic.image.ZImageTest2.getResult(ZImageTest2.java:19)
+	at br.zul.zwork2.test.basic.image.ZImageTest2.getResult(ZImageTest2.java:10)
+	at br.zul.zwork2.test.ZTest.run(ZTest.java:18)
+	at br.zul.zwork2.test.ZMultipleTests.run(ZMultipleTests.java:29)
+	at br.zul.zwork2.test.ZTestManager.executeTest(ZTestManager.java:123)
+	at br.zul.zwork2.test.ZTestManager.executeTests(ZTestManager.java:65)
+	at br.zul.zwork2.test.ZTestManager.executeTests(ZTestManager.java:47)
+	at br.zul.zwork2.main.Main.main(Main.java:27)
+28/07/2016 12:13:08 - ERROR - java.lang.NullPointerException
+	at br.zul.zwork2.test.ZTestManager.executeTests(ZTestManager.java:68)
+	at br.zul.zwork2.test.ZTestManager.executeTests(ZTestManager.java:47)
+	at br.zul.zwork2.main.Main.main(Main.java:27)
+28/07/2016 12:13:27 - ERROR - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):ERRO!
+28/07/2016 12:13:27 - ERROR - java.lang.NullPointerException
+	at javax.swing.ImageIcon.<init>(ImageIcon.java:205)
+	at br.zul.zwork2.io.ZImage.fromResource(ZImage.java:46)
+	at br.zul.zwork2.test.basic.image.ZImageTest2.getResult(ZImageTest2.java:19)
+	at br.zul.zwork2.test.basic.image.ZImageTest2.getResult(ZImageTest2.java:10)
+	at br.zul.zwork2.test.ZTest.run(ZTest.java:18)
+	at br.zul.zwork2.test.ZMultipleTests.run(ZMultipleTests.java:29)
+	at br.zul.zwork2.test.ZTestManager.executeTest(ZTestManager.java:123)
+	at br.zul.zwork2.test.ZTestManager.executeTests(ZTestManager.java:65)
+	at br.zul.zwork2.test.ZTestManager.executeTests(ZTestManager.java:47)
+	at br.zul.zwork2.main.Main.main(Main.java:27)
+28/07/2016 12:13:27 - ERROR - java.lang.NullPointerException
+	at br.zul.zwork2.test.ZTestManager.executeTests(ZTestManager.java:68)
+	at br.zul.zwork2.test.ZTestManager.executeTests(ZTestManager.java:47)
+	at br.zul.zwork2.main.Main.main(Main.java:27)
+28/07/2016 12:15:12 - ERROR - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):ERRO!
+28/07/2016 12:15:12 - ERROR - java.lang.NullPointerException
+	at br.zul.zwork2.io.ZImage.fromResource(ZImage.java:46)
+	at br.zul.zwork2.test.basic.image.ZImageTest2.getResult(ZImageTest2.java:19)
+	at br.zul.zwork2.test.basic.image.ZImageTest2.getResult(ZImageTest2.java:10)
+	at br.zul.zwork2.test.ZTest.run(ZTest.java:18)
+	at br.zul.zwork2.test.ZMultipleTests.run(ZMultipleTests.java:29)
+	at br.zul.zwork2.test.ZTestManager.executeTest(ZTestManager.java:123)
+	at br.zul.zwork2.test.ZTestManager.executeTests(ZTestManager.java:65)
+	at br.zul.zwork2.test.ZTestManager.executeTests(ZTestManager.java:47)
+	at br.zul.zwork2.main.Main.main(Main.java:27)
+28/07/2016 12:15:12 - ERROR - java.lang.NullPointerException
+	at br.zul.zwork2.test.ZTestManager.executeTests(ZTestManager.java:68)
+	at br.zul.zwork2.test.ZTestManager.executeTests(ZTestManager.java:47)
+	at br.zul.zwork2.main.Main.main(Main.java:27)
+28/07/2016 12:15:36 - ERROR - br.zul.zwork2.main.Main.main(String[] args):Quantidade de testes que falharam: 1

@@ -112,8 +112,10 @@ public class ZPath {
             case LINUX:
                 //MONTA O PATH. Ex: /ROOT/DIRECTORY/SUBDIRECTORY
                 for (ZString z:parts){
-                    result.append("/");
-                    result.append(z.toString());
+                    if (!z.isEmpty()){
+                        result.append("/");
+                        result.append(z.toString());    
+                    }
                 }
                 break;
                 

@@ -14,7 +14,7 @@ public abstract class ZSimpleTest<R> extends ZTest<R> {
     @Override
     public boolean validate(R result,R expectedResult){
         String resultStr = convertResultToString(result);
-        String expectedResultStr = convertResultToString(result);
+        String expectedResultStr = convertResultToString(expectedResult);
         
         boolean ok = resultStr.equals(expectedResultStr);
         
