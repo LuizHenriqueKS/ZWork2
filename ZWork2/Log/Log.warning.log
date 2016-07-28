@@ -88,3 +88,11 @@ Resultado obtido: false
 28/07/2016 12:15:36 - WARNING - br.zul.zwork2.test.ZTestManager.printExpectedResult(ZCustomTest test, ZIndividualTestResult r):[br.zul.zwork2.test.basic.image.ZImageTest1]leitura de imagem de recurso interno ... Falhou!
 28/07/2016 12:15:36 - WARNING - br.zul.zwork2.test.ZTestManager.printExpectedResult(ZCustomTest test, ZIndividualTestResult r):Resultado esperado: true
 Resultado obtido: false
+28/07/2016 12:19:35 - WARNING - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):FALHOU!
+28/07/2016 12:19:35 - WARNING - br.zul.zwork2.test.ZTestManager.printExpectedResult(ZCustomTest test, ZIndividualTestResult r):[br.zul.zwork2.test.basic.image.ZImageTest1]leitura de imagem de recurso interno ... Falhou!
+28/07/2016 12:19:35 - WARNING - br.zul.zwork2.test.ZTestManager.printExpectedResult(ZCustomTest test, ZIndividualTestResult r):Resultado esperado: true
+Resultado obtido: false
+28/07/2016 12:19:57 - WARNING - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):FALHOU!
+28/07/2016 12:19:57 - WARNING - br.zul.zwork2.test.ZTestManager.printExpectedResult(ZCustomTest test, ZIndividualTestResult r):[br.zul.zwork2.test.basic.image.ZImageTest1]leitura de imagem de recurso interno ... Falhou!
+28/07/2016 12:19:57 - WARNING - br.zul.zwork2.test.ZTestManager.printExpectedResult(ZCustomTest test, ZIndividualTestResult r):Resultado esperado: true
+Resultado obtido: false

@@ -1,10 +1,15 @@
 package br.zul.zwork2.io;
 
 import br.zul.zwork2.util.ZImageUtils;
+import java.awt.AWTException;
 import java.awt.Image;
+import java.awt.SystemTray;
 import java.awt.Toolkit;
+import java.awt.TrayIcon;
 import java.io.File;
 import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 
 /**
@@ -33,7 +38,7 @@ public class ZImage {
     //MÉTODOS PÚBLICOS
     //==========================================================================
     public boolean isValid(){
-        return this.image!=null&&this.image.getWidth(null)>-1;
+        return this.image!=null;
     }
     
     //==========================================================================
@@ -43,8 +48,10 @@ public class ZImage {
         ZPath path = new ZPath(resource);
         String formattedPath = path.format(ZPath.ZPathPattern.LINUX);
         URL url = ZImage.class.getResource(formattedPath);
-        //System.out.println(url.toExternalForm());
-        Image image = Toolkit.getDefaultToolkit().getImage(url);
+        Image image = null;
+        if (url!=null){
+            image = Toolkit.getDefaultToolkit().getImage(url);
+        }
         return new ZImage(image);
     }
     
