@@ -546,3 +546,115 @@ Resultado obtido: false
 28/07/2016 12:21:34 - INFO - br.zul.zwork2.main.Main.main(String[] args):Quantidade de testes bem sucedidos: 5
 28/07/2016 12:21:34 - INFO - br.zul.zwork2.main.Main.main(String[] args):Quantidade de testes que falharam: 0
 28/07/2016 12:21:34 - INFO - br.zul.zwork2.main.Main.main(String[] args):Quantidade de testes que apresentaram erro: 0
+30/07/2016 14:46:20 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):[br.zul.zwork2.test.basic.ZConverterTests]Testando Conversores...30/07/2016 14:46:20 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):OK!30/07/2016 14:46:20 - INFO - br.zul.zwork2.test.ZTestManager.printMultipleTestResult(ZCustomTest test):[1/1]30/07/2016 14:46:20 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):
+30/07/2016 14:46:20 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):[br.zul.zwork2.test.basic.ZEntityTests]Testando Entidades...30/07/2016 14:46:20 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):OK!30/07/2016 14:46:20 - INFO - br.zul.zwork2.test.ZTestManager.printMultipleTestResult(ZCustomTest test):[4/4]30/07/2016 14:46:20 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):
+30/07/2016 14:46:20 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):[br.zul.zwork2.test.basic.ZFileTests]Testando funções para arquivos...30/07/2016 14:46:20 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):OK!30/07/2016 14:46:20 - INFO - br.zul.zwork2.test.ZTestManager.printMultipleTestResult(ZCustomTest test):[1/1]30/07/2016 14:46:20 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):
+30/07/2016 14:46:20 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):[br.zul.zwork2.test.basic.ZHttpTests]Testando funções para solicitações HTTP...30/07/2016 14:46:20 - ERROR - java.net.MalformedURLException
+	at java.net.URL.<init>(URL.java:627)
+	at java.net.URL.<init>(URL.java:490)
+	at java.net.URL.<init>(URL.java:439)
+	at br.zul.zwork2.http.ZHttpBase.prepareConnection(ZHttpBase.java:44)
+	at br.zul.zwork2.http.ZHttpGet.send(ZHttpGet.java:28)
+	at br.zul.zwork2.test.basic.http.ZHttpTest1.getResult(ZHttpTest1.java:23)
+	at br.zul.zwork2.test.basic.http.ZHttpTest1.getResult(ZHttpTest1.java:12)
+	at br.zul.zwork2.test.ZTest.run(ZTest.java:18)
+	at br.zul.zwork2.test.ZMultipleTests.run(ZMultipleTests.java:29)
+	at br.zul.zwork2.test.ZTestManager.executeTest(ZTestManager.java:123)
+	at br.zul.zwork2.test.ZTestManager.executeTests(ZTestManager.java:65)
+	at br.zul.zwork2.test.ZTestManager.executeTests(ZTestManager.java:47)
+	at br.zul.zwork2.main.Main.main(Main.java:27)
+Caused by: java.lang.NullPointerException
+	at java.net.URL.<init>(URL.java:532)
+	... 12 more
+30/07/2016 14:46:20 - ERROR - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):ERRO!
+30/07/2016 14:46:20 - ERROR - java.lang.RuntimeException: java.net.MalformedURLException
+	at br.zul.zwork2.log.ZPrintLog.prepareException(ZPrintLog.java:50)
+	at br.zul.zwork2.http.ZHttpBase.prepareConnection(ZHttpBase.java:57)
+	at br.zul.zwork2.http.ZHttpGet.send(ZHttpGet.java:28)
+	at br.zul.zwork2.test.basic.http.ZHttpTest1.getResult(ZHttpTest1.java:23)
+	at br.zul.zwork2.test.basic.http.ZHttpTest1.getResult(ZHttpTest1.java:12)
+	at br.zul.zwork2.test.ZTest.run(ZTest.java:18)
+	at br.zul.zwork2.test.ZMultipleTests.run(ZMultipleTests.java:29)
+	at br.zul.zwork2.test.ZTestManager.executeTest(ZTestManager.java:123)
+	at br.zul.zwork2.test.ZTestManager.executeTests(ZTestManager.java:65)
+	at br.zul.zwork2.test.ZTestManager.executeTests(ZTestManager.java:47)
+	at br.zul.zwork2.main.Main.main(Main.java:27)
+Caused by: java.net.MalformedURLException
+	at java.net.URL.<init>(URL.java:627)
+	at java.net.URL.<init>(URL.java:490)
+	at java.net.URL.<init>(URL.java:439)
+	at br.zul.zwork2.http.ZHttpBase.prepareConnection(ZHttpBase.java:44)
+	... 9 more
+Caused by: java.lang.NullPointerException
+	at java.net.URL.<init>(URL.java:532)
+	... 12 more
+30/07/2016 14:46:20 - ERROR - java.lang.NullPointerException
+	at br.zul.zwork2.test.ZTestManager.executeTests(ZTestManager.java:68)
+	at br.zul.zwork2.test.ZTestManager.executeTests(ZTestManager.java:47)
+	at br.zul.zwork2.main.Main.main(Main.java:27)
+30/07/2016 14:47:08 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):[br.zul.zwork2.test.basic.ZConverterTests]Testando Conversores...30/07/2016 14:47:08 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):OK!30/07/2016 14:47:08 - INFO - br.zul.zwork2.test.ZTestManager.printMultipleTestResult(ZCustomTest test):[1/1]30/07/2016 14:47:08 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):
+30/07/2016 14:47:08 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):[br.zul.zwork2.test.basic.ZEntityTests]Testando Entidades...30/07/2016 14:47:08 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):OK!30/07/2016 14:47:08 - INFO - br.zul.zwork2.test.ZTestManager.printMultipleTestResult(ZCustomTest test):[4/4]30/07/2016 14:47:08 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):
+30/07/2016 14:47:08 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):[br.zul.zwork2.test.basic.ZFileTests]Testando funções para arquivos...30/07/2016 14:47:08 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):OK!30/07/2016 14:47:08 - INFO - br.zul.zwork2.test.ZTestManager.printMultipleTestResult(ZCustomTest test):[1/1]30/07/2016 14:47:08 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):
+30/07/2016 14:47:08 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):[br.zul.zwork2.test.basic.ZHttpTests]Testando funções para solicitações HTTP...30/07/2016 14:47:08 - ERROR - br.zul.zwork2.http.ZHttpGet.prepareConnection():Erro em conectar com 'null'!
+30/07/2016 14:47:08 - ERROR - java.net.MalformedURLException
+	at java.net.URL.<init>(URL.java:627)
+	at java.net.URL.<init>(URL.java:490)
+	at java.net.URL.<init>(URL.java:439)
+	at br.zul.zwork2.http.ZHttpBase.prepareConnection(ZHttpBase.java:44)
+	at br.zul.zwork2.http.ZHttpGet.send(ZHttpGet.java:28)
+	at br.zul.zwork2.test.basic.http.ZHttpTest1.getResult(ZHttpTest1.java:23)
+	at br.zul.zwork2.test.basic.http.ZHttpTest1.getResult(ZHttpTest1.java:12)
+	at br.zul.zwork2.test.ZTest.run(ZTest.java:18)
+	at br.zul.zwork2.test.ZMultipleTests.run(ZMultipleTests.java:29)
+	at br.zul.zwork2.test.ZTestManager.executeTest(ZTestManager.java:123)
+	at br.zul.zwork2.test.ZTestManager.executeTests(ZTestManager.java:65)
+	at br.zul.zwork2.test.ZTestManager.executeTests(ZTestManager.java:47)
+	at br.zul.zwork2.main.Main.main(Main.java:27)
+Caused by: java.lang.NullPointerException
+	at java.net.URL.<init>(URL.java:532)
+	... 12 more
+30/07/2016 14:47:08 - ERROR - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):ERRO!
+30/07/2016 14:47:08 - ERROR - java.lang.RuntimeException: java.net.MalformedURLException
+	at br.zul.zwork2.log.ZPrintLog.prepareException(ZPrintLog.java:50)
+	at br.zul.zwork2.log.ZPrintLog.prepareException(ZPrintLog.java:56)
+	at br.zul.zwork2.http.ZHttpBase.prepareConnection(ZHttpBase.java:57)
+	at br.zul.zwork2.http.ZHttpGet.send(ZHttpGet.java:28)
+	at br.zul.zwork2.test.basic.http.ZHttpTest1.getResult(ZHttpTest1.java:23)
+	at br.zul.zwork2.test.basic.http.ZHttpTest1.getResult(ZHttpTest1.java:12)
+	at br.zul.zwork2.test.ZTest.run(ZTest.java:18)
+	at br.zul.zwork2.test.ZMultipleTests.run(ZMultipleTests.java:29)
+	at br.zul.zwork2.test.ZTestManager.executeTest(ZTestManager.java:123)
+	at br.zul.zwork2.test.ZTestManager.executeTests(ZTestManager.java:65)
+	at br.zul.zwork2.test.ZTestManager.executeTests(ZTestManager.java:47)
+	at br.zul.zwork2.main.Main.main(Main.java:27)
+Caused by: java.net.MalformedURLException
+	at java.net.URL.<init>(URL.java:627)
+	at java.net.URL.<init>(URL.java:490)
+	at java.net.URL.<init>(URL.java:439)
+	at br.zul.zwork2.http.ZHttpBase.prepareConnection(ZHttpBase.java:44)
+	... 9 more
+Caused by: java.lang.NullPointerException
+	at java.net.URL.<init>(URL.java:532)
+	... 12 more
+30/07/2016 14:47:08 - ERROR - java.lang.NullPointerException
+	at br.zul.zwork2.test.ZTestManager.executeTests(ZTestManager.java:68)
+	at br.zul.zwork2.test.ZTestManager.executeTests(ZTestManager.java:47)
+	at br.zul.zwork2.main.Main.main(Main.java:27)
+30/07/2016 14:47:54 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):[br.zul.zwork2.test.basic.ZConverterTests]Testando Conversores...30/07/2016 14:47:54 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):OK!30/07/2016 14:47:54 - INFO - br.zul.zwork2.test.ZTestManager.printMultipleTestResult(ZCustomTest test):[1/1]30/07/2016 14:47:54 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):
+30/07/2016 14:47:54 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):[br.zul.zwork2.test.basic.ZEntityTests]Testando Entidades...30/07/2016 14:47:54 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):OK!30/07/2016 14:47:54 - INFO - br.zul.zwork2.test.ZTestManager.printMultipleTestResult(ZCustomTest test):[4/4]30/07/2016 14:47:54 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):
+30/07/2016 14:47:54 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):[br.zul.zwork2.test.basic.ZFileTests]Testando funções para arquivos...30/07/2016 14:47:54 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):OK!30/07/2016 14:47:54 - INFO - br.zul.zwork2.test.ZTestManager.printMultipleTestResult(ZCustomTest test):[1/1]30/07/2016 14:47:54 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):
+30/07/2016 14:47:54 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):[br.zul.zwork2.test.basic.ZHttpTests]Testando funções para solicitações HTTP...30/07/2016 14:47:55 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):OK!30/07/2016 14:47:55 - INFO - br.zul.zwork2.test.ZTestManager.printMultipleTestResult(ZCustomTest test):[1/1]30/07/2016 14:47:55 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):
+30/07/2016 14:47:55 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):[br.zul.zwork2.test.basic.ZImageTests]Testando funções para imagens...30/07/2016 14:47:55 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):OK!30/07/2016 14:47:55 - INFO - br.zul.zwork2.test.ZTestManager.printMultipleTestResult(ZCustomTest test):[2/2]30/07/2016 14:47:55 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):
+30/07/2016 14:47:55 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):[br.zul.zwork2.test.basic.ZInjectTests]Testando Injeções de dependência...30/07/2016 14:47:55 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):OK!30/07/2016 14:47:55 - INFO - br.zul.zwork2.test.ZTestManager.printMultipleTestResult(ZCustomTest test):[2/2]30/07/2016 14:47:55 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):
+30/07/2016 14:47:55 - INFO - br.zul.zwork2.main.Main.main(String[] args):Quantidade de testes bem sucedidos: 6
+30/07/2016 14:47:55 - INFO - br.zul.zwork2.main.Main.main(String[] args):Quantidade de testes que falharam: 0
+30/07/2016 14:47:55 - INFO - br.zul.zwork2.main.Main.main(String[] args):Quantidade de testes que apresentaram erro: 0
+30/07/2016 14:48:08 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):[br.zul.zwork2.test.basic.ZConverterTests]Testando Conversores...30/07/2016 14:48:08 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):OK!30/07/2016 14:48:08 - INFO - br.zul.zwork2.test.ZTestManager.printMultipleTestResult(ZCustomTest test):[1/1]30/07/2016 14:48:08 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):
+30/07/2016 14:48:08 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):[br.zul.zwork2.test.basic.ZEntityTests]Testando Entidades...30/07/2016 14:48:08 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):OK!30/07/2016 14:48:08 - INFO - br.zul.zwork2.test.ZTestManager.printMultipleTestResult(ZCustomTest test):[4/4]30/07/2016 14:48:08 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):
+30/07/2016 14:48:08 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):[br.zul.zwork2.test.basic.ZFileTests]Testando funções para arquivos...30/07/2016 14:48:08 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):OK!30/07/2016 14:48:08 - INFO - br.zul.zwork2.test.ZTestManager.printMultipleTestResult(ZCustomTest test):[1/1]30/07/2016 14:48:08 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):
+30/07/2016 14:48:08 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):[br.zul.zwork2.test.basic.ZHttpTests]Testando funções para solicitações HTTP...30/07/2016 14:48:15 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):OK!30/07/2016 14:48:15 - INFO - br.zul.zwork2.test.ZTestManager.printMultipleTestResult(ZCustomTest test):[1/1]30/07/2016 14:48:15 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):
+30/07/2016 14:48:15 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):[br.zul.zwork2.test.basic.ZImageTests]Testando funções para imagens...30/07/2016 14:48:15 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):OK!30/07/2016 14:48:15 - INFO - br.zul.zwork2.test.ZTestManager.printMultipleTestResult(ZCustomTest test):[2/2]30/07/2016 14:48:15 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):
+30/07/2016 14:48:15 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):[br.zul.zwork2.test.basic.ZInjectTests]Testando Injeções de dependência...30/07/2016 14:48:15 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):OK!30/07/2016 14:48:15 - INFO - br.zul.zwork2.test.ZTestManager.printMultipleTestResult(ZCustomTest test):[2/2]30/07/2016 14:48:15 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):
+30/07/2016 14:48:15 - INFO - br.zul.zwork2.main.Main.main(String[] args):Quantidade de testes bem sucedidos: 6
+30/07/2016 14:48:15 - INFO - br.zul.zwork2.main.Main.main(String[] args):Quantidade de testes que falharam: 0
+30/07/2016 14:48:15 - INFO - br.zul.zwork2.main.Main.main(String[] args):Quantidade de testes que apresentaram erro: 0
