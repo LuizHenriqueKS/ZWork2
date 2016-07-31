@@ -1,7 +1,7 @@
 package br.zul.zwork2.reflection;
 
-import br.zul.zwork2.io.ZFile;
 import br.zul.zwork2.io.ZPath;
+import br.zul.zwork2.io.ZResource;
 import br.zul.zwork2.io.ZZipFile;
 import br.zul.zwork2.util.ZAppUtils;
 import br.zul.zwork2.util.ZFilter;
@@ -55,17 +55,17 @@ public class ZPackage {
      * @param subresources Lista os recursos dos subpackages também.
      * @return 
      */
-    public List<ZFile> listResources(boolean subresources){
+    public List<ZResource> listResources(boolean subresources){
         
         if (ZAppUtils.isAppFileDirectory(caller)){
             
-            List<ZFile> result = new ArrayList<>();
+            List<ZResource> result = new ArrayList<>();
             File dir = new File(ZAppUtils.getAppFile(caller),path.format(ZPath.ZPathPattern.WINDOWS));
             listFiles(result,subresources,dir);
             return result;
             
         } else {
-            List<ZFile> result = new ZZipFile(ZAppUtils.getAppFile(caller)).listFiles();
+            List<ZResource> result = new ZZipFile(ZAppUtils.getAppFile(caller)).listFiles();
             
             //SE O FILTRO DE PATH ESTÁ NULL RETORNA SEMPRE NULL
             if (path==null){
@@ -74,9 +74,9 @@ public class ZPackage {
             }
             
             //SE NÃO TIVER NULL, FILTRA
-            return new ZFilter<Integer,ZFile>(){
+            return new ZFilter<Integer,ZResource>(){
                 @Override
-                public boolean filter(Integer key, ZFile value) {
+                public boolean filter(Integer key, ZResource value) {
                     
                     //OBTEM O PARENTE
                     ZPath valueParent = value.getPath().getParent();
@@ -96,7 +96,7 @@ public class ZPackage {
         
     }
     
-    public List<ZFile> listResources(boolean subresources,ZFilter<Integer,ZFile> filter){
+    public List<ZResource> listResources(boolean subresources,ZFilter<Integer,ZResource> filter){
         return filter.filter(listResources(subresources));
     }
     
@@ -106,7 +106,7 @@ public class ZPackage {
         ZPath appPath = new ZPath(ZAppUtils.getAppFile(caller).getAbsolutePath());
         boolean isAppFileDirectory = ZAppUtils.isAppFileDirectory(caller);
         
-        for (ZFile z:listResources(subresources)){
+        for (ZResource z:listResources(subresources)){
             if (z.getFilename().toLowerCase().endsWith(".class")){
                 
                 String classPath;
@@ -162,9 +162,9 @@ public class ZPackage {
     //==========================================================================
     //MÉTODOS PRIVADOS
     //==========================================================================
-    private void listFiles(List<ZFile> list,boolean subresources,File directory){
+    private void listFiles(List<ZResource> list,boolean subresources,File directory){
         for (File file:directory.listFiles()){
-            list.add(new ZFile(file));
+            list.add(new ZResource(file));
             if (subresources&&file.isDirectory()){
                 listFiles(list,subresources,file);
             }

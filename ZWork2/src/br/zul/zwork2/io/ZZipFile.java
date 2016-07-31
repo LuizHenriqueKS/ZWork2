@@ -37,12 +37,16 @@ public class ZZipFile {
     //==========================================================================
     //MÉTODOS PÚBLICOS
     //==========================================================================
-    public List<ZFile> listFiles() {
+    public List<ZResource> listFiles(){
+        return listResources();
+    }
+    
+    public List<ZResource> listResources() {
         //LOGGER
         ZLogger log = new ZLogger(getClass(),"listFiles()");
         
         //PREPARA A LISTA RESULTADO
-        List<ZFile> result = new ArrayList<>();
+        List<ZResource> result = new ArrayList<>();
         try {
             InputStream is;
             
@@ -63,7 +67,7 @@ public class ZZipFile {
             while ((je = (ZipEntry) jis.getNextEntry()) != null) {
                 String entryName = je.getName();
                 //ADICIONA OS ARQUIVOS NO ZFile
-                result.add(new ZFile(entryName));
+                result.add(new ZResource(entryName));
             }
 
             return result;

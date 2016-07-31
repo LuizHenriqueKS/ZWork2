@@ -6,41 +6,37 @@ import java.io.File;
  *
  * @author Luiz Henrique
  */
-public class ZFile {
+public class ZResource {
     
     //==========================================================================
     //VARIÁVEIS PRIVADAS
     //==========================================================================
     private String filename;
     private ZPath path;
-    private File file;
+    private Boolean isDirectory;
     
     //==========================================================================
     //CONSTRUTORES
     //==========================================================================
-    public ZFile(ZPath path){
+     public ZResource(String path){
+        init(new ZPath(path));
+    }
+    
+    public ZResource(ZPath path){
+        init(path);
+    }
+    
+    public ZResource(File file){
+        this.isDirectory = file.isDirectory();
+        init(new ZPath(file.getAbsolutePath()));
+    }
+    
+    //==========================================================================
+    //MÉTODOS DE CONSTRUÇÃO
+    //==========================================================================
+    private void init(ZPath path){
         this.path = path;
         this.filename = path.getLastPart();
-    }
-    
-    public ZFile(String path){
-        this(new ZPath(path));
-    }
-    
-    public ZFile(File file){
-        this(file.getAbsolutePath());
-        this.file = file;
-    }
-    
-    //==========================================================================
-    //GETTERS E SETTERS MODIFICADOS
-    //==========================================================================
-    public boolean isDirectory(){
-        if (file==null){
-            return false;
-        } else {
-            return file.isDirectory();
-        }
     }
     
     //==========================================================================
@@ -49,8 +45,22 @@ public class ZFile {
     public String getFilename() {
         return filename;
     }
+    public void setFilename(String filename) {
+        this.filename = filename;
+    }
+
     public ZPath getPath() {
         return path;
+    }
+    public void setPath(ZPath path) {
+        this.path = path;
+    }
+
+    public Boolean getIsDirectory() {
+        return isDirectory;
+    }
+    public void setIsDirectory(Boolean isDirectory) {
+        this.isDirectory = isDirectory;
     }
     
 }

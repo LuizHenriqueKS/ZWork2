@@ -68,6 +68,11 @@ public class ZEntityTest2 extends ZSimpleTest<ZAttribute> {
             public boolean unique() {
                 throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
             }
+
+            @Override
+            public String name() {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
         };
     }
     
