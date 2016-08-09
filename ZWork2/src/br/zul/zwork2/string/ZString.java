@@ -42,6 +42,14 @@ import java.util.List;
         return string.isEmpty();
     }
     
+    public boolean isNull(){
+        return string==null;
+    }
+    
+    public boolean isNullOrEmpty(){
+        return isNull()||isEmpty();
+    }
+    
     public ZString trim(){
         return new ZString(string.trim(),caseSensitive);
     }
@@ -105,6 +113,40 @@ import java.util.List;
         if (!source.isEmpty()){
             //ADICIONA NA LISTA
             result.add(source);
+        }
+        
+        //CONVERTE A LISTA EM ARRAY E RETORNA ELA
+        return result.toArray(new ZString[result.size()]);
+    }
+    
+    public ZString[] split(String patterns[],String patternsToAvoid[]){
+        //PREPARA PARA FAZER A BUSCA
+        ZStringSearch search = new ZStringSearch(string, caseSensitive, patterns, patternsToAvoid,ZStringSearchType.LEFT);
+        List<ZString> result = new ArrayList<>();
+        
+        //QUEBRA A STRING
+        int startIndex = 0;
+        while (search.next()){
+            //OBTEM A PARTE DA STRING
+            String str = string.substring(startIndex,search.getResult().getIndex()+search.getResult().getPattern().length());
+            //CONVERTE A STRING PARA ZSTRING
+            ZString z = new ZString(str,caseSensitive);
+            //ADICIONA NA LISTA
+            result.add(z);
+            startIndex = search.getResult().getIndex()+search.getResult().getPattern().length();
+        }
+        
+        //SE AINDA SOBROU ALGO
+        if (startIndex<string.length()){
+            //OBTEM A PARTE RESTANTE
+            String str = string.substring(startIndex);
+            //VERIFICA SE NÃO ESTÁ VAZIA
+            if (!str.isEmpty()){
+                //CONVERTE A STRING PARA ZSTRING
+                ZString z = new ZString(str,caseSensitive);
+                //ADICIONA NA LISTA
+                result.add(z);
+            }
         }
         
         //CONVERTE A LISTA EM ARRAY E RETORNA ELA
