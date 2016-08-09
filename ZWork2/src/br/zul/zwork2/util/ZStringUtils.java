@@ -1,6 +1,7 @@
 package br.zul.zwork2.util;
 
 import br.zul.zwork2.string.ZString;
+import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,6 +50,10 @@ public class ZStringUtils {
         
         return result;
         
+    }
+    
+    public static String removeAccents(String str) {
+        return Normalizer.normalize(str, Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "");
     }
     
     public static String[] convert(ZString[] array){
