@@ -1,9 +1,16 @@
 package br.zul.zwork2.io;
 
 import br.zul.zwork2.log.ZLogger;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.RandomAccessFile;
+import java.nio.file.Files;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -21,8 +28,29 @@ public class ZTxtFile {
         this.file = file;
     }
 
+    public String readAll() {
+        ZLogger logger = new ZLogger(getClass(),"readAll()");
+        try {
+            return new String(Files.readAllBytes(file.toPath()),"UTF-8");
+        } catch (IOException ex) {
+            throw logger.error.prepareException(ex);
+        }
+    }
+    
+    public void writeAll(String text){
+        ZLogger logger = new ZLogger(getClass(),"writeAll(String text)");
+        FileWriter fw;
+        try {   
+            fw = new FileWriter(file);
+            fw.write(text);
+            fw.close();
+        } catch (IOException ex) {
+            throw logger.error.prepareException(ex);
+        }
+    }
+
     public String getLastLine() {
-        ZLogger logger = new ZLogger(getClass(),"getLastLine()");
+        ZLogger logger = new ZLogger(getClass(), "getLastLine()");
         RandomAccessFile fileHandler = null;
         try {
             fileHandler = new RandomAccessFile(file, "r");

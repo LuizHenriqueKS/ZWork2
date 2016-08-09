@@ -13,6 +13,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ZAttribute {
     Class join() default void.class;
+    String name() default "";
     String format() default "";
     String type() default "";
     boolean nullable() default false;

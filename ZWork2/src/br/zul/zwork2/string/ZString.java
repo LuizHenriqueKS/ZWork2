@@ -82,6 +82,25 @@ import java.util.List;
     }
    
     //==========================================================================
+    //MÉTODOS STARTS WITH
+    //==========================================================================
+    public boolean startsWith(String pattern){
+        return startsWith(pattern,null);
+    }
+    
+    public boolean startsWith(String pattern,Integer offset){
+        String s = string;
+        if (offset!=null){
+            s = s.substring(offset);
+        }
+        if (caseSensitive){
+            return s.startsWith(pattern);
+        } else {
+            return s.toLowerCase().startsWith(pattern.toLowerCase());
+        }
+    }
+    
+    //==========================================================================
     //EQUALS
     //==========================================================================
     public boolean equals(String other){
