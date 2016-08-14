@@ -17,7 +17,7 @@ public class ZHttpTests extends ZMultipleTests {
     public void loadListTests(List<ZCustomTest> listTests) {
         
         //OBTEM O PACOTE DA ZHttpTest1
-        ZPackage pack = new ZPackage(getClass(),ZHttpTest1.class.getPackage()); //AQUI É ONDE ESTÁ TODOS OS TESTES DE HTTP TEST
+        ZPackage pack = new ZPackage(getClass(),ZHttpTest1.class.getPackage()); //AQUI É ONDE ESTÃO TODOS OS TESTES DE HTTP TEST
         
         //LISTA AS CLASSES DO PACOTE
         List<ZClass> classes = pack.listClasses(true,ZCustomTest.class,true);

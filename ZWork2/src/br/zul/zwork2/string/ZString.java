@@ -1,6 +1,5 @@
 package br.zul.zwork2.string;
 
-import br.zul.zwork2.string.ZStringSearch.ZStringSearchType;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -204,11 +203,11 @@ import java.util.List;
     //MÉTODOS DE CORTE SEMI-COMPLETOS
     //==========================================================================
     public ZString to(String [] patterns,String[] patternsToIgnore,ZHorizontalDirection direction){
-        return to(patterns, patternsToIgnore, direction, ZStringSearchType.LEFT);
+        return to(patterns, patternsToIgnore, direction, ZStringSearchType.LEFT_UNIQUE);
     }
     
     public ZString from(String [] patterns,String[] patternsToIgnore,ZHorizontalDirection direction){
-        return from(patterns, patternsToIgnore, direction, ZStringSearchType.LEFT);
+        return from(patterns, patternsToIgnore, direction, ZStringSearchType.LEFT_UNIQUE);
     }
     
     //==========================================================================

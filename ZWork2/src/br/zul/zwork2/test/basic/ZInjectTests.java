@@ -17,7 +17,7 @@ public class ZInjectTests extends ZMultipleTests {
     public void loadListTests(List<ZCustomTest> listTests) {
         
         //OBTEM O PACOTE DA ZInjectTest1
-        ZPackage pack = new ZPackage(getClass(),ZInjectTest1.class.getPackage()); //AQUI É ONDE ESTÁ TODOS OS TESTES DE INJEÇÕES
+        ZPackage pack = new ZPackage(getClass(),ZInjectTest1.class.getPackage()); //AQUI É ONDE ESTÃO TODOS OS TESTES DE INJEÇÕES
         
         //LISTA AS CLASSES DO PACOTE
         List<ZClass> classes = pack.listClasses(true,ZCustomTest.class,true);

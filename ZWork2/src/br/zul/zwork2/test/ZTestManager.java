@@ -194,24 +194,22 @@ public class ZTestManager {
             
             //TENTA OBTER OS RESULTADOS
             if (test instanceof ZTest){
-                //CONVERTE O TESTE PARA ZTest
-                ZTest t = ((ZTest) test);
                 //VERIFICA SE O RESULTADO NÃO É NULL
-                if (t.getResult()!=null){
+                if (r.getResult()!=null){
                     //SE NÃO É NULL, OBTEM O RESULTADO E CONVERTE EM STRING
-                    result = t.getResult().toString();
+                    result = r.getResult().toString();
                 }
                 //NÃO VERIFICA SE O RESULTADO ESPERADO PORQUE JÁ FOI VERIFICADO MAIS A CIMAS
-                expectedResult = t.getExpectedResult().toString();
+                expectedResult = r.getExpectedResult().toString();
             } else if (test instanceof ZSimpleTest){
                 //CONVERTE O TESTE PARA ZSimpleTest
                 ZSimpleTest t = ((ZSimpleTest) test);
                 //VERIFICA SE O RESULTADO NÃO É NULL
-                if (t.getResult()!=null){
-                    result = t.convertResultToString(t.getResult());
+                if (r.getResult()!=null){
+                    result = t.convertResultToString(r.getResult());
                 }
                 //NÃO VERIFICA SE O RESULTADO ESPERADO PORQUE JÁ FOI VERIFICADO MAIS A CIMAS
-                expectedResult = t.convertResultToString(t.getExpectedResult());
+                expectedResult = t.convertResultToString(r.getExpectedResult());
             }
             
             //PREPARA MENSAGEM PARA ESCREVER NO LOG

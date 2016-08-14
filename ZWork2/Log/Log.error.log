@@ -181,3 +181,12 @@ Caused by: java.lang.NullPointerException
 	at br.zul.zwork2.test.ZTestManager.executeTests(ZTestManager.java:68)
 	at br.zul.zwork2.test.ZTestManager.executeTests(ZTestManager.java:47)
 	at br.zul.zwork2.main.Main.main(Main.java:27)
+14/08/2016 15:30:11 - ERROR - br.zul.zwork2.main.Main.main(String[] args):Quantidade de testes que falharam: 1
+14/08/2016 15:33:34 - ERROR - br.zul.zwork2.main.Main.main(String[] args):Quantidade de testes que falharam: 1
+14/08/2016 15:36:14 - ERROR - br.zul.zwork2.main.Main.main(String[] args):Quantidade de testes que falharam: 1
+14/08/2016 15:37:54 - ERROR - br.zul.zwork2.main.Main.main(String[] args):Quantidade de testes que falharam: 1
+14/08/2016 16:39:39 - ERROR - br.zul.zwork2.main.Main.main(String[] args):Quantidade de testes que falharam: 1
+14/08/2016 16:39:42 - ERROR - br.zul.zwork2.main.Main.main(String[] args):Quantidade de testes que falharam: 1
+14/08/2016 16:41:21 - ERROR - br.zul.zwork2.main.Main.main(String[] args):Quantidade de testes que falharam: 1
+14/08/2016 16:43:38 - ERROR - br.zul.zwork2.main.Main.main(String[] args):Quantidade de testes que falharam: 1
+14/08/2016 16:44:10 - ERROR - br.zul.zwork2.main.Main.main(String[] args):Quantidade de testes que falharam: 1

@@ -3,9 +3,9 @@ package br.zul.zwork2.string;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
+import java.util.Set;
 
 /**
  * Classe usada para fazer pesquisas em Strings Ex: source = "1.3..6.8" patterns
@@ -16,45 +16,6 @@ import java.util.Map;
  * @author skynet
  */
 public class ZStringSearch {
-
-    ////////////////////////////////////////////////////////////////////////////
-    //ENUMS
-    ////////////////////////////////////////////////////////////////////////////
-    /**
-     * RIGHT - Obtem os indices dos primeiros
-     * que aparecem do fim ao início do texto Ex: source = "123,.678." patterns
-     * = "." e ",."
-     *
-     * indices resultantes = "4" e "8"
-     *
-     */
-    public enum ZStringSearchType {
-        /**
-         * CUMULATIVE - Obtem todos os indices sem se importar com quem vem
-         * primeiro ou se um padrão faz parte de outro. Ex: source = "123,.678."
-         * patterns = "." e ",."
-         *
-         * indices resultantes = "3","4" e "8"
-         *
-         */
-        CUMULATIVE,
-        /**
-         * LEFT - Obtem os indices dos primeiros que aparecerem do início do
-         * texto ao fim. Ex: source = "123,.678." patterns = "." e ",."
-         *
-         * indices resultantes = "3" e "8" 
-         */
-        LEFT,
-        /**
-        * RIGHT - Obtem os indices dos primeiros
-        * que aparecem do fim ao início do texto Ex: source = "123,.678." patterns
-        * = "." e ",."
-        *
-        * indices resultantes = "4" e "8"
-        *
-        */
-        RIGHT
-    }
 
     ////////////////////////////////////////////////////////////////////////////
     //VARIÁVEIS PRIVADOS
@@ -202,37 +163,66 @@ public class ZStringSearch {
     //MÉTODOS PRIVADOS
     ////////////////////////////////////////////////////////////////////////////
     private void search() {
-        Map<String,List<ZStringSearchResult>> map = new HashMap<>();
+        //PREPARA UM CONJUNTO QUE NÃO VAI REPETIR OS RESULTADOS
+        Set<ZStringSearchResult> resultSet = new HashSet<>();
         
+        //BUSCA CADA PADRÃO (EVITANDO AQUELES QUE DEVE EVITAR)
         for (String pattern:patterns){
             List<ZStringSearchResult> result = search(pattern);
             if (!result.isEmpty()){
-                map.put(pattern, result);
+                resultSet.addAll(result);
+            }
+        }
+        //TRANSFORMA O CONJUNTO EM UMA LISTA
+        List<ZStringSearchResult> result = new ArrayList<>(resultSet);
+        
+        //SE FOI INFORMADO UM TIPO, TRATA OS RESULTADOS
+        if (type!=null){
+            //ORDENA OS RESULTADOS PELO PADRÕES MAIORES
+            Collections.sort(result,new Comparator<ZStringSearchResult>(){
+                @Override
+                public int compare(ZStringSearchResult t, ZStringSearchResult t1) {
+                    return t1.length()-t.length();
+                } 
+            });
+            //TRATA OS RESULTADOS QUE COLIDEM
+            int i;
+            for (i=result.size()-1;i>=0;i--){
+                ZStringSearchResult firstResult = result.get(i);
+                for (int j=i-1;j>=0;j--){
+                    ZStringSearchResult secondResult = result.get(j);
+                    if (firstResult.collidesWith(secondResult)){
+                        ZStringSearchTypeArgs args = new ZStringSearchTypeArgs(firstResult, secondResult);
+                        type.filter(args);
+                        if (args.isRemoveFirst()&&args.isRemoveSecond()){
+                            result.remove(i);
+                            result.remove(j);
+                            i--;
+                            break;
+                        } else if (args.isRemoveFirst()){
+                            result.remove(i);
+                            break;
+                        } else if (args.isRemoveSecond()){
+                            result.remove(j);
+                            i--;
+                        }
+                    }
+                }
             }
         }
         
-        List<ZStringSearchResult> result = new ArrayList<>();
-        
-        switch (type){
-            case CUMULATIVE:
-                for (List<ZStringSearchResult> list:map.values()){
-                    result.addAll(list);
-                } 
-                break;
-            case LEFT:
-                result.addAll(filterLeft(map));
-                break;
-            case RIGHT:
-                result.addAll(filterRight(map));
-                break;
-        }
-        
+        //ORDENA PELO ÍNDICE E PADRÕES MENORES
         Collections.sort(result, new Comparator<ZStringSearchResult>(){
             @Override
             public int compare(ZStringSearchResult o1, ZStringSearchResult o2) {
                 int index1 = o1.getIndex();
                 int index2 = o2.getIndex();
-                return index1-index2;
+                int result = index1-index2;
+                if (result==0){
+                    return o1.length()-o2.length();
+                } else {
+                    return result;
+                }
             }
             
         });
@@ -240,87 +230,7 @@ public class ZStringSearch {
         results = result; 
     }
     
-     private List<ZStringSearchResult> filterRight(Map<String,List<ZStringSearchResult>> map){
-        ZStringSearchResult major;
-        List<ZStringSearchResult> result = new ArrayList<>();
-        while (true){
-            major = null;
-            //BUSCA O MENOR ATUALMENTE
-            for (List<ZStringSearchResult> list:map.values()){
-                ZStringSearchResult r = getMinor(list);
-                if (r==null){
-                    continue;
-                }
-                if (major==null){
-                    major = r;
-                } else if ((r.getIndex()+r.getPattern().length())>(major.getIndex()+major.getPattern().length())){
-                    major = r;
-                }
-            }
-            
-            //SE NÃO FOI ENCONTRADO MAIS NENHUM MENOR ENCERRA O LOOP
-            if (major==null){
-                break;
-            }
-            
-            //ADICIONA O MENOR NA LISTA DE RESULTADO
-            result.add(major);
-            
-            //REMOVE OS MENORES OU IGUAL
-            for (List<ZStringSearchResult> list:map.values()){
-                for (int i=list.size()-1;i>=0;i--){
-                    ZStringSearchResult r = list.get(i);
-                    if ((r.getIndex()+r.getPattern().length())<=(major.getIndex()+major.getPattern().length())){ //TODO VERIFICAR SE É MENOR OU MENOR E IGUAL
-                        list.remove(i);
-                    }
-                }
-            }
-            
-        }
-        return result;
-    }
-    
-    private List<ZStringSearchResult> filterLeft(Map<String,List<ZStringSearchResult>> map){
-        ZStringSearchResult minor;
-        List<ZStringSearchResult> result = new ArrayList<>();
-        while (true){
-            minor = null;
-            //BUSCA O MENOR ATUALMENTE
-            for (List<ZStringSearchResult> list:map.values()){
-                ZStringSearchResult r = getMinor(list);
-                if (r==null){
-                    continue;
-                }
-                if (minor==null){
-                    minor = r;
-                } else if (r.getIndex()<minor.getIndex()){
-                    minor = r;
-                }
-            }
-            
-            //SE NÃO FOI ENCONTRADO MAIS NENHUM MENOR ENCERRA O LOOP
-            if (minor==null){
-                break;
-            }
-            
-            //ADICIONA O MENOR NA LISTA DE RESULTADO
-            result.add(minor);
-            
-            //REMOVE OS MENORES OU IGUAL
-            for (List<ZStringSearchResult> list:map.values()){
-                for (int i=list.size()-1;i>=0;i--){
-                    ZStringSearchResult r = list.get(i);
-                    if (r.getIndex()<=(minor.getIndex()+minor.getPattern().length())){ //TODO VERIFICAR SE É MENOR OU MENOR E IGUAL
-                        list.remove(i);
-                    }
-                }
-            }
-            
-        }
-        return result;
-    }
-    
-       private ZStringSearchResult getMinor(List<ZStringSearchResult> list){
+    private ZStringSearchResult getMinor(List<ZStringSearchResult> list){
         ZStringSearchResult minor = null;
         for (ZStringSearchResult r:list){
             if (minor==null){
@@ -388,7 +298,7 @@ public class ZStringSearch {
                 result.add(r);
             }
 
-            offset += index + 1;
+            offset = index + 1;
 
         }
         return result;

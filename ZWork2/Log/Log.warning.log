@@ -96,3 +96,39 @@ Resultado obtido: false
 28/07/2016 12:19:57 - WARNING - br.zul.zwork2.test.ZTestManager.printExpectedResult(ZCustomTest test, ZIndividualTestResult r):[br.zul.zwork2.test.basic.image.ZImageTest1]leitura de imagem de recurso interno ... Falhou!
 28/07/2016 12:19:57 - WARNING - br.zul.zwork2.test.ZTestManager.printExpectedResult(ZCustomTest test, ZIndividualTestResult r):Resultado esperado: true
 Resultado obtido: false
+14/08/2016 15:30:11 - WARNING - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):FALHOU!
+14/08/2016 15:30:11 - WARNING - br.zul.zwork2.test.ZTestManager.printExpectedResult(ZCustomTest test, ZIndividualTestResult r):[br.zul.zwork2.test.basic.string.search.ZStringSearchTest1]Pesquisa básica de texto ... Falhou!
+14/08/2016 15:30:11 - WARNING - br.zul.zwork2.test.ZTestManager.printExpectedResult(ZCustomTest test, ZIndividualTestResult r):Resultado esperado: [6, 7, 22, 54]
+Resultado obtido: [6, 22]
+14/08/2016 15:33:30 - WARNING - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):FALHOU!
+14/08/2016 15:33:30 - WARNING - br.zul.zwork2.test.ZTestManager.printExpectedResult(ZCustomTest test, ZIndividualTestResult r):[br.zul.zwork2.test.basic.string.search.ZStringSearchTest1]Pesquisa básica de texto ... Falhou!
+14/08/2016 15:33:34 - WARNING - br.zul.zwork2.test.ZTestManager.printExpectedResult(ZCustomTest test, ZIndividualTestResult r):Resultado esperado: [6, 7, 22, 54]
+Resultado obtido: [6, 22]
+14/08/2016 15:36:11 - WARNING - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):FALHOU!
+14/08/2016 15:36:11 - WARNING - br.zul.zwork2.test.ZTestManager.printExpectedResult(ZCustomTest test, ZIndividualTestResult r):[br.zul.zwork2.test.basic.string.search.ZStringSearchTest1]Pesquisa básica de texto ... Falhou!
+14/08/2016 15:36:14 - WARNING - br.zul.zwork2.test.ZTestManager.printExpectedResult(ZCustomTest test, ZIndividualTestResult r):Resultado esperado: [6, 7, 22, 54]
+Resultado obtido: [6, 22, 25]
+14/08/2016 15:37:53 - WARNING - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):FALHOU!
+14/08/2016 15:37:54 - WARNING - br.zul.zwork2.test.ZTestManager.printExpectedResult(ZCustomTest test, ZIndividualTestResult r):[br.zul.zwork2.test.basic.string.search.ZStringSearchTest1]Pesquisa básica de texto ... Falhou!
+14/08/2016 15:37:54 - WARNING - br.zul.zwork2.test.ZTestManager.printExpectedResult(ZCustomTest test, ZIndividualTestResult r):Resultado esperado: [0, 6, 7, 22, 25]
+Resultado obtido: [0, 7, 23, 26]
+14/08/2016 16:39:39 - WARNING - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):FALHOU!
+14/08/2016 16:39:39 - WARNING - br.zul.zwork2.test.ZTestManager.printExpectedResult(ZCustomTest test, ZIndividualTestResult r):[br.zul.zwork2.test.basic.string.search.ZStringSearchTest1]Pesquisa básica de texto ... Falhou!
+14/08/2016 16:39:39 - WARNING - br.zul.zwork2.test.ZTestManager.printExpectedResult(ZCustomTest test, ZIndividualTestResult r):Resultado esperado: [0, 6, 7, 22, 25]
+Resultado obtido: [0, 7, 23, 26]
+14/08/2016 16:39:42 - WARNING - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):FALHOU!
+14/08/2016 16:39:42 - WARNING - br.zul.zwork2.test.ZTestManager.printExpectedResult(ZCustomTest test, ZIndividualTestResult r):[br.zul.zwork2.test.basic.string.search.ZStringSearchTest1]Pesquisa básica de texto ... Falhou!
+14/08/2016 16:39:42 - WARNING - br.zul.zwork2.test.ZTestManager.printExpectedResult(ZCustomTest test, ZIndividualTestResult r):Resultado esperado: [0, 6, 7, 22, 25]
+Resultado obtido: [0, 7, 23, 26]
+14/08/2016 16:41:21 - WARNING - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):FALHOU!
+14/08/2016 16:41:21 - WARNING - br.zul.zwork2.test.ZTestManager.printExpectedResult(ZCustomTest test, ZIndividualTestResult r):[br.zul.zwork2.test.basic.string.search.ZStringSearchTest1]Pesquisa básica de texto ... Falhou!
+14/08/2016 16:41:21 - WARNING - br.zul.zwork2.test.ZTestManager.printExpectedResult(ZCustomTest test, ZIndividualTestResult r):Resultado esperado: [0, 6, 7, 22, 25]
+Resultado obtido: [0, 7, 8, 23, 26]
+14/08/2016 16:43:38 - WARNING - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):FALHOU!
+14/08/2016 16:43:38 - WARNING - br.zul.zwork2.test.ZTestManager.printExpectedResult(ZCustomTest test, ZIndividualTestResult r):[br.zul.zwork2.test.basic.string.search.ZStringSearchTest2]Pesquisa básica de texto ... Falhou!
+14/08/2016 16:43:38 - WARNING - br.zul.zwork2.test.ZTestManager.printExpectedResult(ZCustomTest test, ZIndividualTestResult r):Resultado esperado: [0, 7, 8, 23, 26]
+Resultado obtido: [0]
+14/08/2016 16:44:10 - WARNING - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):FALHOU!
+14/08/2016 16:44:10 - WARNING - br.zul.zwork2.test.ZTestManager.printExpectedResult(ZCustomTest test, ZIndividualTestResult r):[br.zul.zwork2.test.basic.string.search.ZStringSearchTest3]Pesquisa básica de texto ... Falhou!
+14/08/2016 16:44:10 - WARNING - br.zul.zwork2.test.ZTestManager.printExpectedResult(ZCustomTest test, ZIndividualTestResult r):Resultado esperado: [0, 1]
+Resultado obtido: [0, 0]

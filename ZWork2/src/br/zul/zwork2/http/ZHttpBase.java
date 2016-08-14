@@ -48,6 +48,7 @@ public class ZHttpBase {
             } else {
                 conn = (HttpURLConnection) _url.openConnection(proxy.getProxy());
             }
+            conn.setInstanceFollowRedirects(true);
             conn.setUseCaches( false );
             if (cookieManager!=null&&!cookieManager.hasCookies()){
                 conn.setRequestProperty("Cookie", cookieManager.getCookiesText());
