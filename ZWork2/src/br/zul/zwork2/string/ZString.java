@@ -139,7 +139,7 @@ import java.util.List;
     
     public ZString[] split(String patterns[],String patternsToAvoid[]){
         //PREPARA PARA FAZER A BUSCA
-        ZStringSearch search = new ZStringSearch(string, caseSensitive, patterns, patternsToAvoid,ZStringSearchType.LEFT);
+        ZStringSearch search = new ZStringSearch(string, caseSensitive, patterns, patternsToAvoid,ZStringSearchType.LEFT_UNIQUE);
         List<ZString> result = new ArrayList<>();
         
         //QUEBRA A STRING
