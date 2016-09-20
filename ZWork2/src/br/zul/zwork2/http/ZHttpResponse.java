@@ -1,20 +1,25 @@
 package br.zul.zwork2.http;
 
+import br.zul.zwork2.io.ZGzip;
 import br.zul.zwork2.log.ZLogger;
 import br.zul.zwork2.string.ZString;
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.Reader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.zip.GZIPInputStream;
 
 /**
  *
  * @author Luiz Henrique
  */
 public class ZHttpResponse {
-    
+
     //==========================================================================
     //CONSTANTES
     //==========================================================================
@@ -55,65 +60,82 @@ public class ZHttpResponse {
     public static final int HTTP_UNAVAILABLE = 503;
     public static final int HTTP_GATEWAY_TIMEOUT = 504;
     public static final int HTTP_VERSION = 505;
-    
+
     //==========================================================================
     //VARIÁVEIS PRIVADAS
     //==========================================================================
-    private Reader reader;
-    private Map<String,List<String>> responsePropertyMap;
+    private InputStream inputStream;
+    private Map<String, List<String>> responsePropertyMap;
     private Integer responseCode;
     private String responseMessage;
-    
+
     //==========================================================================
     //CONSTRUTORES
     //==========================================================================
-    public ZHttpResponse(){
+    public ZHttpResponse() {
         responsePropertyMap = new HashMap<>();
     }
-    
+
     //==========================================================================
     //MÉTODOS PÚBLICOS
     //==========================================================================
-    public String getResponseText(){
-        ZLogger logger = new ZLogger(getClass(),"getResponseText()");
+    public String getResponseText() {
+        ZLogger logger = new ZLogger(getClass(), "getResponseText()");
         try {
-            StringBuilder response = new StringBuilder();
-            String line;
-            BufferedReader br=new BufferedReader(getReader());
-            while ((line=br.readLine()) != null) {
-                response.append(line);
-                response.append("\r\n");
+
+            if (responsePropertyMap().containsKey("Content-Encoding") && responsePropertyMap().get("Content-Encoding").get(0).equalsIgnoreCase("gzip")) {
+                InputStream bodyStream = new GZIPInputStream(getInputStream());
+                ByteArrayOutputStream outStream = new ByteArrayOutputStream();
+                byte[] buffer = new byte[4096];
+                int length;
+                while ((length = bodyStream.read(buffer)) > 0) {
+                    outStream.write(buffer, 0, length);
+                }
+                return new String(outStream.toByteArray(), StandardCharsets.UTF_8);
+            } else {
+                StringBuilder response = new StringBuilder();
+                BufferedReader br = new BufferedReader(new InputStreamReader(getInputStream(), StandardCharsets.UTF_8));
+                String line;
+                while ((line = br.readLine()) != null) {
+                    response.append(line);
+                    response.append("\r\n");
+                }
+                return response.toString();
             }
-            return response.toString();
         } catch (IOException ex) {
             throw logger.error.prepareException(ex);
         }
     }
-    
-    public ZString getResponseZText(boolean caseSensitive){
-        return new ZString(getResponseText(),caseSensitive);
+
+    public ZString getResponseZText(boolean caseSensitive) {
+        return new ZString(getResponseText(), caseSensitive);
     }
-    
+
     //==========================================================================
     //MÉTODOS PÚBLICOS PARA COOKIES
     //==========================================================================
-    public List<ZCookie> listCookies(){
+    public List<ZCookie> listCookies() {
         return null;
     }
-    public Map<String,List<String>> responsePropertyMap(){
+
+    public Map<String, List<String>> responsePropertyMap() {
         return responsePropertyMap;
     }
-    
+
+    //==========================================================================
+    //GETTERS MODIFICADOS
+    //==========================================================================
     //==========================================================================
     //GETTERS E SETTERS
     //==========================================================================
-    public Reader getReader() {
-        return reader;
+    public InputStream getInputStream() {
+        return inputStream;
     }
-    public void setReader(Reader reader) {
-        this.reader = reader;
+
+    public void setInputStream(InputStream inputStream) {
+        this.inputStream = inputStream;
     }
-    
+
     public void setResponsePropertyMap(Map<String, List<String>> responsePropertyMap) {
         this.responsePropertyMap = responsePropertyMap;
     }
@@ -121,6 +143,7 @@ public class ZHttpResponse {
     public Integer getResponseCode() {
         return responseCode;
     }
+
     public void setResponseCode(Integer responseCode) {
         this.responseCode = responseCode;
     }
@@ -128,8 +151,9 @@ public class ZHttpResponse {
     public String getResponseMessage() {
         return responseMessage;
     }
+
     public void setResponseMessage(String responseMessage) {
         this.responseMessage = responseMessage;
     }
-    
+
 }

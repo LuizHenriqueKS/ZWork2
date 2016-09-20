@@ -67,9 +67,9 @@ public abstract class ZStringSearchType {
             } else if (args.getFirstResult().getIndex()>args.getSecondResult().getIndex()){
                 args.setRemoveFirst(true);
             } else if (args.getFirstResult().isBetween(args.getSecondResult())){
-                args.setRemoveSecond(true);
-            } else if (args.getSecondResult().isBetween(args.getFirstResult())){
                 args.setRemoveFirst(true);
+            } else if (args.getSecondResult().isBetween(args.getFirstResult())){
+                args.setRemoveSecond(true);
             }
         }
     };

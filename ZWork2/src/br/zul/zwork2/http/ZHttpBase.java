@@ -10,6 +10,7 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.zip.GZIPInputStream;
 
 /**
  *
@@ -71,7 +72,7 @@ public class ZHttpBase {
             response.setResponseCode(connection.getResponseCode());
             response.setResponseMessage(connection.getResponseMessage());
             response.setResponsePropertyMap(connection.getHeaderFields());
-            response.setReader(new InputStreamReader(connection.getInputStream(),StandardCharsets.UTF_8));
+            response.setInputStream(connection.getInputStream());
             if (cookieManager!=null){
                 cookieManager.putCookies(response.listCookies());
             }
