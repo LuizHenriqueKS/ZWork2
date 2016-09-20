@@ -57,6 +57,66 @@ import java.util.List;
     public String toString(){
         return string;
     }
+      //==========================================================================
+    //MÉTODOS SEARCH
+    //==========================================================================
+    public ZStringSearch search(String[] patterns,String[] patternsToAvoid,ZStringSearchType type){
+        ZStringSearch search = new ZStringSearch(string, caseSensitive, patterns, patternsToAvoid, type);
+        return search;
+    }
+    
+    public ZStringSearch search(String pattern,String patternsToAvoid,ZStringSearchType type){
+        return search(new String[]{pattern},new String[]{patternsToAvoid},type);
+    }
+    
+    public ZStringSearch search(String... patterns){
+        return search(patterns,null,ZStringSearchType.LEFT_UNIQUE);
+    }
+    
+    //==========================================================================
+    //MÉTODOS APPEND
+    //==========================================================================
+    /**
+     * 
+     *  new ZString("a",true).appendLeft("b"); //SAÍDA: ba
+     * 
+     * @param str
+     * @return 
+     */
+    public ZString appendLeft(String str){
+        return new ZString(str+string,caseSensitive);
+    }
+    
+    public ZString appendLeft(ZString z){
+        return new ZString(z.string+string,caseSensitive);
+    }
+    
+    public ZString appendRight(String str){
+        return new ZString(string+str,caseSensitive);
+    }
+    
+    public ZString appendRight(ZString z){
+        return new ZString(string+z.string,caseSensitive);
+    }
+    
+    //==========================================================================
+    //MÉTODOS INDEX OF
+    //==========================================================================
+    public int indexOf(String pattern,int fromIndex){
+        String str = string;
+        if (!caseSensitive){
+           str = str.toLowerCase();
+        }
+        return str.indexOf(pattern,fromIndex);
+    }
+    
+    public int indexOf(String pattern){
+        String str = string;
+        if (!caseSensitive){
+           str = str.toLowerCase();
+        }
+        return str.indexOf(pattern);
+    }
     
     //==========================================================================
     //MÉTODOS SUBSTRING
@@ -253,22 +313,29 @@ import java.util.List;
     }
     
     //==========================================================================
-    //MÉTODOS BÁSICOS DE CORTE "FROM"
+    //MÉTODOS BÁSICOS DE CORTE FROM RIGHT
     //==========================================================================
     public ZString fromRight(String pattern){
         return from(new String[]{pattern},null,ZHorizontalDirection.RIGHT);
     }
     
-    public ZString fromLeft(String pattern){
-        return from(new String[]{pattern}, null, ZHorizontalDirection.LEFT);
-    }
-    
       public ZString fromRight(String... patterns){
         return from(patterns,null,ZHorizontalDirection.RIGHT);
     }
-    
+      
+    //==========================================================================
+    //MÉTODOS BÁSICOS DE CORTE FROM LEFT
+    //==========================================================================
+    public ZString fromLeft(String pattern){
+        return from(new String[]{pattern}, null, ZHorizontalDirection.LEFT);
+    }
+      
     public ZString fromLeft(String... patterns){
         return from(patterns, null, ZHorizontalDirection.LEFT);
+    }
+    
+    public ZString fromLeft(String[] patterns,String[] patternsToVoid){
+        return from(patterns, patternsToVoid, ZHorizontalDirection.LEFT);
     }
     
     //==========================================================================
@@ -282,13 +349,23 @@ import java.util.List;
         return to(patterns,null,ZHorizontalDirection.RIGHT);
     }
     
+    public ZString toRight(String[] patterns,String[] patternsToVoid){
+        return to(patterns,patternsToVoid,ZHorizontalDirection.RIGHT);
+    }
+    
+    //==========================================================================
+    //MÉTODOS BÁSICOS DE CORTE TO LEFT
+    //==========================================================================
     public ZString toLeft(String... patterns){
         return to(patterns, null, ZHorizontalDirection.LEFT);
     }
     
-    
     public ZString toLeft(String pattern){
         return to(new String[]{pattern},null,ZHorizontalDirection.LEFT);
+    }
+    
+    public ZString toLeft(String[] patterns,String[] patternsToVoid){
+        return to(patterns,patternsToVoid,ZHorizontalDirection.LEFT);
     }
     
 }

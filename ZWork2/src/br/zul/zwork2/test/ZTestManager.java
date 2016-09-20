@@ -193,15 +193,7 @@ public class ZTestManager {
             String expectedResult = "null";
             
             //TENTA OBTER OS RESULTADOS
-            if (test instanceof ZTest){
-                //VERIFICA SE O RESULTADO NÃO É NULL
-                if (r.getResult()!=null){
-                    //SE NÃO É NULL, OBTEM O RESULTADO E CONVERTE EM STRING
-                    result = r.getResult().toString();
-                }
-                //NÃO VERIFICA SE O RESULTADO ESPERADO PORQUE JÁ FOI VERIFICADO MAIS A CIMAS
-                expectedResult = r.getExpectedResult().toString();
-            } else if (test instanceof ZSimpleTest){
+            if (test instanceof ZSimpleTest){
                 //CONVERTE O TESTE PARA ZSimpleTest
                 ZSimpleTest t = ((ZSimpleTest) test);
                 //VERIFICA SE O RESULTADO NÃO É NULL
@@ -210,7 +202,15 @@ public class ZTestManager {
                 }
                 //NÃO VERIFICA SE O RESULTADO ESPERADO PORQUE JÁ FOI VERIFICADO MAIS A CIMAS
                 expectedResult = t.convertResultToString(r.getExpectedResult());
-            }
+            } else if (test instanceof ZTest){
+                //VERIFICA SE O RESULTADO NÃO É NULL
+                if (r.getResult()!=null){
+                    //SE NÃO É NULL, OBTEM O RESULTADO E CONVERTE EM STRING
+                    result = r.getResult().toString();
+                }
+                //NÃO VERIFICA SE O RESULTADO ESPERADO PORQUE JÁ FOI VERIFICADO MAIS A CIMAS
+                expectedResult = r.getExpectedResult().toString();
+            } 
             
             //PREPARA MENSAGEM PARA ESCREVER NO LOG
             StringBuilder msg = new StringBuilder();

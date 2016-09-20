@@ -132,3 +132,86 @@ Resultado obtido: [0]
 14/08/2016 16:44:10 - WARNING - br.zul.zwork2.test.ZTestManager.printExpectedResult(ZCustomTest test, ZIndividualTestResult r):[br.zul.zwork2.test.basic.string.search.ZStringSearchTest3]Pesquisa básica de texto ... Falhou!
 14/08/2016 16:44:10 - WARNING - br.zul.zwork2.test.ZTestManager.printExpectedResult(ZCustomTest test, ZIndividualTestResult r):Resultado esperado: [0, 1]
 Resultado obtido: [0, 0]
+20/09/2016 16:05:49 - WARNING - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):FALHOU!
+20/09/2016 16:05:49 - WARNING - br.zul.zwork2.test.ZTestManager.printExpectedResult(ZCustomTest test, ZIndividualTestResult r):[br.zul.zwork2.test.basic.xml.ZXmlTest1]Montando um xml ... Falhou!
+20/09/2016 16:05:49 - WARNING - br.zul.zwork2.test.ZTestManager.printExpectedResult(ZCustomTest test, ZIndividualTestResult r):Resultado esperado: Luiz <b>Henrique</b> <font name='Arial'>Kafer</font>
+Resultado obtido: Luiz <root/>
+b>Henrique
+20/09/2016 16:10:55 - WARNING - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):FALHOU!
+20/09/2016 16:10:55 - WARNING - br.zul.zwork2.test.ZTestManager.printExpectedResult(ZCustomTest test, ZIndividualTestResult r):[br.zul.zwork2.test.basic.xml.ZXmlTest1]Montando um xml ... Falhou!
+20/09/2016 16:10:55 - WARNING - br.zul.zwork2.test.ZTestManager.printExpectedResult(ZCustomTest test, ZIndividualTestResult r):Resultado esperado: Luiz <b>Henrique</b> <font name='Arial'>Kafer</font>
+Resultado obtido: Luiz <root/>
+/b> <root/>
+
+20/09/2016 16:13:16 - WARNING - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):FALHOU!
+20/09/2016 16:13:16 - WARNING - br.zul.zwork2.test.ZTestManager.printExpectedResult(ZCustomTest test, ZIndividualTestResult r):[br.zul.zwork2.test.basic.xml.ZXmlTest1]Montando um xml ... Falhou!
+20/09/2016 16:13:16 - WARNING - br.zul.zwork2.test.ZTestManager.printExpectedResult(ZCustomTest test, ZIndividualTestResult r):Resultado esperado: Luiz <b>Henrique</b> <font name='Arial'>Kafer</font>
+Resultado obtido: Luiz <root/>
+<root/>
+
+20/09/2016 16:14:30 - WARNING - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):FALHOU!
+20/09/2016 16:14:30 - WARNING - br.zul.zwork2.test.ZTestManager.printExpectedResult(ZCustomTest test, ZIndividualTestResult r):[br.zul.zwork2.test.basic.xml.ZXmlTest1]Montando um xml ... Falhou!
+20/09/2016 16:14:33 - WARNING - br.zul.zwork2.test.ZTestManager.printExpectedResult(ZCustomTest test, ZIndividualTestResult r):Resultado esperado: Luiz <b>Henrique</b> <font name='Arial'>Kafer</font>
+Resultado obtido: Luiz <root/>
+<root/>
+
+20/09/2016 16:49:51 - WARNING - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):FALHOU!
+20/09/2016 16:49:51 - WARNING - br.zul.zwork2.test.ZTestManager.printExpectedResult(ZCustomTest test, ZIndividualTestResult r):[br.zul.zwork2.test.basic.xml.ZXmlTest1]Montando um xml ... Falhou!
+20/09/2016 16:49:56 - WARNING - br.zul.zwork2.test.ZTestManager.printExpectedResult(ZCustomTest test, ZIndividualTestResult r):Resultado esperado: Luiz <b>Henrique</b> <font name='Arial'>Kafer</font>
+Resultado obtido: Luiz <b/>
+<font name="Arial"/>
+
+20/09/2016 17:03:45 - WARNING - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):FALHOU!
+20/09/2016 17:03:45 - WARNING - br.zul.zwork2.test.ZTestManager.printExpectedResult(ZCustomTest test, ZIndividualTestResult r):[br.zul.zwork2.test.basic.xml.ZXmlTest1]Montando um xml ... Falhou!
+20/09/2016 17:03:45 - WARNING - br.zul.zwork2.test.ZTestManager.printExpectedResult(ZCustomTest test, ZIndividualTestResult r):Resultado esperado: Luiz <b>Henrique</b> <font name='Arial'>Kafer</font>
+Resultado obtido: Luiz <b>
+>Henrique</b>
+<font name="Arial">
+name='Arial'>Kafer</font>
+
+20/09/2016 17:04:57 - WARNING - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):FALHOU!
+20/09/2016 17:04:57 - WARNING - br.zul.zwork2.test.ZTestManager.printExpectedResult(ZCustomTest test, ZIndividualTestResult r):[br.zul.zwork2.test.basic.xml.ZXmlTest1]Montando um xml ... Falhou!
+20/09/2016 17:05:04 - WARNING - br.zul.zwork2.test.ZTestManager.printExpectedResult(ZCustomTest test, ZIndividualTestResult r):Resultado esperado: Luiz <b>Henrique</b> <font name='Arial'>Kafer</font>
+Resultado obtido: Luiz <b>
+>Henrique</b>
+<font name="Arial">
+name='Arial'>Kafer</font>
+
+20/09/2016 17:07:19 - WARNING - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):FALHOU!
+20/09/2016 17:07:19 - WARNING - br.zul.zwork2.test.ZTestManager.printExpectedResult(ZCustomTest test, ZIndividualTestResult r):[br.zul.zwork2.test.basic.xml.ZXmlTest1]Montando um xml ... Falhou!
+20/09/2016 17:07:19 - WARNING - br.zul.zwork2.test.ZTestManager.printExpectedResult(ZCustomTest test, ZIndividualTestResult r):Resultado esperado: Luiz <b>Henrique</b> <font name='Arial'>Kafer</font>
+Resultado obtido: Luiz <b>
+Henrique</b>
+<font name="Arial">
+Kafer</font>
+
+20/09/2016 17:08:00 - WARNING - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):FALHOU!
+20/09/2016 17:08:00 - WARNING - br.zul.zwork2.test.ZTestManager.printExpectedResult(ZCustomTest test, ZIndividualTestResult r):[br.zul.zwork2.test.basic.xml.ZXmlTest1]Montando um xml ... Falhou!
+20/09/2016 17:08:00 - WARNING - br.zul.zwork2.test.ZTestManager.printExpectedResult(ZCustomTest test, ZIndividualTestResult r):Resultado esperado: Luiz <b>Henrique</b> <font name='Arial'>Kafer</font>
+Resultado obtido: Luiz <b>
+Henrique</b>
+<font name="Arial">
+Kafer</font>
+
+20/09/2016 17:08:40 - WARNING - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):FALHOU!
+20/09/2016 17:08:40 - WARNING - br.zul.zwork2.test.ZTestManager.printExpectedResult(ZCustomTest test, ZIndividualTestResult r):[br.zul.zwork2.test.basic.xml.ZXmlTest1]Montando um xml ... Falhou!
+20/09/2016 17:08:40 - WARNING - br.zul.zwork2.test.ZTestManager.printExpectedResult(ZCustomTest test, ZIndividualTestResult r):Resultado esperado: Luiz <b>Henrique</b> <font name='Arial'>Kafer</font>
+Resultado obtido: Luiz <b>
+Henrique</b>
+<font name="Arial">
+Kafer</font>
+
+20/09/2016 17:09:07 - WARNING - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):FALHOU!
+20/09/2016 17:09:07 - WARNING - br.zul.zwork2.test.ZTestManager.printExpectedResult(ZCustomTest test, ZIndividualTestResult r):[br.zul.zwork2.test.basic.xml.ZXmlTest1]Montando um xml ... Falhou!
+20/09/2016 17:09:07 - WARNING - br.zul.zwork2.test.ZTestManager.printExpectedResult(ZCustomTest test, ZIndividualTestResult r):Resultado esperado: Luiz <b>Henrique</b> <font name='Arial'>Kafer</font>
+Resultado obtido: Luiz <b>
+Henrique</b>
+<font name="Arial">
+Kafer</font>
+
+20/09/2016 17:11:10 - WARNING - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):FALHOU!
+20/09/2016 17:11:10 - WARNING - br.zul.zwork2.test.ZTestManager.printExpectedResult(ZCustomTest test, ZIndividualTestResult r):[br.zul.zwork2.test.basic.xml.ZXmlTest1]Montando um xml ... Falhou!
+20/09/2016 17:11:39 - WARNING - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):FALHOU!
+20/09/2016 17:11:39 - WARNING - br.zul.zwork2.test.ZTestManager.printExpectedResult(ZCustomTest test, ZIndividualTestResult r):[br.zul.zwork2.test.basic.xml.ZXmlTest1]Montando um xml ... Falhou!
+20/09/2016 17:11:39 - WARNING - br.zul.zwork2.test.ZTestManager.printExpectedResult(ZCustomTest test, ZIndividualTestResult r):Resultado esperado: Luiz<b>Henrique</b><fontname='Arial'>Kafer</font>
+Resultado obtido: Luiz<b>Henrique</b><fontname="Arial">Kafer</font>
