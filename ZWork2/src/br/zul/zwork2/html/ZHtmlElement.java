@@ -1,79 +1,76 @@
-package br.zul.zwork2.xml;
+package br.zul.zwork2.html;
 
-import br.zul.zwork2.html.ZHtmlTag;
-import br.zul.zwork2.html.ZHtmlValue;
-import br.zul.zwork2.string.ZString;
+import br.zul.zwork2.log.ZLogger;
+import br.zul.zwork2.xml.*;
 
 /**
  *
  * @author luiz.silva
  */
-public abstract class ZXmlElement {
+public abstract class ZHtmlElement {
     
     //==========================================================================
     //VARIÁVEIS PRIVADAS
     //==========================================================================
-    private ZXmlTag parent;
+    private ZHtmlTag parent;
     
     //==========================================================================
     //MÉTODOS PÚBLICOS ESTÁTICOS
     //==========================================================================
-    public static ZXmlElement parseElement(String xml){
-        ZString z = new ZString(xml,true);
-        ZString before = z.toLeft("<");
-        //SE POSSUI UM CONTEÚDO ANTES DO "<" ENTÃO É UM VALOR
-        if (!before.trim().isEmpty()){
-            return new ZXmlValue(before.toString());
-        } else {
-            ZString after = z.fromLeft("<");
-            if (!after.trim().isEmpty()){
-                //SE POSSUI CONTEÚDO DEPOIS ENTÃO É UMA TAG
-                return new ZXmlTag(after.toString());
-            } else {
-                //SE NÃO ACHOU NADA, RETORNA UM VALOR EM BRANCO
-                return new ZXmlValue();
-            }
+    public static ZHtmlElement parseElement(String html){
+        return parseElement(ZXmlElement.parseElement(html));
+    }
+    
+    public static ZHtmlElement parseElement(ZXmlElement element){
+        ZLogger logger = new ZLogger(ZHtmlElement.class,"parseElement(ZXmlElement element)");
+        switch (element.getType()){
+            case TAG:
+                return new ZHtmlTag(element.asTag());
+            case VALUE:
+                return new ZHtmlValue(element.asValue());
+            default:
+                throw logger.error.prepareException("Não foi possível converter para um elemento html: %s",element.toString());
         }
     }
     
     //==========================================================================
     //MÉTODOS PÚBLICOS ABSTRATOS
     //==========================================================================
-    public abstract ZXmlElementType getType();
+    public abstract ZHtmlElementType getType();
     
     //==========================================================================
     //MÉTODOS PÚBLICOS CONVERSORES
     //==========================================================================
-    public ZXmlTag asTag(){
-        return (ZXmlTag)this;
+    public ZHtmlTag asTag(){
+        return (ZHtmlTag)this;
     }
     
-    public ZXmlValue asValue(){
-        return (ZXmlValue)this;
+    public ZHtmlValue asValue(){
+        return (ZHtmlValue)this;
     }
     
     //==========================================================================
     //GETTERS E SETTERS MODIFICADOS
     //==========================================================================
-    public boolean isType(ZXmlElementType type){
+    public boolean isType(ZHtmlElementType type){
         return getType().equals(type);
     }
     
     public boolean isValue(){
-        return isType(ZXmlElementType.VALUE);
+        return isType(ZHtmlElementType.VALUE);
     }
     
     public boolean isTag(){
-        return isType(ZXmlElementType.TAG);
+        return isType(ZHtmlElementType.TAG);
     }
     
     //==========================================================================
     //GETTERS E SETTERS
     //==========================================================================
-    public ZXmlTag getParent() {
+    public ZHtmlTag getParent() {
         return parent;
     }
-    public void setParent(ZXmlTag parent) {
+    public void setParent(ZHtmlTag parent) {
         this.parent = parent;
     }
 
