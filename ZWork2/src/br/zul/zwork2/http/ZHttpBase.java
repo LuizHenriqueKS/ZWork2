@@ -26,6 +26,7 @@ public class ZHttpBase {
     private final Map<String,String> parameterMap;
     private final Map<String,String> requestPropertyMap;
     private ZProxy proxy;
+    private boolean instanceFollowRedirects = false;
     
     //==========================================================================
     //CONSTRUTORES
@@ -49,7 +50,7 @@ public class ZHttpBase {
             } else {
                 conn = (HttpURLConnection) _url.openConnection(proxy.getProxy());
             }
-            conn.setInstanceFollowRedirects(true);
+            conn.setInstanceFollowRedirects(instanceFollowRedirects);
             conn.setUseCaches( false );
             if (cookieManager!=null&&!cookieManager.hasCookies()){
                 conn.setRequestProperty("Cookie", cookieManager.getCookiesText());
@@ -73,12 +74,22 @@ public class ZHttpBase {
             response.setResponseMessage(connection.getResponseMessage());
             response.setResponsePropertyMap(connection.getHeaderFields());
             response.setInputStream(connection.getInputStream());
+            response.setUrl(connection.getURL().toString());
             if (cookieManager!=null){
                 cookieManager.putCookies(response.listCookies());
             }
             return response;
         } catch (IOException ex) {
             throw logger.error.prepareException(ex);
+        }
+    }
+    
+    protected void prepareRequest(ZHttpRequest request){
+        request.setCookieManager(getCookieManager());
+        request.setProxy(getProxy());
+        request.setInstanceFollowRedirects(isInstanceFollowRedirects());
+        for (Map.Entry<String,String> requestProperty:requestPropertyMap().entrySet()){
+            request.putParameter(requestProperty.getKey(), requestProperty.getValue());
         }
     }
     
@@ -146,6 +157,13 @@ public class ZHttpBase {
     }
     public void setProxy(ZProxy proxy) {
         this.proxy = proxy;
+    }
+
+    public boolean isInstanceFollowRedirects() {
+        return instanceFollowRedirects;
+    }
+    public void setInstanceFollowRedirects(boolean instanceFollowRedirects) {
+        this.instanceFollowRedirects = instanceFollowRedirects;
     }
     
 }

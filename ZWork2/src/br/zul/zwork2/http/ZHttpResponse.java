@@ -68,6 +68,7 @@ public class ZHttpResponse {
     private Map<String, List<String>> responsePropertyMap;
     private Integer responseCode;
     private String responseMessage;
+    private String url;
 
     //==========================================================================
     //CONSTRUTORES
@@ -110,6 +111,13 @@ public class ZHttpResponse {
     public ZString getResponseZText(boolean caseSensitive) {
         return new ZString(getResponseText(), caseSensitive);
     }
+    
+    public String getLocationProperty(){
+        if (!responsePropertyMap.containsKey("Location")){
+            return null;
+        }
+        return responsePropertyMap.get("Location").get(0);
+    }
 
     //==========================================================================
     //MÉTODOS PÚBLICOS PARA COOKIES
@@ -125,13 +133,13 @@ public class ZHttpResponse {
     //==========================================================================
     //GETTERS MODIFICADOS
     //==========================================================================
+    
     //==========================================================================
     //GETTERS E SETTERS
     //==========================================================================
     public InputStream getInputStream() {
         return inputStream;
     }
-
     public void setInputStream(InputStream inputStream) {
         this.inputStream = inputStream;
     }
@@ -143,7 +151,6 @@ public class ZHttpResponse {
     public Integer getResponseCode() {
         return responseCode;
     }
-
     public void setResponseCode(Integer responseCode) {
         this.responseCode = responseCode;
     }
@@ -151,9 +158,15 @@ public class ZHttpResponse {
     public String getResponseMessage() {
         return responseMessage;
     }
-
     public void setResponseMessage(String responseMessage) {
         this.responseMessage = responseMessage;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+    public void setUrl(String url) {
+        this.url = url;
     }
 
 }

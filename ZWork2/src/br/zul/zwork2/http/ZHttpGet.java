@@ -5,7 +5,6 @@ import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.ProtocolException;
 import java.net.URLEncoder;
-import java.util.Arrays;
 import java.util.Map;
 
 /**
@@ -16,7 +15,7 @@ public class ZHttpGet extends ZHttpRequest {
 
     @Override
     public ZHttpResponse send() {
-        ZLogger logger = new ZLogger(getClass(), "send()");
+       ZLogger logger = new ZLogger(getClass(), "send()");
         try {
             String _url = getUrl();
             if (getContentLength()>0){
@@ -27,9 +26,16 @@ public class ZHttpGet extends ZHttpRequest {
             }
             HttpURLConnection connection = prepareConnection(_url);
             connection.setDoOutput(true);
-            connection.setInstanceFollowRedirects(true);
+            connection.setInstanceFollowRedirects(false);
             connection.setRequestMethod("GET");
-            return getResponse(connection);
+            ZHttpResponse response = getResponse(connection);
+            if (isInstanceFollowRedirects()&&response.getLocationProperty()!=null){
+               ZHttpGet httpGet = new ZHttpGet();
+               httpGet.setUrl(response.getLocationProperty());
+               prepareRequest(httpGet);
+               response = httpGet.send();
+            }
+            return response;
         } catch (ProtocolException ex) {
             throw logger.error.prepareException(ex);
         }

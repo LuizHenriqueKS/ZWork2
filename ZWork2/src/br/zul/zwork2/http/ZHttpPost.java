@@ -20,12 +20,19 @@ public class ZHttpPost extends ZHttpRequest {
         try {
             HttpURLConnection connection = prepareConnection(getUrl());
             connection.setDoOutput(true);
-            connection.setInstanceFollowRedirects(true);
+            connection.setInstanceFollowRedirects(false);
             connection.setRequestMethod("POST");
             connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
             connection.setRequestProperty("Content-Length", Integer.toString(getContentLength()));
             connection.getOutputStream().write(getContent());
-            return getResponse(connection);
+            ZHttpResponse response = getResponse(connection);
+            if (isInstanceFollowRedirects()&&response.getLocationProperty()!=null){
+               ZHttpGet httpGet = new ZHttpGet();
+               httpGet.setUrl(response.getLocationProperty());
+               prepareRequest(httpGet);
+               response = httpGet.send();
+            }
+            return response;
         } catch (ProtocolException ex) {
             throw logger.error.prepareException(ex);
         } catch (IOException ex) {
