@@ -4,7 +4,7 @@ import br.zul.zwork2.annotation.ZInject;
 import br.zul.zwork2.annotation.ZSingleton;
 import br.zul.zwork2.log.ZLogger;
 import br.zul.zwork2.reflection.ZClass;
-import br.zul.zwork2.util.ZFilter;
+import br.zul.zwork2.filter.ZListFilter;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
@@ -98,7 +98,7 @@ public class ZInjectManager {
         ZClass c = new ZClass(objectClass);
         
         //OBTEM OS MÉTODOS GETINSTANCE ESTÁTICOS DA CLASSE
-        Collection<Method> methodCollection = c.listMethods(new ZFilter<Integer,Method>(){
+        Collection<Method> methodCollection = c.listMethods(new ZListFilter<Integer,Method>(){
             @Override
             public boolean filter(Integer key, Method value) {
                 

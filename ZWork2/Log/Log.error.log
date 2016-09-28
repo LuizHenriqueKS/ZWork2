@@ -190,3 +190,61 @@ Caused by: java.lang.NullPointerException
 14/08/2016 16:41:21 - ERROR - br.zul.zwork2.main.Main.main(String[] args):Quantidade de testes que falharam: 1
 14/08/2016 16:43:38 - ERROR - br.zul.zwork2.main.Main.main(String[] args):Quantidade de testes que falharam: 1
 14/08/2016 16:44:10 - ERROR - br.zul.zwork2.main.Main.main(String[] args):Quantidade de testes que falharam: 1
+22/09/2016 15:12:21 - ERROR - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):ERRO!
+22/09/2016 15:12:21 - ERROR - java.lang.NullPointerException
+	at br.zul.zwork2.key.ZKeyList.addKey(ZKeyList.java:39)
+	at br.zul.zwork2.iterator.ZHtmlIterator.beforeFirst(ZHtmlIterator.java:221)
+	at br.zul.zwork2.iterator.ZIterator.init(ZIterator.java:37)
+	at br.zul.zwork2.iterator.ZIterator.<init>(ZIterator.java:30)
+	at br.zul.zwork2.iterator.ZHtmlIterator.<init>(ZHtmlIterator.java:28)
+	at br.zul.zwork2.iterator.ZHtmlIterator.<init>(ZHtmlIterator.java:36)
+	at br.zul.zwork2.test.basic.html.ZHtmlTest2.getResult(ZHtmlTest2.java:34)
+	at br.zul.zwork2.test.basic.html.ZHtmlTest2.getResult(ZHtmlTest2.java:13)
+	at br.zul.zwork2.test.ZTest.run(ZTest.java:18)
+	at br.zul.zwork2.test.ZMultipleTests.run(ZMultipleTests.java:29)
+	at br.zul.zwork2.test.ZTestManager.executeTest(ZTestManager.java:123)
+	at br.zul.zwork2.test.ZTestManager.executeTests(ZTestManager.java:65)
+	at br.zul.zwork2.test.ZTestManager.executeTests(ZTestManager.java:47)
+	at br.zul.zwork2.main.Main.main(Main.java:27)
+22/09/2016 15:12:21 - ERROR - java.lang.NullPointerException
+	at br.zul.zwork2.test.ZTestManager.executeTests(ZTestManager.java:68)
+	at br.zul.zwork2.test.ZTestManager.executeTests(ZTestManager.java:47)
+	at br.zul.zwork2.main.Main.main(Main.java:27)
+22/09/2016 15:12:52 - ERROR - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):ERRO!
+22/09/2016 15:12:52 - ERROR - java.lang.NullPointerException
+	at br.zul.zwork2.iterator.ZHtmlIterator.hasBefore(ZHtmlIterator.java:255)
+	at br.zul.zwork2.iterator.ZHtmlIterator.next(ZHtmlIterator.java:172)
+	at br.zul.zwork2.test.basic.html.ZHtmlTest2.getResult(ZHtmlTest2.java:36)
+	at br.zul.zwork2.test.basic.html.ZHtmlTest2.getResult(ZHtmlTest2.java:13)
+	at br.zul.zwork2.test.ZTest.run(ZTest.java:18)
+	at br.zul.zwork2.test.ZMultipleTests.run(ZMultipleTests.java:29)
+	at br.zul.zwork2.test.ZTestManager.executeTest(ZTestManager.java:123)
+	at br.zul.zwork2.test.ZTestManager.executeTests(ZTestManager.java:65)
+	at br.zul.zwork2.test.ZTestManager.executeTests(ZTestManager.java:47)
+	at br.zul.zwork2.main.Main.main(Main.java:27)
+22/09/2016 15:12:52 - ERROR - java.lang.NullPointerException
+	at br.zul.zwork2.test.ZTestManager.executeTests(ZTestManager.java:68)
+	at br.zul.zwork2.test.ZTestManager.executeTests(ZTestManager.java:47)
+	at br.zul.zwork2.main.Main.main(Main.java:27)
+22/09/2016 15:15:09 - ERROR - br.zul.zwork2.main.Main.main(String[] args):Quantidade de testes que falharam: 1
+22/09/2016 15:15:29 - ERROR - br.zul.zwork2.main.Main.main(String[] args):Quantidade de testes que falharam: 1
+22/09/2016 15:15:40 - ERROR - br.zul.zwork2.main.Main.main(String[] args):Quantidade de testes que falharam: 1
+22/09/2016 15:19:06 - ERROR - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):ERRO!
+22/09/2016 15:19:06 - ERROR - java.lang.NullPointerException
+	at br.zul.zwork2.iterator.ZHtmlIterator.hasBefore(ZHtmlIterator.java:267)
+	at br.zul.zwork2.iterator.ZHtmlIterator.next(ZHtmlIterator.java:172)
+	at br.zul.zwork2.test.basic.html.ZHtmlTest2.getResult(ZHtmlTest2.java:36)
+	at br.zul.zwork2.test.basic.html.ZHtmlTest2.getResult(ZHtmlTest2.java:13)
+	at br.zul.zwork2.test.ZTest.run(ZTest.java:18)
+	at br.zul.zwork2.test.ZMultipleTests.run(ZMultipleTests.java:29)
+	at br.zul.zwork2.test.ZTestManager.executeTest(ZTestManager.java:123)
+	at br.zul.zwork2.test.ZTestManager.executeTests(ZTestManager.java:65)
+	at br.zul.zwork2.test.ZTestManager.executeTests(ZTestManager.java:47)
+	at br.zul.zwork2.main.Main.main(Main.java:27)
+22/09/2016 15:19:06 - ERROR - java.lang.NullPointerException
+	at br.zul.zwork2.test.ZTestManager.executeTests(ZTestManager.java:68)
+	at br.zul.zwork2.test.ZTestManager.executeTests(ZTestManager.java:47)
+	at br.zul.zwork2.main.Main.main(Main.java:27)
+22/09/2016 15:23:05 - ERROR - br.zul.zwork2.main.Main.main(String[] args):Quantidade de testes que falharam: 1
+23/09/2016 09:18:48 - ERROR - br.zul.zwork2.main.Main.main(String[] args):Quantidade de testes que falharam: 1
+27/09/2016 09:44:24 - ERROR - br.zul.zwork2.main.Main.main(String[] args):Quantidade de testes que falharam: 1

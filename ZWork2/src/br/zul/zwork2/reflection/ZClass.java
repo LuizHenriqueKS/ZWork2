@@ -3,7 +3,7 @@ package br.zul.zwork2.reflection;
 import br.zul.zwork2.io.ZPath;
 import br.zul.zwork2.log.ZLogger;
 import br.zul.zwork2.string.ZString;
-import br.zul.zwork2.util.ZFilter;
+import br.zul.zwork2.filter.ZListFilter;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -61,7 +61,7 @@ public class ZClass<T> {
         return listFields(null,null);
     }
     
-    public List<Field> listFields(ZFilter<String,Field> filter){
+    public List<Field> listFields(ZListFilter<String,Field> filter){
         return listFields(filter,null);
     }
     
@@ -69,7 +69,7 @@ public class ZClass<T> {
         return listFields(null,annotation);
     }
     
-    public List<Field> listFields(ZFilter<String,Field> filter,Class<? extends Annotation> annotation){
+    public List<Field> listFields(ZListFilter<String,Field> filter,Class<? extends Annotation> annotation){
         //PREPARA A LISTA DE RESULTADO
         Set<Field> set = new HashSet<>();
         
@@ -133,7 +133,7 @@ public class ZClass<T> {
         ZLogger log = new ZLogger(getClass(),"getField(final ZString fieldName)");
         
         //OBTEM OS CAMPOS COM ESSE NOME
-        Collection<Field> collection = listFields(new ZFilter<String,Field>(){
+        Collection<Field> collection = listFields(new ZListFilter<String,Field>(){
             @Override
             public boolean filter(String key, Field value) {
                 return fieldName.equals(key);
@@ -175,7 +175,7 @@ public class ZClass<T> {
         ZLogger logger = new ZLogger(getClass(),"getField(String fieldName)");
         
         //PREPARA UM FILTRO PARA FILTRAR PELO NOME
-        ZFilter<String,Field> filter = new ZFilter<String,Field>() {
+        ZListFilter<String,Field> filter = new ZListFilter<String,Field>() {
             @Override
             public boolean filter(String key, Field value) {
                 return fieldName.equals(key);
@@ -283,15 +283,15 @@ public class ZClass<T> {
     //MÉTODOS PÚBLICOS PARA MÉTODOS
     //==========================================================================
     public List<Method> listMethods(){
-        return listMethods((ZFilter)null,null);
+        return listMethods((ZListFilter)null,null);
     }
     
-    public List<Method> listMethods(ZFilter<Integer,Method> filter){
+    public List<Method> listMethods(ZListFilter<Integer,Method> filter){
         return listMethods(filter,null);
     }
     
     public List<Method> listMethods(Class<? extends Annotation> annotation){
-        return listMethods((ZFilter)null,annotation);
+        return listMethods((ZListFilter)null,annotation);
     }
     
     /**
@@ -320,7 +320,7 @@ public class ZClass<T> {
     public List<Method> listMethods(final ZString methodName,Class<? extends Annotation> annotation){
         
         //PREPARA O FILTRO QUE IRÁ FILTRAR OS MÉTODOS PELO NOME
-        ZFilter<Integer,Method> filter = new ZFilter<Integer,Method>(){
+        ZListFilter<Integer,Method> filter = new ZListFilter<Integer,Method>(){
             @Override
             public boolean filter(Integer key, Method value) {
                 return methodName.equals(value.getName()); //COMPARA O NOME DO MÉTODO COM O NOME INFORMADO
@@ -330,7 +330,7 @@ public class ZClass<T> {
         return listMethods(filter,annotation);
     }
     
-    public List<Method> listMethods(ZFilter<Integer,Method> filter,final Class<? extends Annotation> annotation){
+    public List<Method> listMethods(ZListFilter<Integer,Method> filter,final Class<? extends Annotation> annotation){
         
         //OBTEM TODOS OS MÉTODOS (USA O CONJUNTO SET PARA NÃO OBTER MÉTODOS DUPLICADOS)
         Set<Method> methodSet = new HashSet<>();
@@ -344,7 +344,7 @@ public class ZClass<T> {
         if (annotation!=null){
             
             //SE POSSUI ANOTAÇÃO, FILTRA A LISTA DE MÉTODOS POR ELA
-           result = new ZFilter<Integer,Method>(){
+           result = new ZListFilter<Integer,Method>(){
                @Override
                public boolean filter(Integer key, Method value) {
                   return value.isAnnotationPresent(annotation); //VERIFICA SE O MÉTODO POSSUI A ANOTAÇÃO

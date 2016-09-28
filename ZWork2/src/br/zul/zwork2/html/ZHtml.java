@@ -20,16 +20,28 @@ public class ZHtml {
     //==========================================================================
     public ZHtml(){
         this.elementList = new ArrayList<>();
+        init();
     }
     
     public ZHtml(String html){
         this(new ZXml(html));
+        init();
     }
     
     public ZHtml(ZXml xml){
         this();
         for (ZXmlElement element:xml.listElements()){
             elementList.add(ZHtmlElement.parseElement(element));
+        }
+        init();
+    }
+    
+    //==========================================================================
+    //MÉTODOS DE CONSTRUÇÃO
+    //==========================================================================
+    private void init(){
+        for (ZHtmlElement element:elementList){
+            element.setHtml(this);
         }
     }
     
@@ -61,13 +73,16 @@ public class ZHtml {
     
     public void addElement(ZHtmlElement element){
         elementList.add(element);
+        element.setHtml(this);
     }
     
     public void removeElement(ZHtmlElement element){
         elementList.remove(element);
+        element.setHtml(null);
     }
     
     public void removeElement(int index){
+        elementList.get(index).setHtml(null);
         elementList.remove(index);
     }
     

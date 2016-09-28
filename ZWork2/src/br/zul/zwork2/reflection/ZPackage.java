@@ -4,7 +4,7 @@ import br.zul.zwork2.io.ZPath;
 import br.zul.zwork2.io.ZResource;
 import br.zul.zwork2.io.ZZipFile;
 import br.zul.zwork2.util.ZAppUtils;
-import br.zul.zwork2.util.ZFilter;
+import br.zul.zwork2.filter.ZListFilter;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -74,7 +74,7 @@ public class ZPackage {
             }
             
             //SE NÃO TIVER NULL, FILTRA
-            return new ZFilter<Integer,ZResource>(){
+            return new ZListFilter<Integer,ZResource>(){
                 @Override
                 public boolean filter(Integer key, ZResource value) {
                     
@@ -96,7 +96,7 @@ public class ZPackage {
         
     }
     
-    public List<ZResource> listResources(boolean subresources,ZFilter<Integer,ZResource> filter){
+    public List<ZResource> listResources(boolean subresources,ZListFilter<Integer,ZResource> filter){
         return filter.filter(listResources(subresources));
     }
     
@@ -130,7 +130,7 @@ public class ZPackage {
         return result;
     }
     
-    public List<ZClass> listClasses(boolean subresources,ZFilter<Integer,ZClass> filter){
+    public List<ZClass> listClasses(boolean subresources,ZListFilter<Integer,ZClass> filter){
         return filter.filter(listClasses(subresources));
     }
     
@@ -143,7 +143,7 @@ public class ZPackage {
      */
     public List<ZClass> listClasses(boolean subresources,final Class<?> originClass,final boolean ignoreClassesEquals){
         
-        ZFilter filter = new ZFilter<Integer,ZClass>(){
+        ZListFilter filter = new ZListFilter<Integer,ZClass>(){
             @Override
             public boolean filter(Integer key, ZClass value) {
                 //SE É PARA IGNORAR CLASSES IGUAIS A DEFINIDA

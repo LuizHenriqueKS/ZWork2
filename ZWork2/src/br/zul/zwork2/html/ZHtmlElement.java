@@ -2,6 +2,7 @@ package br.zul.zwork2.html;
 
 import br.zul.zwork2.log.ZLogger;
 import br.zul.zwork2.xml.*;
+import java.util.List;
 
 /**
  *
@@ -13,6 +14,7 @@ public abstract class ZHtmlElement {
     //VARIÁVEIS PRIVADAS
     //==========================================================================
     private ZHtmlTag parent;
+    private ZHtml html;
     
     //==========================================================================
     //MÉTODOS PÚBLICOS ESTÁTICOS
@@ -64,6 +66,17 @@ public abstract class ZHtmlElement {
         return isType(ZHtmlElementType.TAG);
     }
     
+    public Integer getIndex(){
+        if (getParent()==null){
+            if (getHtml()==null){
+                return null;
+            }
+            return getHtml().listElements().indexOf(this);
+        } else {
+            return getParent().listElements().indexOf(this);
+        }
+    }
+    
     //==========================================================================
     //GETTERS E SETTERS
     //==========================================================================
@@ -72,6 +85,13 @@ public abstract class ZHtmlElement {
     }
     public void setParent(ZHtmlTag parent) {
         this.parent = parent;
+    }
+
+    public ZHtml getHtml() {
+        return html;
+    }
+    public void setHtml(ZHtml html) {
+        this.html = html;
     }
 
 }

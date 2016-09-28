@@ -1,4 +1,4 @@
-package br.zul.zwork2.util;
+package br.zul.zwork2.filter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -12,7 +12,7 @@ import java.util.Map;
  * @param <K> Classe da chave
  * @param <V> Classe do valor
  */
-public abstract class ZFilter<K,V> {
+public abstract class ZListFilter<K,V> {
     
     public abstract boolean filter(K key,V value);
     

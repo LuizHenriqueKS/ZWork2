@@ -4,20 +4,20 @@ import br.zul.zwork2.reflection.ZClass;
 import br.zul.zwork2.reflection.ZPackage;
 import br.zul.zwork2.test.ZCustomTest;
 import br.zul.zwork2.test.ZMultipleTests;
-import br.zul.zwork2.test.basic.xml.ZXmlTest1;
+import br.zul.zwork2.test.basic.html.ZHtmlTest1;
 import java.util.List;
 
 /**
  *
  * @author Luiz Henrique
  */
-public class ZXmlTests extends ZMultipleTests {
+public class ZHtmlTests extends ZMultipleTests {
 
     @Override
     public void loadListTests(List<ZCustomTest> listTests) {
         
         //OBTEM O PACOTE ONDE ESTÃO OS TESTES DO OBJETO A TESTAR
-        ZPackage pack = new ZPackage(getClass(),ZXmlTest1.class.getPackage()); //AQUI É ONDE ESTÁ TODOS OS TESTES DE INJEÇÕES
+        ZPackage pack = new ZPackage(getClass(),ZHtmlTest1.class.getPackage()); //AQUI É ONDE ESTÁ TODOS OS TESTES DE INJEÇÕES
         
         //LISTA AS CLASSES DO PACOTE
         List<ZClass> classes = pack.listClasses(true,ZCustomTest.class,true);
@@ -32,7 +32,7 @@ public class ZXmlTests extends ZMultipleTests {
 
     @Override
     public String getTestName() {
-        return "manipulador de xml";
+        return "manipulador de html";
     }
     
 }

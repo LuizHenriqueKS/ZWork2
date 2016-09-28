@@ -215,3 +215,56 @@ Kafer</font>
 20/09/2016 17:11:39 - WARNING - br.zul.zwork2.test.ZTestManager.printExpectedResult(ZCustomTest test, ZIndividualTestResult r):[br.zul.zwork2.test.basic.xml.ZXmlTest1]Montando um xml ... Falhou!
 20/09/2016 17:11:39 - WARNING - br.zul.zwork2.test.ZTestManager.printExpectedResult(ZCustomTest test, ZIndividualTestResult r):Resultado esperado: Luiz<b>Henrique</b><fontname='Arial'>Kafer</font>
 Resultado obtido: Luiz<b>Henrique</b><fontname="Arial">Kafer</font>
+22/09/2016 15:15:09 - WARNING - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):FALHOU!
+22/09/2016 15:15:09 - WARNING - br.zul.zwork2.test.ZTestManager.printExpectedResult(ZCustomTest test, ZIndividualTestResult r):[br.zul.zwork2.test.basic.html.ZHtmlTest2]iterator html ... Falhou!
+22/09/2016 15:15:09 - WARNING - br.zul.zwork2.test.ZTestManager.printExpectedResult(ZCustomTest test, ZIndividualTestResult r):Resultado esperado: a
+b
+c
+d
+
+Resultado obtido: 
+22/09/2016 15:15:28 - WARNING - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):FALHOU!
+22/09/2016 15:15:28 - WARNING - br.zul.zwork2.test.ZTestManager.printExpectedResult(ZCustomTest test, ZIndividualTestResult r):[br.zul.zwork2.test.basic.html.ZHtmlTest2]iterator html ... Falhou!
+22/09/2016 15:15:28 - WARNING - br.zul.zwork2.test.ZTestManager.printExpectedResult(ZCustomTest test, ZIndividualTestResult r):Resultado esperado: a
+b
+c
+d
+
+Resultado obtido: 
+22/09/2016 15:15:40 - WARNING - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):FALHOU!
+22/09/2016 15:15:40 - WARNING - br.zul.zwork2.test.ZTestManager.printExpectedResult(ZCustomTest test, ZIndividualTestResult r):[br.zul.zwork2.test.basic.html.ZHtmlTest2]iterator html ... Falhou!
+22/09/2016 15:15:40 - WARNING - br.zul.zwork2.test.ZTestManager.printExpectedResult(ZCustomTest test, ZIndividualTestResult r):Resultado esperado: a
+b
+c
+d
+
+Resultado obtido: 
+22/09/2016 15:17:11 - WARNING - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):FALHOU!
+22/09/2016 15:17:11 - WARNING - br.zul.zwork2.test.ZTestManager.printExpectedResult(ZCustomTest test, ZIndividualTestResult r):[br.zul.zwork2.test.basic.html.ZHtmlTest2]iterator html ... Falhou!
+22/09/2016 15:23:05 - WARNING - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):FALHOU!
+22/09/2016 15:23:05 - WARNING - br.zul.zwork2.test.ZTestManager.printExpectedResult(ZCustomTest test, ZIndividualTestResult r):[br.zul.zwork2.test.basic.html.ZHtmlTest2]iterator html ... Falhou!
+22/09/2016 15:23:05 - WARNING - br.zul.zwork2.test.ZTestManager.printExpectedResult(ZCustomTest test, ZIndividualTestResult r):Resultado esperado: a
+b
+c
+d
+
+Resultado obtido: a
+
+23/09/2016 09:18:47 - WARNING - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):FALHOU!
+23/09/2016 09:18:47 - WARNING - br.zul.zwork2.test.ZTestManager.printExpectedResult(ZCustomTest test, ZIndividualTestResult r):[br.zul.zwork2.test.basic.html.ZHtmlTest2]iterator html ... Falhou!
+23/09/2016 09:18:47 - WARNING - br.zul.zwork2.test.ZTestManager.printExpectedResult(ZCustomTest test, ZIndividualTestResult r):Resultado esperado: a
+b
+c
+d
+
+Resultado obtido: a
+
+27/09/2016 09:44:23 - WARNING - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):FALHOU!
+27/09/2016 09:44:23 - WARNING - br.zul.zwork2.test.ZTestManager.printExpectedResult(ZCustomTest test, ZIndividualTestResult r):[br.zul.zwork2.test.basic.html.ZHtmlTest2]iterator html ... Falhou!
+27/09/2016 09:44:23 - WARNING - br.zul.zwork2.test.ZTestManager.printExpectedResult(ZCustomTest test, ZIndividualTestResult r):Resultado esperado: a
+b
+c
+d
+
+Resultado obtido: a
+

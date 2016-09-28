@@ -27,10 +27,12 @@ public class ZHtmlTag extends ZHtmlElement {
         this.tagName = "undefined";
         this.attributesMap = new HashMap<>();
         this.elementList = new ArrayList<>();
+        init();
     }
 
     public ZHtmlTag(String html) {
         this(new ZXmlTag(html));
+        init();
     }
     
     public ZHtmlTag(ZXmlTag xmlTag){
@@ -40,6 +42,17 @@ public class ZHtmlTag extends ZHtmlElement {
         
         for (ZXmlElement element:xmlTag.listElements()){
             this.elementList.add(ZHtmlElement.parseElement(element));
+        }
+        init();
+    }
+    
+    //==========================================================================
+    //MÉTODOS DE CONSTRUÇÃO
+    //==========================================================================
+    private void init(){
+        for (ZHtmlElement element:elementList){
+            element.setHtml(getHtml());
+            element.setParent(this);
         }
     }
 
@@ -139,13 +152,18 @@ public class ZHtmlTag extends ZHtmlElement {
     public void addElement(ZHtmlElement element) {
         elementList.add(element);
         element.setParent(this);
+        element.setHtml(getHtml());
     }
 
     public void removeElement(ZHtmlElement element) {
+        element.setParent(null);
+        element.setHtml(null);
         elementList.remove(element);
     }
 
     public void removeElement(int index) {
+        elementList.get(index).setParent(null);
+        elementList.get(index).setHtml(null);
         elementList.remove(index);
     }
 
