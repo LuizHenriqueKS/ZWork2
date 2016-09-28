@@ -9,23 +9,18 @@ public class ZDBJoin {
     //==========================================================================
     //VARIÁVEIS PRIVADAS
     //==========================================================================
-    private final String name;
     private final ZDBQuery query;
     
     //==========================================================================
     //CONSTRUTORES
     //==========================================================================
-    public ZDBJoin(String name, ZDBQuery query) {
-        this.name = name;
+    public ZDBJoin(ZDBQuery query) {
         this.query = query;
     }
     
     //==========================================================================
     //GETTERS E SETTERS
     //==========================================================================
-    public String getName() {
-        return name;
-    }
     public ZDBQuery getQuery() {
         return query;
     }

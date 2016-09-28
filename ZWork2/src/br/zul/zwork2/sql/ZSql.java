@@ -15,7 +15,7 @@ public class ZSql {
     //==========================================================================
     private String tableName;
     private List<String> columnList;
-    private List<String> leftJoinList;
+    private List<String> joinList;
     private List<String> conditionList;
     private List<ZSqlOrderBy> orderByList;
     private List<String> havingList;
@@ -63,23 +63,23 @@ public class ZSql {
     //MÉTODOS PARA LEFT JOINS
     //==========================================================================
     /**
-     * Ex: addLeftJoin("LEFT JOIN Table AS t ON t.id = ;idT");
+     * Ex: addJoin("LEFT JOIN Table AS t ON t.id = ;idT");
      *
-     * @param leftJoin
+     * @param join
      * @return
      */
-    public ZSql addLeftJoin(String leftJoin) {
-        this.leftJoinList.add(leftJoin);
+    public ZSql addJoin(String join) {
+        this.joinList.add(join);
         return this;
     }
 
-    public ZSql removeLeftJoin(String leftJoin) {
-        this.leftJoinList.remove(leftJoin);
+    public ZSql removeJoin(String join) {
+        this.joinList.remove(join);
         return this;
     }
 
-    public ZSql clearLeftJoins() {
-        leftJoinList.clear();
+    public ZSql clearJoins() {
+        joinList.clear();
         return this;
     }
 
@@ -213,9 +213,9 @@ public class ZSql {
         sql.append(" FROM ");
         sql.append(tableName);
         sql.append(" \r\n ");
-        //ADICIONA OS NOVOS LEFT JOINS
-        for (String leftJoin : leftJoinList) {
-            sql.append(leftJoin);
+        //ADICIONA OS NOVOS JOINS
+        for (String join : joinList) {
+            sql.append(join);
             sql.append(" \r\n ");
         }
         //ADICIONA AS CONDIÇÕES SE TIVER

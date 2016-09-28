@@ -24,8 +24,8 @@ public class ZDBSelect extends ZDBQuery {
     //==========================================================================
     //CONSTRUTORES
     //==========================================================================
-    public ZDBSelect(String name) {
-        super(name);
+    public ZDBSelect(String name,String alias) {
+        super(name,alias);
         this.selectionList = new ArrayList<>();
         this.joinList = new ArrayList<>();
         this.orderByList = new ArrayList<>();
@@ -45,12 +45,22 @@ public class ZDBSelect extends ZDBQuery {
     }
     
     public ZDBSelect removeSelection(String selection){
-        
+        for (ZDBSelection s:selectionList){
+            if (s instanceof ZDBSelectionNormal&&s.getName().equals(selection)){
+                selectionList.remove(s);
+                break;
+            }
+        }
         return this;
     }
     
     public List<ZDBSelection> listSelections(){
         return new ArrayList<>(selectionList);
+    }
+    
+    public ZDBSelect clearSelections(){
+        selectionList.clear();
+        return this;
     }
     
     //==========================================================================
@@ -68,12 +78,11 @@ public class ZDBSelect extends ZDBQuery {
      * Ex:
      *  addJoin("Person",query);
      * 
-     * @param name
      * @param query
      * @return 
      */
-    public ZDBSelect addJoin(String name,ZDBQuery query){
-        ZDBJoin join = new ZDBJoin(name,query);
+    public ZDBSelect addJoin(ZDBQuery query){
+        ZDBJoin join = new ZDBJoin(query);
         this.joinList.add(join);
         return this;
     }
@@ -81,6 +90,10 @@ public class ZDBSelect extends ZDBQuery {
     public ZDBSelect addJoin(ZDBJoin join){
         this.joinList.add(join);
         return this;
+    }
+    
+    public ZDBSelect addLeftJoin(ZDBQuery query){
+        return addJoin(new ZDBLeftJoin(query));
     }
    
     public ZDBSelect removeJoin(ZDBJoin join){

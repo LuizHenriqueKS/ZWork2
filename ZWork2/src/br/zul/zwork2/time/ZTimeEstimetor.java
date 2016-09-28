@@ -9,12 +9,12 @@ import java.util.Map;
  *
  * @author luiz.silva
  */
-public class TimeEstimetor {
+public class ZTimeEstimetor {
 
     private final long start;
     private final long progressTotal;
 
-    public TimeEstimetor(long progressTotal) {
+    public ZTimeEstimetor(long progressTotal) {
         this.start = System.currentTimeMillis();
         this.progressTotal = progressTotal;
     }

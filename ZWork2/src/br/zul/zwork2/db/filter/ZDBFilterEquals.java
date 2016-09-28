@@ -10,21 +10,20 @@ public class ZDBFilterEquals extends ZDBFilter {
     //GETTERS E SETTERS
     //==========================================================================
     private Object value;
+    private boolean parameter;
     
     //==========================================================================
     //CONSTRUTORES
     //==========================================================================
-    public ZDBFilterEquals(Object value,String... name){
+    public ZDBFilterEquals(boolean parameter,Object value,String... name){
         super(name);
+        this.value = value;
+        this.parameter = parameter;
     }
    
     //==========================================================================
     //MÉTODOS PÚBLICOS SOBRESCRITOS
     //==========================================================================
-    @Override
-    public ZDBFilterType getType() {
-        return ZDBFilterType.EQUALS;
-    }
     
     //==========================================================================
     //GETTERS E SETTERS
@@ -34,6 +33,13 @@ public class ZDBFilterEquals extends ZDBFilter {
     }
     public void setValue(Object value) {
         this.value = value;
+    }
+
+    public boolean isParameter() {
+        return parameter;
+    }
+    public void setParameter(boolean parameter) {
+        this.parameter = parameter;
     }
     
 }

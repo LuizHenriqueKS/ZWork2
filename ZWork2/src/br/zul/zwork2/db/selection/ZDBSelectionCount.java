@@ -4,15 +4,15 @@ package br.zul.zwork2.db.selection;
  *
  * @author Luiz Henrique
  */
-public class ZDBSelectionNormal extends ZDBSelection{
+public class ZDBSelectionCount extends ZDBSelection{
 
-    public ZDBSelectionNormal(String... name){
+    public ZDBSelectionCount(String... name){
         super(name);
     }
     
     @Override
     public String toString() {
-        return getName();
+        return String.format("COUNT(%s)",getName());
     }
     
 }

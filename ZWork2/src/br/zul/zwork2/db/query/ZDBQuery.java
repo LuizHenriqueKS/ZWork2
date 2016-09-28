@@ -15,12 +15,14 @@ public class ZDBQuery {
     //==========================================================================
     private final List<ZDBFilter> filterList;
     private String name;
+    private String alias;
     
     //==========================================================================
     //CONSTRUTORES
     //==========================================================================
-    public ZDBQuery(String name){
+    public ZDBQuery(String name,String alias){
         this.name = name;
+        this.alias = alias;
         this.filterList = new ArrayList<>();
     }
     
@@ -77,6 +79,13 @@ public class ZDBQuery {
     public ZDBQuery setName(String name) {
         this.name = name;
         return this;
+    }
+
+    public String getAlias() {
+        return alias;
+    }
+    public void setAlias(String alias) {
+        this.alias = alias;
     }
     
 }

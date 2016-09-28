@@ -28,8 +28,6 @@ public abstract class ZDBSelection {
     @Override
     public abstract String toString();
     
-    public abstract ZDBSelectionType getType();
-    
     //==========================================================================
     //MÉTODOS PÚBLICOS SOBESCRITOS
     //==========================================================================
