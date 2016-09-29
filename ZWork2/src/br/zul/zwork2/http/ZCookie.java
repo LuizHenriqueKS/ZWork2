@@ -36,7 +36,7 @@ public class ZCookie {
     //==========================================================================
     //MÉTODOS CONSTRUTORES
     //==========================================================================
-    public void init(String code){
+    private void init(String code){
         ZLogger logger = new ZLogger(getClass(),"init(String code)"); 
         ZString zs = new ZString(code,false);
         if (zs.startsWith("Set-Cookie:")){
@@ -49,17 +49,18 @@ public class ZCookie {
         this.secure = false;
         for (int i=1;i<nameAndValue.length;i++){
             nameAndValue = part[i].split("=");
-            if (nameAndValue[0].equals("Expires")){
+            String name = nameAndValue[0].toString().toLowerCase().trim();
+            if (name.equals("expires")){
                 try {
                     expires = new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss z").parse(nameAndValue[1].toString());
                 } catch (ParseException ex) {
                     throw logger.error.prepareException(ex);
                 }
-            } else if (nameAndValue[0].equals("Path")){
+            } else if (name.equals("path")){
                 path = nameAndValue[1].toString();
-            } else if (nameAndValue[0].equals("Domain")){
+            } else if (name.equals("domain")){
                 domain = nameAndValue[1].toString();
-            } else if (nameAndValue[0].equals("secure")){
+            } else if (name.equals("secure")){
                 secure = true;
             }
         }

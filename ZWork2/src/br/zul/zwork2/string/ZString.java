@@ -1,5 +1,6 @@
 package br.zul.zwork2.string;
 
+import br.zul.zwork2.util.ZStringUtils;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,11 +54,52 @@ import java.util.List;
         return new ZString(string.trim(),caseSensitive);
     }
     
+    public ZString normalize(){
+        return new ZString(ZStringUtils.removeAccents(string),caseSensitive);
+    }
+    
+    /**
+     * Alias normalize();
+     * @return 
+     */
+    public ZString removeAccents(){
+        return normalize();
+    }
+    
     @Override
     public String toString(){
         return string;
     }
-      //==========================================================================
+    
+    public ZString remove(String pattern){
+        ZString[] part = split(pattern);
+        StringBuilder builder = new StringBuilder();
+        for (ZString p:part){
+            builder.append(p.toString());
+        }
+        return new ZString(builder.toString(),caseSensitive);
+    }
+    
+    //==========================================================================
+    //MÉTODOS DE CONVERSÃO
+    //==========================================================================
+    public Integer asInteger(){
+        return Integer.valueOf(string);
+    }
+    
+    public Float asFloat(){
+        return Float.valueOf(string);
+    }
+    
+    public Long asLong(){
+        return Long.valueOf(string);
+    }
+    
+    public String asString(){
+        return string;
+    }
+    
+    //==========================================================================
     //MÉTODOS SEARCH
     //==========================================================================
     public ZStringSearch search(String[] patterns,String[] patternsToAvoid,ZStringSearchType type){

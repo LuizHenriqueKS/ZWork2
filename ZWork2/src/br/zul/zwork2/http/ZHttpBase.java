@@ -52,7 +52,7 @@ public class ZHttpBase {
             }
             conn.setInstanceFollowRedirects(instanceFollowRedirects);
             conn.setUseCaches( false );
-            if (cookieManager!=null&&!cookieManager.hasCookies()){
+            if (cookieManager!=null&&cookieManager.hasCookies()){
                 conn.setRequestProperty("Cookie", cookieManager.getCookiesText());
             }
             return conn;

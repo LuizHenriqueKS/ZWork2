@@ -1,45 +1,47 @@
 package br.zul.zwork2.db.filter;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 /**
  *
  * @author Luiz Henrique
  */
-public class ZDBFilterEquals extends ZDBFilter {
+public class ZDBFiltersOr extends ZDBFilter {
     
     //==========================================================================
-    //VARIAVEIS PRIVADAS
+    //VARIÁVEIS PRIVADAS
     //==========================================================================
-    private Object value;
-    private boolean parameter;
+    private final List<ZDBFilter> filterList;
     
     //==========================================================================
     //CONSTRUTORES
     //==========================================================================
-    public ZDBFilterEquals(boolean parameter,Object value,String... name){
-        super(name);
-        this.value = value;
-        this.parameter = parameter;
+    public ZDBFiltersOr(){
+        super("OR");
+        this.filterList = new ArrayList<>();
     }
    
     //==========================================================================
-    //MÉTODOS PÚBLICOS SOBRESCRITOS
+    //MÉTODOS PÚBLICOS
     //==========================================================================
+    public ZDBFiltersOr addFilter(ZDBFilter filter){
+        this.filterList.add(filter);
+        return this;
+    }
+    
+    public ZDBFiltersOr removeFilter(ZDBFilter filter){
+        this.filterList.remove(filter);
+        return this;
+    }
+    
+    public List<ZDBFilter> listFilters(){
+        return Collections.unmodifiableList(filterList);
+    }
     
     //==========================================================================
     //GETTERS E SETTERS
     //==========================================================================
-    public Object getValue() {
-        return value;
-    }
-    public void setValue(Object value) {
-        this.value = value;
-    }
-
-    public boolean isParameter() {
-        return parameter;
-    }
-    public void setParameter(boolean parameter) {
-        this.parameter = parameter;
-    }
     
 }

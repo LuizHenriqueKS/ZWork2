@@ -6,8 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -89,7 +87,7 @@ public class ZSqlDBResult extends ZDBResult {
     public List<String> listNames() {
         try {
             List<String> result = new ArrayList<>();
-            for (int i=0;i<rs.getMetaData().getColumnCount();i++){
+            for (int i=1;i<=rs.getMetaData().getColumnCount();i++){
                 result.add(rs.getMetaData().getColumnName(i));
             }
             return result;

@@ -34,8 +34,11 @@ public class ZCookieManager {
     
     public int indexOf(String cookieName){
         for (int i=0;i<cookieList.size();i++){
-            if (cookieName.equals(cookieList.get(i).getName())){
-                return i;
+            try{
+                if (cookieName.equals(cookieList.get(i).getName())){
+                    return i;
+                }
+            }catch(Exception e){
             }
         }
         return -1;
@@ -84,7 +87,9 @@ public class ZCookieManager {
     }
     
     public void putCookies(List<ZCookie> cookieList){
-        cookieList.addAll(cookieList);
+       for (ZCookie cookie:cookieList){
+           putCookie(cookie);
+       }
     }
     
 }

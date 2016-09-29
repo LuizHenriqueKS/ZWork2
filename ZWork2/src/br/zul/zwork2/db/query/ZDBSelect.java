@@ -144,6 +144,11 @@ public class ZDBSelect extends ZDBQuery {
         return new ArrayList<>(orderByList);
     }
     
+    public ZDBSelect clearOrderBys(){
+        orderByList.clear();
+        return this;
+    }
+    
     //==========================================================================
     //GETTERS E STTERS
     //==========================================================================

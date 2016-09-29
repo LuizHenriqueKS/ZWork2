@@ -1,6 +1,5 @@
 package br.zul.zwork2.http;
 
-import br.zul.zwork2.io.ZGzip;
 import br.zul.zwork2.log.ZLogger;
 import br.zul.zwork2.string.ZString;
 import java.io.BufferedReader;
@@ -9,6 +8,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -80,7 +80,7 @@ public class ZHttpResponse {
     //==========================================================================
     //MÉTODOS PÚBLICOS
     //==========================================================================
-    public String getResponseText() {
+    public String getResponseText(String charset) {
         ZLogger logger = new ZLogger(getClass(), "getResponseText()");
         try {
 
@@ -92,10 +92,10 @@ public class ZHttpResponse {
                 while ((length = bodyStream.read(buffer)) > 0) {
                     outStream.write(buffer, 0, length);
                 }
-                return new String(outStream.toByteArray(), StandardCharsets.UTF_8);
+                return new String(outStream.toByteArray(), charset);
             } else {
                 StringBuilder response = new StringBuilder();
-                BufferedReader br = new BufferedReader(new InputStreamReader(getInputStream(), StandardCharsets.UTF_8));
+                BufferedReader br = new BufferedReader(new InputStreamReader(getInputStream(), charset));
                 String line;
                 while ((line = br.readLine()) != null) {
                     response.append(line);
@@ -106,6 +106,16 @@ public class ZHttpResponse {
         } catch (IOException ex) {
             throw logger.error.prepareException(ex);
         }
+    }
+    
+    public String getResponseText(){
+        String charset = "UTF-8";
+        for (String contentType:responsePropertyMap.get("Content-Type")){
+            if (contentType.contains("charset")){
+                charset = new ZString(contentType,false).fromLeft("charset=").toLeft(";").asString();
+            } 
+        }
+        return getResponseText(charset);
     }
 
     public ZString getResponseZText(boolean caseSensitive) {
@@ -123,7 +133,16 @@ public class ZHttpResponse {
     //MÉTODOS PÚBLICOS PARA COOKIES
     //==========================================================================
     public List<ZCookie> listCookies() {
-        return null;
+        List<String> cookieList = responsePropertyMap.get("Set-Cookie");
+        List<ZCookie> result = new ArrayList<>();
+        if (cookieList==null){
+            return result;
+        }
+        for (String cookieStr:cookieList){
+            ZCookie cookie = new ZCookie(cookieStr);
+            result.add(cookie);
+        }
+        return result;
     }
 
     public Map<String, List<String>> responsePropertyMap() {

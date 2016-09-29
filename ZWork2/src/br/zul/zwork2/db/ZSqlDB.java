@@ -2,6 +2,9 @@ package br.zul.zwork2.db;
 
 import br.zul.zwork2.db.filter.ZDBFilter;
 import br.zul.zwork2.db.filter.ZDBFilterEquals;
+import br.zul.zwork2.db.filter.ZDBFilterIsTrue;
+import br.zul.zwork2.db.filter.ZDBFiltersAnd;
+import br.zul.zwork2.db.filter.ZDBFiltersOr;
 import br.zul.zwork2.db.query.ZDBJoin;
 import br.zul.zwork2.db.query.ZDBLeftJoin;
 import br.zul.zwork2.db.query.ZDBOrderBy;
@@ -16,6 +19,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -35,17 +40,18 @@ public abstract class ZSqlDB extends ZDB {
     //==========================================================================
     //CONSTRUTORES
     //==========================================================================
-    public ZSqlDB(String host,Integer port,String dataBaseName){
+    public ZSqlDB(String host, Integer port, String dataBaseName) {
         this.host = host;
         this.port = port;
+        this.dataBaseName = dataBaseName;
     }
-    
+
     //==========================================================================
     //MÉTODOS PÚBLICOS ABSTRATOS
     //==========================================================================
     public abstract String getDriverClassName();
 
-    public abstract String getConnectionUrl(String host, Integer port,String dataBaseName);
+    public abstract String getConnectionUrl(String host, Integer port, String dataBaseName);
 
     public abstract String filterToConditionCustom(ZDBFilter filter);
 
@@ -58,18 +64,20 @@ public abstract class ZSqlDB extends ZDB {
         ZLogger logger = new ZLogger(getClass(), "connect()");
         try {
             //CARREGA O CLASSE DO DRIVE PARA CONECTAR COM O BANCO
-            if (getDriverClassName()!=null){
+            if (getDriverClassName() != null) {
                 Class.forName(getDriverClassName());
             }
             //VERIFICA SE TEM AS INFORMAÇÕES PARA ISSO
             if (connectionUrl != null) {
                 //TENTA CONECTAR COM O BANCO
                 connection = DriverManager.getConnection(connectionUrl, getUsername(), getPassword());
+                return;
             } else if (host != null && port != null) {
                 //MONTA O URL DE CONEXÃO
                 String url = getConnectionUrl(host, port, dataBaseName);
                 //TENTA CONECTAR COM O BANCO
                 connection = DriverManager.getConnection(url, getUsername(), getPassword());
+                return;
             }
             //SE CHEGOU AQUI É PORQUE NÃO TEM AS INFORMAÇÕES NECESSÁRIAS
             throw logger.error.prepareException("Não foi informado o url de conexão ou o host e senha para se conectar ao banco de dados!");
@@ -111,21 +119,21 @@ public abstract class ZSqlDB extends ZDB {
     private boolean setValue(int index, PreparedStatement ps, ZDBFilter filter) {
         Object value = null;
         if (filter instanceof ZDBFilterEquals) {
-            if (((ZDBFilterEquals) filter).isParameter()){
+            if (((ZDBFilterEquals) filter).isParameter()) {
                 value = ((ZDBFilterEquals) filter).getValue();
             }
         }
         //SE TEM VALOR A SER SETADO (AS VEZES PODE SER UM FILTRO QUE NÃO PRECISE SETAR VALOR)
         if (value != null) {
-            setValue(index,ps, filter);
+            setValue(index, ps, filter);
             return true;
         }
-        
+
         return false;
     }
 
     public void setValue(int index, PreparedStatement ps, Object obj) {
-        ZLogger logger = new ZLogger(getClass(),"setValue(int index, PreparedStatement ps, Object obj)");
+        ZLogger logger = new ZLogger(getClass(), "setValue(int index, PreparedStatement ps, Object obj)");
         try {
             //String
             if (obj instanceof String) {
@@ -133,32 +141,38 @@ public abstract class ZSqlDB extends ZDB {
                 return;
             }
             //SE CHEGOU AQUI, É PORQUE NÃO FOI PROGRAMADO PARA PASSAR ESSA VARIAVEL
-            throw logger.error.prepareException("Não foi programado para setar esse tipo de objeto '%s' no statement!",obj.getClass().getName());
+            throw logger.error.prepareException("Não foi programado para setar esse tipo de objeto '%s' no statement!", obj.getClass().getName());
         } catch (SQLException ex) {
             throw logger.error.prepareException(ex);
         }
 
     }
-    
-    public String filterToCondition(ZDBFilter filter){
-        
+
+    public String filterToCondition(ZDBFilter filter) {
+
         String result = filterToConditionCustom(filter);
-        
-        if (!ZStringUtils.isEmpty(result)){
+
+        if (!ZStringUtils.isEmpty(result)) {
             return result;
         }
-        
-        if (filter instanceof ZDBFilterEquals){
-            if (((ZDBFilterEquals) filter).isParameter()){
-                return String.format("%s = ?",filter.getName());
+
+        if (filter instanceof ZDBFilterEquals) {
+            if (((ZDBFilterEquals) filter).isParameter()) {
+                return String.format("%s = ?", filter.getName());
             } else {
-                return String.format("%s = %s",filter.getName(),((ZDBFilterEquals) filter).getValue().toString());
+                return String.format("%s = %s", filter.getName(), ((ZDBFilterEquals) filter).getValue().toString());
             }
+        } else if (filter instanceof ZDBFilterIsTrue) {
+            return filter.getName();
+        } else if (filter instanceof ZDBFiltersOr) {
+            return filtersToCondition(filter,"OR");
+        } else if (filter instanceof ZDBFiltersAnd) {
+            return filtersToCondition(filter,"AND");
         }
-        
-        ZLogger logger = new ZLogger(getClass(),"filterToCondition(ZDBFilter filter)");
-        throw logger.error.prepareException("Não foi programado o filtro '%s'!",filter.getClass().getName());
-        
+
+        ZLogger logger = new ZLogger(getClass(), "filterToCondition(ZDBFilter filter)");
+        throw logger.error.prepareException("Não foi programado o filtro '%s'!", filter.getClass().getName());
+
     }
 
     //==========================================================================
@@ -173,42 +187,45 @@ public abstract class ZSqlDB extends ZDB {
         if (query instanceof ZDBSelect) {
             select = (ZDBSelect) query;
         } else {
-            select = new ZDBSelect(query.getName(),query.getAlias());
+            select = new ZDBSelect(query.getName(), query.getAlias());
             select.copyFiltersFrom(query);
         }
         //MONTA O SQL
         ZSql sql = getSql(query);
+        String sqlStr = sql.getSelectSql();
         //PASSA OS PARAMETROS
         try {
             //PREPARA O STATAMENT
-            PreparedStatement ps = getConnection().prepareStatement(sql.getSelectSql());
+            connect();
+
+            PreparedStatement ps = connection.prepareStatement(sqlStr, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             int index = 0;
             //PASSA O PARAMETRO
             for (ZDBFilter filter : select.listFilters()) {
-                if (setValue(index, ps, filter)){
+                if (setValue(index, ps, filter)) {
                     index++;
                 }
             }
             //RETORNA O RESULTADO
             ResultSet rs = ps.executeQuery();
-            return new ZSqlDBResult(ps,rs);
+            return new ZSqlDBResult(ps, rs);
         } catch (SQLException ex) {
-            throw logger.error.prepareException(ex);
+            throw logger.error.prepareException(ex, "Sql: %s", sqlStr);
         }
     }
-    
-    public ZSql getSql(ZDBQuery query){
+
+    public ZSql getSql(ZDBQuery query) {
         //PREPARA PARA FAZER A SELAÇÃO
         ZDBSelect select;
         //OBTEM OU MONTA A SELEÇÃO
         if (query instanceof ZDBSelect) {
             select = (ZDBSelect) query;
         } else {
-            select = new ZDBSelect(query.getName(),query.getAlias());
+            select = new ZDBSelect(query.getName(), query.getAlias());
             select.copyFiltersFrom(query);
         }
         //MONTA O SQL
-        ZSql sql = new ZSql(select.getName()+" "+select.getAlias());
+        ZSql sql = new ZSql(select.getName() + " " + select.getAlias());
         //PASSA AS COLUNAS DA SELAÇÃO
         for (ZDBSelection selection : select.listSelections()) {
             sql.addColumn(selection.toString());
@@ -216,7 +233,7 @@ public abstract class ZSqlDB extends ZDB {
         //PASSA OS JOINS
         for (ZDBJoin join : select.listJoins()) {
             StringBuilder joinBuilder = new StringBuilder();
-            if (join instanceof ZDBLeftJoin){
+            if (join instanceof ZDBLeftJoin) {
                 joinBuilder.append("LEFT JOIN ");
             } else {
                 joinBuilder.append("JOIN ");
@@ -229,7 +246,7 @@ public abstract class ZSqlDB extends ZDB {
             for (ZDBFilter filter : join.getQuery().listFilters()) {
                 subSql.addCondition(filterToCondition(filter));
             }
-            joinBuilder.append(subSql.getWhereSql());
+            joinBuilder.append(subSql.getWhereSql().substring("WHERE ".length()));
             sql.addJoin(joinBuilder.toString());
         }
         //PASSA O GROUP BY
@@ -244,9 +261,44 @@ public abstract class ZSqlDB extends ZDB {
         for (ZDBFilter filter : select.listFilters()) {
             sql.addCondition(filterToCondition(filter));
         }
+        //PASSA O LIMIT E OFFSET
+        sql.setOffset(select.getOffset());
+        sql.setLimit(select.getLimit());
         return sql;
     }
 
+    //==========================================================================
+    //MÉTODOS PRIVADOS
+    //==========================================================================
+    private String filtersToCondition(ZDBFilter filters,String separator){
+        StringBuilder builder = new StringBuilder();
+        List<ZDBFilter> filterList = new ArrayList<>();
+        
+        if (filters instanceof ZDBFiltersOr){
+            filterList = ((ZDBFiltersOr) filters).listFilters();
+        } else if (filters instanceof ZDBFiltersAnd){
+            filterList = ((ZDBFiltersAnd) filters).listFilters();
+        }
+        
+        boolean first = true;
+        for (ZDBFilter f:filterList){
+            if (!first){
+                builder.append(" ");
+                builder.append(separator);
+                builder.append(" ");
+            }
+            first = false;
+            builder.append(filterToCondition(f));
+        }
+        
+        if (builder.length()>0){
+            builder.insert(0, "(");
+            builder.append(")");
+        }
+        
+        return builder.toString();
+    }
+    
     //==========================================================================
     //GETTERS E SETTERS
     //==========================================================================

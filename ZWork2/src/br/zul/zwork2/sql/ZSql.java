@@ -14,14 +14,14 @@ public class ZSql {
     //VARIÁVEIS PRIVADAS
     //==========================================================================
     private String tableName;
-    private List<String> columnList;
-    private List<String> joinList;
-    private List<String> conditionList;
-    private List<ZSqlOrderBy> orderByList;
-    private List<String> havingList;
-    private List<String> groupByList;
-    private Integer limit;
-    private Integer offset;
+    private final List<String> columnList;
+    private final List<String> joinList;
+    private final List<String> conditionList;
+    private final List<ZSqlOrderBy> orderByList;
+    private final List<String> havingList;
+    private final List<String> groupByList;
+    private Long limit;
+    private Long offset;
     private ZDBType type;
 
     //==========================================================================
@@ -29,6 +29,12 @@ public class ZSql {
     //==========================================================================
     public ZSql(String tableName) {
         this.tableName = tableName;
+        this.columnList = new ArrayList<>();
+        this.joinList = new ArrayList<>();
+        this.conditionList = new ArrayList<>();
+        this.orderByList = new ArrayList<>();
+        this.havingList = new ArrayList<>();
+        this.groupByList = new ArrayList<>();
     }
 
     //==========================================================================
@@ -158,25 +164,25 @@ public class ZSql {
     //==========================================================================
     //MÉTODOS PARA HAVING
     //==========================================================================
-    public ZSql addHaving(String having){
+    public ZSql addHaving(String having) {
         havingList.add(having);
         return this;
     }
-    
-    public ZSql removeHaving(String having){
+
+    public ZSql removeHaving(String having) {
         havingList.remove(having);
         return this;
     }
-    
-    public ZSql clearHavings(){
+
+    public ZSql clearHavings() {
         havingList.clear();
         return this;
     }
-    
-    public List<String> listHavings(){
+
+    public List<String> listHavings() {
         return new ArrayList<>(havingList);
     }
-    
+
     //==========================================================================
     //MÉTODOS PARA MONTAR O SQL
     //==========================================================================
@@ -208,6 +214,15 @@ public class ZSql {
         if (columnList.isEmpty()) {
             //SE NÃO FOI INFORMADO QUAIS COLUNAS RETORNAS, RETORNA TUDO
             sql.append("*");
+        } else {
+            boolean first = true;
+            for (String column:columnList){
+                if (!first){
+                    sql.append(",");
+                }
+                sql.append(column);
+                first = false;
+            }
         }
         //ADICIONA QUAL TABELA BUSCAR
         sql.append(" FROM ");
@@ -246,7 +261,7 @@ public class ZSql {
                     sql.append(", ");
                 }
                 sql.append(orderBy.getColumn());
-                if (!orderBy.isAscending()){
+                if (!orderBy.isAscending()) {
                     sql.append(" DESC");
                 }
                 addComma = true;
@@ -259,7 +274,7 @@ public class ZSql {
             sql.append(" HAVING ");
             boolean addComma = false;
             //ADICIONO AS COLUNAS HAVING
-            for (String having:havingList) {
+            for (String having : havingList) {
                 if (addComma) {
                     sql.append(", ");
                 }
@@ -267,6 +282,14 @@ public class ZSql {
                 addComma = true;
             }
             sql.append(" \r\n ");
+        }
+        //ACIONA O OFFSET
+        if (offset!=null){
+            sql.append(String.format(" OFFSET %d\r\n ",offset));
+        }
+        //ACIONA O LIMIT
+        if (limit!=null){
+            sql.append(String.format(" LIMIT %d\r\n ",limit));
         }
         //RETORNA O SQL MONTADO
         return sql.toString();
@@ -283,19 +306,19 @@ public class ZSql {
         this.tableName = tableName;
     }
 
-    public Integer getLimit() {
+    public Long getLimit() {
         return limit;
     }
 
-    public void setLimit(Integer limit) {
+    public void setLimit(Long limit) {
         this.limit = limit;
     }
 
-    public Integer getOffset() {
+    public Long getOffset() {
         return offset;
     }
 
-    public void setOffset(Integer offset) {
+    public void setOffset(Long offset) {
         this.offset = offset;
     }
 
