@@ -2,15 +2,13 @@ package br.zul.zwork2.http;
 
 import br.zul.zwork2.log.ZLogger;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
-import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.zip.GZIPInputStream;
+import java.util.Map.Entry;
 
 /**
  *
@@ -54,6 +52,9 @@ public class ZHttpBase {
             conn.setUseCaches( false );
             if (cookieManager!=null&&cookieManager.hasCookies()){
                 conn.setRequestProperty("Cookie", cookieManager.getCookiesText());
+            }
+            for (Entry<String,String> property:requestPropertyMap.entrySet()){
+                conn.setRequestProperty(property.getKey(), property.getValue());
             }
             return conn;
         }   catch (MalformedURLException | ProtocolException ex) {

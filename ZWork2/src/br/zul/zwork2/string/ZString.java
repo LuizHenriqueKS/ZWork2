@@ -80,6 +80,84 @@ import java.util.List;
         return new ZString(builder.toString(),caseSensitive);
     }
     
+    public int count(String pattern){
+        return split(pattern).length-1;
+    }
+    
+    //==========================================================================
+    //MÉTODOS UPPERCASE
+    //==========================================================================
+    public ZString toUpperCase(){
+        return new ZString(string.toUpperCase(), caseSensitive);
+    }
+    
+    public ZString toUpperCase(int index){
+        char[] array = string.toCharArray();
+        array[index] = (array[index]+"").toUpperCase().toCharArray()[0];
+        return new ZString(new String(array),caseSensitive);
+    }
+    
+    public ZString firstToUpperCase(){
+        return toUpperCase(0);
+    }
+    
+    //==========================================================================
+    //MÉTODOS LOWERCASE
+    //==========================================================================
+    public ZString toLowerCase(){
+        return new ZString(string.toLowerCase(),caseSensitive);
+    }
+    
+    public ZString toLowerCase(int index){
+        char[] array = string.toCharArray();
+        array[index] = (array[index]+"").toLowerCase().toCharArray()[0];
+        return new ZString(new String(array),caseSensitive);
+    }
+    
+    
+    public ZString firstToLowerCase(){
+        return toLowerCase(0);
+    }
+    
+    //==========================================================================
+    //MÉTODOS DE REPLACE
+    //==========================================================================
+    /**
+     * 
+     * Exemplo de uso
+     * 
+     * @param target O que será substituido
+     * @param replacement 
+     * @param limit
+     * @return 
+     */
+    public ZString replace(String target,String replacement, Integer limit){
+        
+        int i = 0;
+        ZString z = this;
+        
+        while (z.contains(target)){
+            ZString newZ = z.toLeft(target);
+            newZ = newZ.appendRight(replacement);
+            newZ = newZ.appendRight(z.fromLeft(target));
+            z = newZ;
+            if (limit!=null&&++i==limit){
+                break;
+            }
+        }
+        
+        return z;
+        
+    }
+    
+    public ZString replace(String target,String replacement){
+        return replace(target,replacement,null);
+    }
+    
+    public ZString replaceFirst(String target,String replacement){
+        return replace(target,replacement,1);
+    }
+    
     //==========================================================================
     //MÉTODOS DE CONVERSÃO
     //==========================================================================

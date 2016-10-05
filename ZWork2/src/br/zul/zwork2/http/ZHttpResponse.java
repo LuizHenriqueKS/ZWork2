@@ -118,7 +118,7 @@ public class ZHttpResponse {
         return getResponseText(charset);
     }
 
-    public ZString getResponseZText(boolean caseSensitive) {
+    public ZString getResponseText(boolean caseSensitive) {
         return new ZString(getResponseText(), caseSensitive);
     }
     
