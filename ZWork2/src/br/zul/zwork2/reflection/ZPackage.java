@@ -42,7 +42,7 @@ public class ZPackage {
     //==========================================================================
     //MÉTODOS PÚBLICAS
     //==========================================================================
-    public String[] listParts(){
+    public List<String> listParts(){
         return this.path.listParts();
     }
     

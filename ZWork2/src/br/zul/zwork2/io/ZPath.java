@@ -4,6 +4,7 @@ import br.zul.zwork2.string.ZString;
 import br.zul.zwork2.util.ZStringUtils;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -21,7 +22,18 @@ public class ZPath {
     //ENUMS
     //==========================================================================
     public enum ZPathPattern{
-        WINDOWS,LINUX,PACKAGE;
+        /**
+         * c:\\br\\com\\package\\example
+         */
+        WINDOWS,
+        /**
+         * /br/com/package/example
+         */
+        LINUX,
+        /**
+         * br.com.package.main
+         */
+        PACKAGE;
     }
     
     //==========================================================================
@@ -67,6 +79,10 @@ public class ZPath {
         }
     }
     
+    public ZPath(ZString path){
+        this(path.asString());
+    }
+    
     public ZPath(Package pack){
         String packPath = pack.toString().substring("package ".length());
         init(packPath,ZPathPattern.PACKAGE);
@@ -75,6 +91,10 @@ public class ZPath {
     public ZPath(String pathParts[],ZPathPattern pattern){
         this.parts = ZStringUtils.convert(pathParts, CASE_SENSITIVE);
         init(pattern);
+    }
+    
+    public ZPath(List<String> partList,ZPathPattern pattern){
+        this(partList.toArray(new String[partList.size()]),pattern);
     }
     
     //==========================================================================
@@ -153,12 +173,12 @@ public class ZPath {
             
             ZPath zp = (ZPath)other;
             //SE O TAMANHO É DIFERENTE QUER DIZER Q NÃO É IGUAL
-            if (zp.listParts().length!=parts.length){
+            if (zp.listParts().size()!=parts.length){
                 return false;
             } else {
                 //VERIFICA SE AS PARTES SÃO IGUAIS
                 for (int i=0;i<parts.length;i++){
-                    if (!parts[i].equals(zp.listParts()[i])){
+                    if (!parts[i].equals(zp.listParts().get(i))){
                         return false; //SE UM NÃO FOR RETORNA FALSE
                     }
                 }
@@ -179,21 +199,29 @@ public class ZPath {
         return hash;
     }
     
-    public String[] listParts(){
-        return ZStringUtils.convert(parts);
+    public List<String> listParts(){
+        return Arrays.asList(ZStringUtils.convert(parts));
     }
     
     public String getLastPart(){
         return parts[parts.length-1].toString();
     }
     
+    public ZString getLastPart(boolean caseSensitive){
+        return new ZString(getLastPart(),caseSensitive);
+    }
+    
     public String getFirstPart(){
         return parts[0].toString();
     }
     
+    public ZString getFirstPartAsZString(boolean caseSensitive){
+        return new ZString(getFirstPart(),caseSensitive);
+    }
+    
     public ZPath getParent(){
         try{
-            String[] parentParts = Arrays.copyOfRange(listParts(), 0, parts.length-1);
+            String[] parentParts = Arrays.copyOfRange(ZStringUtils.convert(parts), 0, parts.length-1);
             return new ZPath(parentParts,pattern);
         }catch(Exception e){
             return null;
