@@ -10,7 +10,7 @@ import java.util.List;
  *
  * @author Luiz Henrique
  */
-public class ZHtmlTest2 extends ZSimpleTest<List<String>> {
+public class ZHtmlTest2 extends ZSimpleTest<String> {
 
    public String getSource(){
        StringBuilder html = new StringBuilder();
@@ -19,39 +19,24 @@ public class ZHtmlTest2 extends ZSimpleTest<List<String>> {
    }
 
     @Override
-    public String convertResultToString(List<String> result) {
-        StringBuilder sb = new StringBuilder();
-        for (String str:result){
-            sb.append(str);
-            sb.append("\r\n");
-        }
-        return sb.toString();
+    public String convertResultToString(String result) {
+        return result.replace("\r\n","").replace(" ","");
     }
 
     @Override
-    public List<String> getResult() {
+    public String getResult() {
         ZHtml html = new ZHtml(getSource());
-        ZHtmlIterator iterator = new ZHtmlIterator(html);
-        List<String> result = new ArrayList<>();
-        while (iterator.next()){
-            result.add(iterator.getValue().asTag().getTagName());
-        }
-        return result;
+        return html.toString();
     }
 
     @Override
-    public List<String> getExpectedResult() {
-        List<String> result = new ArrayList<>();
-        result.add("a");
-        result.add("b");
-        result.add("c");
-        result.add("d");
-        return result;
+    public String getExpectedResult() {
+        return getSource();
     }
 
     @Override
     public String getTestName() {
-        return "iterator html";
+        return "montando um html mais complexo";
     }
     
     

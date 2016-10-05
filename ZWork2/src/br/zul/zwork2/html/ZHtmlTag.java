@@ -102,7 +102,7 @@ public class ZHtmlTag extends ZHtmlElement {
         }
         return xml.toString().trim();
     }
-
+    
     //==========================================================================
     //MÉTODOS PÚBLICOS SOBRESCRITOS
     //==========================================================================
@@ -173,6 +173,10 @@ public class ZHtmlTag extends ZHtmlElement {
 
     public int countElements() {
         return elementList.size();
+    }
+
+    public boolean hasElements(){
+        return !elementList.isEmpty();
     }
 
     //==========================================================================

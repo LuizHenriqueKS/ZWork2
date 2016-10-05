@@ -15,7 +15,7 @@ public class ZKeyList<Key> {
     //==========================================================================
     //VARIÁVEIS PRIVADAS
     //==========================================================================
-    private List<Key> list;
+    private final List<Key> list;
     
     //==========================================================================
     //CONSTRUTORES
@@ -114,10 +114,23 @@ public class ZKeyList<Key> {
             return false;
         }
         final ZKeyList<?> other = (ZKeyList<?>) obj;
-        if (!Objects.equals(this.list, other.list)) {
-            return false;
+        return Objects.equals(this.list, other.list);
+    }
+    
+    @Override
+    public String toString(){
+        StringBuilder result = new StringBuilder();
+        result.append("[");
+        boolean first = true;
+        for (Key key:list){
+            if (!first){
+                result.append(",");
+            }
+            first = false;
+            result.append(key);
         }
-        return true;
+        result.append("]");
+        return result.toString();
     }
     
 }

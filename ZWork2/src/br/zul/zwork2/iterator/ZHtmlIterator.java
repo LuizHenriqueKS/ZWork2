@@ -222,14 +222,24 @@ public class ZHtmlIterator extends ZIterator<ZKeyList<Integer>,ZHtmlElement> {
         List<ZHtmlElement> path = listPath(false);
         key = key.copy();
         do {
-            int k = key.getKey(index)+1;
+            
+            if (step>0){
+                if (path!=null&&!path.isEmpty()&&path.get(0).isTag()){
+                    if (path.get(0).asTag().hasElements()){
+                        key.addKey(path.get(0).asTag().getElement(0).getIndex()-1);
+                        index = key.getLastIndex();
+                    }
+                }
+            }
+            
+            int k = key.getKey(index)+step;
             key.setKey(index,k);
             
             if (step>0){
                 if (index==0&&k>=elementList.size()){
                     state = IteratorState.AFTER_LAST;
                     return false;
-                } else if (index>0&&k>=path.get(p).asTag().countElements()){
+                } else if (index>0&&path!=null&&(!path.get(p).isTag()||k>=path.get(p).asTag().countElements())){
                     index--;
                     p++;
                     key.removeKey(index);
