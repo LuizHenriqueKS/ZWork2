@@ -76,7 +76,7 @@ public class ZXmlTag extends ZXmlElement {
                     tag--;
                     break;
             }
-            if (tag<=0){
+            if (tag<0){
                 z = z.substring(0,search.getResult().getEndIndex()-1);
                 break;
             }

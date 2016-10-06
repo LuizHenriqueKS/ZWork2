@@ -346,3 +346,30 @@ Caused by: java.lang.NullPointerException
 	at br.zul.zwork2.main.Main.main(Main.java:27)
 05/10/2016 11:52:07 - ERROR - br.zul.zwork2.main.Main.main(String[] args):Quantidade de testes que falharam: 1
 05/10/2016 15:18:38 - ERROR - br.zul.zwork2.main.Main.main(String[] args):Quantidade de testes que falharam: 1
+06/10/2016 14:13:55 - ERROR - br.zul.zwork2.main.Main.main(String[] args):Quantidade de testes que falharam: 1
+06/10/2016 16:16:52 - ERROR - br.zul.zwork2.main.Main.main(String[] args):Quantidade de testes que falharam: 1
+06/10/2016 16:18:41 - ERROR - br.zul.zwork2.main.Main.main(String[] args):Quantidade de testes que falharam: 1
+06/10/2016 16:20:09 - ERROR - br.zul.zwork2.main.Main.main(String[] args):Quantidade de testes que falharam: 1
+06/10/2016 16:27:04 - ERROR - br.zul.zwork2.main.Main.main(String[] args):Quantidade de testes que falharam: 1
+06/10/2016 16:28:38 - ERROR - br.zul.zwork2.main.Main.main(String[] args):Quantidade de testes que falharam: 1
+06/10/2016 16:36:23 - ERROR - br.zul.zwork2.main.Main.main(String[] args):Quantidade de testes que falharam: 1
+06/10/2016 16:53:10 - ERROR - br.zul.zwork2.main.Main.main(String[] args):Quantidade de testes que falharam: 1
+06/10/2016 16:57:11 - ERROR - br.zul.zwork2.main.Main.main(String[] args):Quantidade de testes que falharam: 1
+06/10/2016 17:01:18 - ERROR - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):ERRO!
+06/10/2016 17:01:18 - ERROR - java.lang.IndexOutOfBoundsException: Index: 1, Size: 1
+	at java.util.ArrayList.rangeCheck(ArrayList.java:635)
+	at java.util.ArrayList.get(ArrayList.java:411)
+	at br.zul.zwork2.iterator.ZHtmlIterator.next(ZHtmlIterator.java:250)
+	at br.zul.zwork2.iterator.ZHtmlIterator.next(ZHtmlIterator.java:147)
+	at br.zul.zwork2.test.basic.html.ZHtmlTest3.getResult(ZHtmlTest3.java:36)
+	at br.zul.zwork2.test.basic.html.ZHtmlTest3.getResult(ZHtmlTest3.java:13)
+	at br.zul.zwork2.test.ZTest.run(ZTest.java:18)
+	at br.zul.zwork2.test.ZMultipleTests.run(ZMultipleTests.java:29)
+	at br.zul.zwork2.test.ZTestManager.executeTest(ZTestManager.java:123)
+	at br.zul.zwork2.test.ZTestManager.executeTests(ZTestManager.java:65)
+	at br.zul.zwork2.test.ZTestManager.executeTests(ZTestManager.java:47)
+	at br.zul.zwork2.main.Main.main(Main.java:27)
+06/10/2016 17:01:18 - ERROR - java.lang.NullPointerException
+	at br.zul.zwork2.test.ZTestManager.executeTests(ZTestManager.java:68)
+	at br.zul.zwork2.test.ZTestManager.executeTests(ZTestManager.java:47)
+	at br.zul.zwork2.main.Main.main(Main.java:27)

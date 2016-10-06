@@ -64,7 +64,6 @@ public class ZHtmlIterator extends ZIterator<ZKeyList<Integer>,ZHtmlElement> {
         if (element==null){
             return null;
         }
-        list.add(element);
         while (!elementList.contains(element)) {
             list.add(element);
             element = element.getParent();
@@ -138,7 +137,7 @@ public class ZHtmlIterator extends ZIterator<ZKeyList<Integer>,ZHtmlElement> {
         }
         ZHtmlElement element = elementList.get(key.getKey(0));
         for (int i=1;i<key.size();i++){
-            element = element.asTag().getElement(key.getKey(0));
+            element = element.asTag().getElement(key.getKey(i));
         }
         return element;
     }
@@ -219,30 +218,44 @@ public class ZHtmlIterator extends ZIterator<ZKeyList<Integer>,ZHtmlElement> {
     private boolean next(int step){
         int index = key.getLastIndex();
         int p = 1;
+        boolean subnivels = true;
         List<ZHtmlElement> path = listPath(false);
         key = key.copy();
         do {
-            
-            if (step>0){
-                if (path!=null&&!path.isEmpty()&&path.get(0).isTag()){
-                    if (path.get(0).asTag().hasElements()){
-                        key.addKey(path.get(0).asTag().getElement(0).getIndex()-1);
-                        index = key.getLastIndex();
+            //ENTRA NO SUB NIVEIS
+            if (subnivels){
+                if (step>0){
+                    if (path!=null&&!path.isEmpty()&&path.get(0).isTag()){
+                        if (path.get(0).asTag().hasElements()){
+                            key.addKey(path.get(0).asTag().getElement(0).getIndex()-1);
+                            index = key.getLastIndex();
+                        }
                     }
                 }
             }
             
+            //AGORA PODE ENTRAR NOS SUBNIVEIS DE NOVO
+            subnivels = true;
+            
+            //AVANÇA UM PASSO (SE ENTROU NUM SUBNÍVEL ELE VAI ESTAR EM -1)
             int k = key.getKey(index)+step;
             key.setKey(index,k);
             
             if (step>0){
+                
+                //VERIFICA O INDEX DO PRIMERIO NIVEL
                 if (index==0&&k>=elementList.size()){
+                    //ALCANÇOU O FINAL
                     state = IteratorState.AFTER_LAST;
                     return false;
+                //VERIFICA O INDICE DOS PROXIMOS NIVEIS
                 } else if (index>0&&path!=null&&(!path.get(p).isTag()||k>=path.get(p).asTag().countElements())){
+                    //ALCANÇOU O FINAL DO SUBNIVEL
+                    key.removeKey(index);
                     index--;
                     p++;
-                    key.removeKey(index);
+                    //NÃO PODE ENTRAR NO SUBNIVEL (SE ENTRAR VAI SER LOOP INFINITO)
+                    subnivels = false;
                 } else {
                     break;
                 }
@@ -253,16 +266,19 @@ public class ZHtmlIterator extends ZIterator<ZKeyList<Integer>,ZHtmlElement> {
                     state = IteratorState.BEFORE_FIRST;
                     return false;
                 } else if (index>0&&k<0){
+                    key.removeKey(index);
                     index--;
                     p++;
-                    key.removeKey(index);
                 } else {
                     break;
                 }
                 
             }
             
-        } while (false);
+            p--;
+            path = listPath(false);
+            
+        } while (p>0);
         if (key.size()==1&&key.getKey(0)<=-1){
             state = IteratorState.BEFORE_FIRST;
         } else if (key.size()==1&&key.getKey(0)>=elementList.size()){

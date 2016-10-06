@@ -1,10 +1,7 @@
 package br.zul.zwork2.test.basic.html;
 
 import br.zul.zwork2.html.ZHtml;
-import br.zul.zwork2.iterator.ZHtmlIterator;
 import br.zul.zwork2.test.ZSimpleTest;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  *
@@ -31,7 +28,7 @@ public class ZHtmlTest2 extends ZSimpleTest<String> {
 
     @Override
     public String getExpectedResult() {
-        return getSource();
+        return "<a><b><c/></b><d/></a>";
     }
 
     @Override
