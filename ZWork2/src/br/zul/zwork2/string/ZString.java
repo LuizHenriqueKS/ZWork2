@@ -85,6 +85,18 @@ import java.util.List;
     }
     
     //==========================================================================
+    //MÉTODOS CLIPBOARD
+    //==========================================================================
+    public ZString toClipboard(){
+        ZStringUtils.toClipboard(string);
+        return this;
+    }
+    
+    public static ZString fromClipboard(boolean caseSensitive){
+        return ZStringUtils.fromClipboard(caseSensitive);
+    }
+    
+    //==========================================================================
     //MÉTODOS UPPERCASE
     //==========================================================================
     public ZString toUpperCase(){
