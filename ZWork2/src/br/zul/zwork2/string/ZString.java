@@ -292,6 +292,25 @@ import java.util.List;
     }
     
     //==========================================================================
+    //MÉTODOS ENDS WITH
+    //==========================================================================
+    public boolean endsWith(String pattern){
+        return endsWith(pattern,null);
+    }
+    
+    public boolean endsWith(String pattern,Integer offset){
+        String s = string;
+        if (offset!=null){
+            s = s.substring(0,s.length()-offset);
+        }
+        if (caseSensitive){
+            return s.endsWith(pattern);
+        } else {
+            return s.toLowerCase().endsWith(pattern.toLowerCase());
+        }
+    }
+    
+    //==========================================================================
     //EQUALS
     //==========================================================================
     public boolean equals(String other){
