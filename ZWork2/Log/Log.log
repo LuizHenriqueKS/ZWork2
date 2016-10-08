@@ -2279,3 +2279,82 @@ c
 	at br.zul.zwork2.test.ZTestManager.executeTests(ZTestManager.java:68)
 	at br.zul.zwork2.test.ZTestManager.executeTests(ZTestManager.java:47)
 	at br.zul.zwork2.main.Main.main(Main.java:27)
+08/10/2016 08:41:08 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):[br.zul.zwork2.test.basic.ZConverterTests]Testando Conversores...08/10/2016 08:41:08 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):OK!08/10/2016 08:41:08 - INFO - br.zul.zwork2.test.ZTestManager.printMultipleTestResult(ZCustomTest test):[1/1]08/10/2016 08:41:08 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):
+08/10/2016 08:41:08 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):[br.zul.zwork2.test.basic.ZEntityTests]Testando Entidades...08/10/2016 08:41:08 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):OK!08/10/2016 08:41:08 - INFO - br.zul.zwork2.test.ZTestManager.printMultipleTestResult(ZCustomTest test):[4/4]08/10/2016 08:41:08 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):
+08/10/2016 08:41:08 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):[br.zul.zwork2.test.basic.ZFileTests]Testando funções para arquivos...08/10/2016 08:41:08 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):OK!08/10/2016 08:41:08 - INFO - br.zul.zwork2.test.ZTestManager.printMultipleTestResult(ZCustomTest test):[1/1]08/10/2016 08:41:08 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):
+08/10/2016 08:41:08 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):[br.zul.zwork2.test.basic.ZHtmlTests]Testando manipulador de html...08/10/2016 08:41:08 - ERROR - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):ERRO!
+08/10/2016 08:41:08 - ERROR - java.lang.IndexOutOfBoundsException: Index: 1, Size: 1
+	at java.util.ArrayList.rangeCheck(ArrayList.java:653)
+	at java.util.ArrayList.get(ArrayList.java:429)
+	at br.zul.zwork2.iterator.ZHtmlIterator.next(ZHtmlIterator.java:252)
+	at br.zul.zwork2.iterator.ZHtmlIterator.next(ZHtmlIterator.java:147)
+	at br.zul.zwork2.test.basic.html.ZHtmlTest3.getResult(ZHtmlTest3.java:36)
+	at br.zul.zwork2.test.basic.html.ZHtmlTest3.getResult(ZHtmlTest3.java:13)
+	at br.zul.zwork2.test.ZTest.run(ZTest.java:18)
+	at br.zul.zwork2.test.ZMultipleTests.run(ZMultipleTests.java:29)
+	at br.zul.zwork2.test.ZTestManager.executeTest(ZTestManager.java:123)
+	at br.zul.zwork2.test.ZTestManager.executeTests(ZTestManager.java:65)
+	at br.zul.zwork2.test.ZTestManager.executeTests(ZTestManager.java:47)
+	at br.zul.zwork2.main.Main.main(Main.java:27)
+08/10/2016 08:41:09 - ERROR - java.lang.NullPointerException
+	at br.zul.zwork2.test.ZTestManager.executeTests(ZTestManager.java:68)
+	at br.zul.zwork2.test.ZTestManager.executeTests(ZTestManager.java:47)
+	at br.zul.zwork2.main.Main.main(Main.java:27)
+08/10/2016 08:42:57 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):[br.zul.zwork2.test.basic.ZConverterTests]Testando Conversores...08/10/2016 08:42:57 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):OK!08/10/2016 08:42:57 - INFO - br.zul.zwork2.test.ZTestManager.printMultipleTestResult(ZCustomTest test):[1/1]08/10/2016 08:42:57 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):
+08/10/2016 08:42:57 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):[br.zul.zwork2.test.basic.ZEntityTests]Testando Entidades...08/10/2016 08:42:57 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):OK!08/10/2016 08:42:57 - INFO - br.zul.zwork2.test.ZTestManager.printMultipleTestResult(ZCustomTest test):[4/4]08/10/2016 08:42:57 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):
+08/10/2016 08:42:57 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):[br.zul.zwork2.test.basic.ZFileTests]Testando funções para arquivos...08/10/2016 08:42:57 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):OK!08/10/2016 08:42:57 - INFO - br.zul.zwork2.test.ZTestManager.printMultipleTestResult(ZCustomTest test):[1/1]08/10/2016 08:42:57 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):
+08/10/2016 08:42:57 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):[br.zul.zwork2.test.basic.ZHtmlTests]Testando manipulador de html...08/10/2016 08:42:57 - ERROR - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):ERRO!
+08/10/2016 08:42:57 - ERROR - java.lang.IndexOutOfBoundsException: Index: 1, Size: 1
+	at java.util.ArrayList.rangeCheck(ArrayList.java:653)
+	at java.util.ArrayList.get(ArrayList.java:429)
+	at br.zul.zwork2.iterator.ZHtmlIterator.next(ZHtmlIterator.java:252)
+	at br.zul.zwork2.iterator.ZHtmlIterator.next(ZHtmlIterator.java:147)
+	at br.zul.zwork2.test.basic.html.ZHtmlTest3.getResult(ZHtmlTest3.java:36)
+	at br.zul.zwork2.test.basic.html.ZHtmlTest3.getResult(ZHtmlTest3.java:13)
+	at br.zul.zwork2.test.ZTest.run(ZTest.java:18)
+	at br.zul.zwork2.test.ZMultipleTests.run(ZMultipleTests.java:29)
+	at br.zul.zwork2.test.ZTestManager.executeTest(ZTestManager.java:123)
+	at br.zul.zwork2.test.ZTestManager.executeTests(ZTestManager.java:65)
+	at br.zul.zwork2.test.ZTestManager.executeTests(ZTestManager.java:47)
+	at br.zul.zwork2.main.Main.main(Main.java:27)
+08/10/2016 08:42:57 - ERROR - java.lang.NullPointerException
+	at br.zul.zwork2.test.ZTestManager.executeTests(ZTestManager.java:68)
+	at br.zul.zwork2.test.ZTestManager.executeTests(ZTestManager.java:47)
+	at br.zul.zwork2.main.Main.main(Main.java:27)
+08/10/2016 08:43:22 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):[br.zul.zwork2.test.basic.ZConverterTests]Testando Conversores...08/10/2016 08:43:22 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):OK!08/10/2016 08:43:22 - INFO - br.zul.zwork2.test.ZTestManager.printMultipleTestResult(ZCustomTest test):[1/1]08/10/2016 08:43:22 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):
+08/10/2016 08:43:22 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):[br.zul.zwork2.test.basic.ZEntityTests]Testando Entidades...08/10/2016 08:43:22 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):OK!08/10/2016 08:43:22 - INFO - br.zul.zwork2.test.ZTestManager.printMultipleTestResult(ZCustomTest test):[4/4]08/10/2016 08:43:22 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):
+08/10/2016 08:43:22 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):[br.zul.zwork2.test.basic.ZFileTests]Testando funções para arquivos...08/10/2016 08:43:22 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):OK!08/10/2016 08:43:22 - INFO - br.zul.zwork2.test.ZTestManager.printMultipleTestResult(ZCustomTest test):[1/1]08/10/2016 08:43:22 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):
+08/10/2016 08:43:22 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):[br.zul.zwork2.test.basic.ZHtmlTests]Testando manipulador de html...08/10/2016 08:43:22 - ERROR - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):ERRO!
+08/10/2016 08:43:22 - ERROR - java.lang.IndexOutOfBoundsException: Index: 1, Size: 1
+	at java.util.ArrayList.rangeCheck(ArrayList.java:653)
+	at java.util.ArrayList.get(ArrayList.java:429)
+	at br.zul.zwork2.iterator.ZHtmlIterator.next(ZHtmlIterator.java:252)
+	at br.zul.zwork2.iterator.ZHtmlIterator.next(ZHtmlIterator.java:147)
+	at br.zul.zwork2.test.basic.html.ZHtmlTest3.getResult(ZHtmlTest3.java:36)
+	at br.zul.zwork2.test.basic.html.ZHtmlTest3.getResult(ZHtmlTest3.java:13)
+	at br.zul.zwork2.test.ZTest.run(ZTest.java:18)
+	at br.zul.zwork2.test.ZMultipleTests.run(ZMultipleTests.java:29)
+	at br.zul.zwork2.test.ZTestManager.executeTest(ZTestManager.java:123)
+	at br.zul.zwork2.test.ZTestManager.executeTests(ZTestManager.java:65)
+	at br.zul.zwork2.test.ZTestManager.executeTests(ZTestManager.java:47)
+	at br.zul.zwork2.main.Main.main(Main.java:27)
+08/10/2016 08:43:22 - ERROR - java.lang.NullPointerException
+	at br.zul.zwork2.test.ZTestManager.executeTests(ZTestManager.java:68)
+	at br.zul.zwork2.test.ZTestManager.executeTests(ZTestManager.java:47)
+	at br.zul.zwork2.main.Main.main(Main.java:27)
+08/10/2016 08:43:52 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):[br.zul.zwork2.test.basic.ZConverterTests]Testando Conversores...08/10/2016 08:43:52 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):OK!08/10/2016 08:43:52 - INFO - br.zul.zwork2.test.ZTestManager.printMultipleTestResult(ZCustomTest test):[1/1]08/10/2016 08:43:52 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):
+08/10/2016 08:43:52 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):[br.zul.zwork2.test.basic.ZEntityTests]Testando Entidades...08/10/2016 08:43:52 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):OK!08/10/2016 08:43:52 - INFO - br.zul.zwork2.test.ZTestManager.printMultipleTestResult(ZCustomTest test):[4/4]08/10/2016 08:43:52 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):
+08/10/2016 08:43:52 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):[br.zul.zwork2.test.basic.ZFileTests]Testando funções para arquivos...08/10/2016 08:43:52 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):OK!08/10/2016 08:43:52 - INFO - br.zul.zwork2.test.ZTestManager.printMultipleTestResult(ZCustomTest test):[1/1]08/10/2016 08:43:52 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):
+08/10/2016 08:43:52 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):[br.zul.zwork2.test.basic.ZHtmlTests]Testando manipulador de html...08/10/2016 08:47:01 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):[br.zul.zwork2.test.basic.ZConverterTests]Testando Conversores...08/10/2016 08:47:02 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):OK!08/10/2016 08:47:02 - INFO - br.zul.zwork2.test.ZTestManager.printMultipleTestResult(ZCustomTest test):[1/1]08/10/2016 08:47:02 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):
+08/10/2016 08:47:02 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):[br.zul.zwork2.test.basic.ZEntityTests]Testando Entidades...08/10/2016 08:47:02 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):OK!08/10/2016 08:47:02 - INFO - br.zul.zwork2.test.ZTestManager.printMultipleTestResult(ZCustomTest test):[4/4]08/10/2016 08:47:02 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):
+08/10/2016 08:47:02 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):[br.zul.zwork2.test.basic.ZFileTests]Testando funções para arquivos...08/10/2016 08:47:02 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):OK!08/10/2016 08:47:02 - INFO - br.zul.zwork2.test.ZTestManager.printMultipleTestResult(ZCustomTest test):[1/1]08/10/2016 08:47:02 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):
+08/10/2016 08:47:02 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):[br.zul.zwork2.test.basic.ZHtmlTests]Testando manipulador de html...08/10/2016 08:48:04 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):OK!08/10/2016 08:48:04 - INFO - br.zul.zwork2.test.ZTestManager.printMultipleTestResult(ZCustomTest test):[3/3]08/10/2016 08:48:04 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):
+08/10/2016 08:48:04 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):[br.zul.zwork2.test.basic.ZHttpTests]Testando funções para solicitações HTTP...08/10/2016 08:48:04 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):OK!08/10/2016 08:48:04 - INFO - br.zul.zwork2.test.ZTestManager.printMultipleTestResult(ZCustomTest test):[1/1]08/10/2016 08:48:04 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):
+08/10/2016 08:48:04 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):[br.zul.zwork2.test.basic.ZImageTests]Testando funções para imagens...08/10/2016 08:48:05 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):OK!08/10/2016 08:48:05 - INFO - br.zul.zwork2.test.ZTestManager.printMultipleTestResult(ZCustomTest test):[2/2]08/10/2016 08:48:05 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):
+08/10/2016 08:48:05 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):[br.zul.zwork2.test.basic.ZInjectTests]Testando Injeções de dependência...08/10/2016 08:48:05 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):OK!08/10/2016 08:48:05 - INFO - br.zul.zwork2.test.ZTestManager.printMultipleTestResult(ZCustomTest test):[2/2]08/10/2016 08:48:05 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):
+08/10/2016 08:48:05 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):[br.zul.zwork2.test.basic.ZStringSearchTests]Testando funções para pesquisa de texto...08/10/2016 08:48:05 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):OK!08/10/2016 08:48:05 - INFO - br.zul.zwork2.test.ZTestManager.printMultipleTestResult(ZCustomTest test):[3/3]08/10/2016 08:48:05 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):
+08/10/2016 08:48:05 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):[br.zul.zwork2.test.basic.ZStringTests]Testando funções para texto...08/10/2016 08:48:05 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):OK!08/10/2016 08:48:05 - INFO - br.zul.zwork2.test.ZTestManager.printMultipleTestResult(ZCustomTest test):[1/1]08/10/2016 08:48:05 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):
+08/10/2016 08:48:05 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):[br.zul.zwork2.test.basic.ZXmlTests]Testando manipulador de xml...08/10/2016 08:48:05 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):OK!08/10/2016 08:48:05 - INFO - br.zul.zwork2.test.ZTestManager.printMultipleTestResult(ZCustomTest test):[1/1]08/10/2016 08:48:05 - INFO - br.zul.zwork2.test.ZTestManager.executeTest(ZCustomTest test):
+08/10/2016 08:48:05 - INFO - br.zul.zwork2.main.Main.main(String[] args):Quantidade de testes bem sucedidos: 10
+08/10/2016 08:48:05 - INFO - br.zul.zwork2.main.Main.main(String[] args):Quantidade de testes que falharam: 0
+08/10/2016 08:48:05 - INFO - br.zul.zwork2.main.Main.main(String[] args):Quantidade de testes que apresentaram erro: 0

@@ -249,7 +249,7 @@ public class ZHtmlIterator extends ZIterator<ZKeyList<Integer>,ZHtmlElement> {
                     state = IteratorState.AFTER_LAST;
                     return false;
                 //VERIFICA O INDICE DOS PROXIMOS NIVEIS
-                } else if (index>0&&path!=null&&(!path.get(p).isTag()||k>=path.get(p).asTag().countElements())){
+                } else if (index>0&&path!=null&&path.size()>1&&(!path.get(p).isTag()||k>=path.get(p).asTag().countElements())){
                     //ALCANÇOU O FINAL DO SUBNIVEL
                     key.removeKey(index);
                     index--;
