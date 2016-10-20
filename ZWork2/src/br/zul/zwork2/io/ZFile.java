@@ -14,6 +14,7 @@ public class ZFile {
     private String filename;
     private ZPath path;
     private File file;
+    private ZResource resource;
     
     //==========================================================================
     //CONSTRUTORES
@@ -32,15 +33,29 @@ public class ZFile {
         this.file = file;
     }
     
+    public ZFile(ZResource resource){
+        this.resource = resource;
+        this.filename = resource.getFilename();
+        this.path = resource.getPath();
+    }
+    
     //==========================================================================
     //GETTERS E SETTERS MODIFICADOS
     //==========================================================================
     public boolean isDirectory(){
-        if (file==null){
+        if (file==null&&resource==null){
             return false;
-        } else {
+        } else if (file!=null){
             return file.isDirectory();
+        } else if (resource!=null&&resource.getIsDirectory()!=null) {
+            return resource.getIsDirectory();
+        } else {
+            return false;
         }
+    }
+    
+    public boolean isResource(){
+        return resource!=null;
     }
     
     //==========================================================================
@@ -51,6 +66,20 @@ public class ZFile {
     }
     public ZPath getPath() {
         return path;
+    }
+
+    public File getFile() {
+        return file;
+    }
+    public void setFile(File file) {
+        this.file = file;
+    }
+
+    public ZResource getResource() {
+        return resource;
+    }
+    public void setResource(ZResource resource) {
+        this.resource = resource;
     }
     
 }

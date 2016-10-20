@@ -28,6 +28,10 @@ public class ZTxtFile {
         this.file = file;
     }
 
+    public ZTxtFile(ZResource resource){
+        
+    }
+    
     public String readAll() {
         ZLogger logger = new ZLogger(getClass(),"readAll()");
         try {

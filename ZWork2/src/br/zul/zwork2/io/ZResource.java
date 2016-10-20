@@ -12,6 +12,7 @@ public class ZResource {
     //VARIÁVEIS PRIVADAS
     //==========================================================================
     private String filename;
+    private File file;
     private ZPath path;
     private Boolean isDirectory;
     
@@ -27,9 +28,10 @@ public class ZResource {
     }
     
     public ZResource(File file){
+        this.file = file;
         this.isDirectory = file.isDirectory();
         init(new ZPath(file.getAbsolutePath()));
-    }
+    } 
     
     //==========================================================================
     //MÉTODOS DE CONSTRUÇÃO
@@ -37,6 +39,13 @@ public class ZResource {
     private void init(ZPath path){
         this.path = path;
         this.filename = path.getLastPart();
+    }
+    
+    //==========================================================================
+    //MÉTODOS DE CONVERSÃO
+    //==========================================================================
+    public ZFile asFile(){
+        return new ZFile(this);
     }
     
     //==========================================================================
@@ -61,6 +70,13 @@ public class ZResource {
     }
     public void setIsDirectory(Boolean isDirectory) {
         this.isDirectory = isDirectory;
+    }
+
+    public File getFile() {
+        return file;
+    }
+    public void setFile(File file) {
+        this.file = file;
     }
     
 }
